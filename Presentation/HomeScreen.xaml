@@ -1,0 +1,95 @@
+﻿<Window x:Class="Presentation.HomeScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:Presentation.UserControls"
+        xmlns:local="clr-namespace:Presentation"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
+        Background="White"
+        Title="CSA LABS" Height="900" Width="1700" Icon="Images/logo.png">
+    <Border BorderBrush="#EBEDF3">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <!-- Left Menu -->
+            <Border Background="#FFFFFF" BorderBrush="LightGray" BorderThickness="1">
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <Grid Margin="0 -30 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5"
+                                    Background="Orange" Height="80" Width="80" Margin="20 65 0 0">
+                                <Image Source="/Images/whitew.png" Height="40" Width="40"/>
+                            </Border>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                        Margin="5 60 0 0">
+                                <TextBlock Text="DAVID GONZALES J." Grid.Column="1" VerticalAlignment="Center" FontFamily="Lexend" FontWeight="Bold" FontSize="15"/>
+                                <TextBlock Text="Empleado" Grid.Column="1" VerticalAlignment="Center" FontFamily="Lexend" FontWeight="Bold" FontSize="15"
+                                           Foreground="Gray"/>
+                                <Image Source="/Images/settingsb.png"
+                                       Margin="0 10 0 0"
+                                       Height="20" Width="20"
+                                       HorizontalAlignment="Left" />
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Margin="0 30 0 0">
+                            <TextBlock Margin="20 0" HorizontalAlignment="Center" Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                Panel.ZIndex="1" Text="Busca Aqui" Visibility="{Binding ElementName=textBoxSearch}" />
+                            <TextBox Name="textBoxSearch" Style="{StaticResource searchTextbox}"/>
+                        </StackPanel>
+                        <StackPanel Margin="0 0 0 0" Height="601">
+                            <TextBlock Text="M E N U   P R I N C I P A L" HorizontalAlignment="Left" Margin="30 0 0 10"  Style="{StaticResource textBlockMenu}"/>
+                            <ListBox x:Name="myListBoxModules" Style="{StaticResource listBoxMenu}" Height="567" Width="278"/>
+                        </StackPanel>
+
+                        <Grid Margin="10 10 10 10" Height="57">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="/Images/logout.png"
+                                       Height="20" Width="20"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center" Opacity="0.6"
+                                       MouseDown="Image_MouseDown" Cursor="Hand"/>
+                            <Image Source="/Images/logo.png"
+                                       Height="100" Width="100"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Grid.Column="1"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Main Section -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="pageTitle" Text="C.S LABS" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           FontFamily="Lexend" FontWeight="SemiBold" Foreground="#424242" FontSize="14"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0">
+                    <Button Style="{StaticResource windowButtonMinus}" Width="50" Click="Button_Click">
+                        <Image Source="/Images/minusb.png" Margin="10 0 10 0" Style="{StaticResource imgClose}"/>
+                    </Button>
+                    <Button Style="{StaticResource windowButtonClose}" Width="50" Click="Button_Click_1" MouseUp="Button_MouseUp">
+                        <Image x:Name="xcloseImage" Source="/Images/close_b.png" Margin="10 0 10 0" Style="{StaticResource imgClose}"/>
+                    </Button>
+                </StackPanel>
+
+
+                <Frame x:Name="Main" Background="#EFEFEFFF" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,114 @@
+﻿<Window x:Class="Presentation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Presentation"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
+        Background="Transparent"
+        Title="CSA LABS Login" Height="700" Width="1000" Icon="Images/logo.png">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="#FFFFFF"
+                CornerRadius="0 0 0 0">
+            <StackPanel  VerticalAlignment="Center">
+                <Image Source="/Images/logo.png" Height="199" Width="209" Stretch="Fill" Margin="0 -100 0 0"/>
+                <TextBlock Text="Ingresar al Sistema" Margin="10 -50 0 0" Foreground="#434343"
+                           HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           FontFamily="Lexend"/>
+
+                <Border BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="/Images/user.png" Height="25"/>
+                        <TextBlock x:Name="textEmail" 
+                                   Grid.Column="1"
+                                   Text="Email"
+                                   VerticalAlignment="Center"
+                                   MouseDown="textEmail_MouseDown"
+                                   Style="{StaticResource textHint}"/>
+                        <TextBox x:Name="txtEmail" 
+                                 Grid.Column="1"
+                                 VerticalAlignment="Center"
+                                 TextChanged="txtEmail_TextChanged"
+                                 Style="{StaticResource textBox}"/>
+
+                    </Grid>
+                </Border>
+
+                <Border BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="/Images/key.png" Height="25"/>
+                        <TextBlock x:Name="textPassword" 
+                                   Grid.Column="1"
+                                   Text="Contraseña"
+                                   VerticalAlignment="Center"
+                                   MouseDown="textPassword_MouseDown"
+                                   Style="{StaticResource textHint}"/>
+                        <PasswordBox x:Name="passwordBox"
+                                     Grid.Column="1"
+                                     VerticalAlignment="Center"
+                                     PasswordChanged="txtPassword_PasswordChanged"
+                                     Style="{StaticResource textBox}"/>
+
+                    </Grid>
+                </Border>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
+                    <Button Content="Acceder" Margin="0 0 15 0" Style="{StaticResource loginButton}" Click="Button_Click_1"/>
+                    <Button Content="Limpiar" Style="{StaticResource loginButton2}" Click="Button_Click"/>
+                </StackPanel>
+
+                <TextBlock Text="Olvidaste tu contraseña?" Style="{StaticResource forgetPassword}"
+                           MouseDown="TextBlock_MouseDown"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1" MouseDown="Border_MouseDown">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#4176f0" Offset="0"/>
+                    <GradientStop Color="#c56985" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <Canvas>
+                    <Polygon Points="0,20,230,140 0,270" Fill="#e87f5e" Canvas.Left="50" Canvas.Top="36" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.722,0.319"/>
+                    <Polygon Points="100,400 200,370 180,470" Fill="#a42593"/>
+                    <Ellipse Margin="250 450 0 0" Width="40" Height="40" Fill="#4EB1B6"/>
+                    <Ellipse Margin="50 400 0 0" Width="40" Height="20" Fill="#102c7f"/>
+                    <Polygon Points="200,100,530,40 500,170" Fill="#f8d16f"/>
+                    <Ellipse Width="640" Height="540" Fill="#102c7f" Canvas.Left="342" Canvas.Top="366"/>
+                    <Ellipse Margin="150 600 10 10" Width="140" Height="150" Fill="#c56985"/>
+                </Canvas>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource windowButtonMinus}" Click="Button_Click_2">
+                        <Image Source="/Images/minuss.png" Margin="10 0 10 0" Style="{StaticResource imgClose}"/>
+                    </Button>
+                    <Button Style="{StaticResource windowButtonClose}" Click="Button_Click_3">
+                        <Image Source="/Images/closed.png" Margin="10 0 10 0" Style="{StaticResource imgClose}"/>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Images/bigcsa.png" Width="400" Height="400"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

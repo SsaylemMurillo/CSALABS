@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="Presentation.UserControls.ButtonMenuController"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Presentation.UserControls"
+             mc:Ignorable="d"
+             Name="ButtonMenuControl" Focusable="False" FocusVisualStyle="{x:Null}" BorderBrush="Transparent">
+    <ListBoxItem Style="{StaticResource listBoxItemMenu}">
+        <Button x:Name="buttonMenu" Style="{StaticResource menuButton}" Click="buttonMenu_Click">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="imageMenu" Style="{StaticResource menuButtonIcon}"/>
+                <TextBlock x:Name="myButtonText" VerticalAlignment="Center" Margin="5 0 0 0"/>
+            </StackPanel>
+        </Button>
+    </ListBoxItem>
+</UserControl>
