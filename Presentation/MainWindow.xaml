@@ -29,7 +29,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="/Images/user.png" Height="25"/>
+                        <Image Source="/Images/user.png" Height="25" Opacity="0.5"/>
                         <TextBlock x:Name="textEmail" 
                                    Grid.Column="1"
                                    Text="Email"
@@ -52,7 +52,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="/Images/key.png" Height="25"/>
+                        <Image Source="/Images/key.png" Height="25" Opacity="0.5"/>
                         <TextBlock x:Name="textPassword" 
                                    Grid.Column="1"
                                    Text="Contraseña"

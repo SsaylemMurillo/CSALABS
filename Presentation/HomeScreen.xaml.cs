@@ -27,9 +27,7 @@ namespace Presentation
         {
             modules = new List<Control>();
             InitializeComponent();
-            Main.Content = new MainPage();
-            GetModules();
-            LoadModules();
+            MainFrame.Content = new MainPage(MainFrame);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -53,41 +51,51 @@ namespace Presentation
                 DragMove();
         }
 
-        public void GetModules()
-        {
-            // Communicate with the user-rol database and get the modules
-
-            ButtonMenuController menuController = new ButtonMenuController();
-            menuController.ChangeTextOfButton("Registro Paciente");
-            menuController.ChangeImageOfButton("Images/user.png");
-            menuController.MainFrame = Main;
-            menuController.TextFrame = pageTitle;
-
-            ButtonMenuController menuController2 = new ButtonMenuController();
-            menuController2.ChangeTextOfButton("Gestión Paciente");
-            menuController2.ChangeImageOfButton("Images/user_m.png");
-            menuController2.PageOfButton = new MainPage();
-            menuController2.MainFrame = Main;
-            menuController2.TextFrame = pageTitle;
-
-            modules.Add(menuController);
-            modules.Add(menuController2);
-
-        }
-
-        public void LoadModules()
-        {
-            foreach (ButtonMenuController item in modules)
-            {
-                myListBoxModules.Items.Add(item);
-            }
-        }
-
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // Logout Session
             new MainWindow().Show();
             Close();
+        }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            /*
+            if (!string.IsNullOrEmpty(txtSearch.Text) && txtSearch.Text.Length > 0)
+            {
+                textBlockSearch.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textBlockSearch.Visibility = Visibility.Visible;
+            }
+            */
+        }
+
+        private void Image_MouseDown_1(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("Configurations Window...", "CSALABS");
+        }
+
+        private void textBlockSearch_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //txtSearch.Focus();
+        }
+
+        private void Image_MouseDown_2(object sender, MouseButtonEventArgs e)
+        {
+            //Main.Content = new MainPage();
+            //pageTitle.Text = "CSA LABS";
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void homeButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new MainPage(MainFrame);
         }
     }
 }

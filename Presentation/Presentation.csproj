@@ -59,9 +59,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EditPatientWindow.xaml.cs">
+      <DependentUpon>EditPatientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ManagePatientPage.xaml.cs">
+      <DependentUpon>ManagePatientPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RegisterPatientPage.xaml.cs">
+      <DependentUpon>RegisterPatientPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ButtonMenuController.xaml.cs">
       <DependentUpon>ButtonMenuController.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ModuleButtonController.xaml.cs">
+      <DependentUpon>ModuleButtonController.xaml</DependentUpon>
+    </Compile>
+    <Page Include="EditPatientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HomeScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -92,7 +108,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ManagePatientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RegisterPatientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\ButtonMenuController.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ModuleButtonController.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -167,10 +195,27 @@
     <Resource Include="Images\settingsb.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\filter.png" />
+    <Resource Include="Images\back.png" />
+    <Resource Include="Images\add.png" />
+    <Resource Include="Images\addw.png" />
+    <Resource Include="Images\home.png" />
+    <Resource Include="Images\activityb.png" />
+    <Resource Include="Images\alertb.png" />
+    <Resource Include="Images\bellb.png" />
+    <Content Include="Images\home.svg" />
+    <Resource Include="Images\homew.png" />
     <Content Include="Images\loading.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\user.bmp" />
+    <Resource Include="Images\search.png" />
+    <Resource Include="Images\pencil.png" />
+    <Resource Include="Images\next.png" />
+    <Resource Include="Images\menu.png" />
+    <Resource Include="Images\userw.png" />
+    <Resource Include="Images\menub.png" />
+    <Resource Include="Images\searchb.png" />
     <Content Include="Images\user_m.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

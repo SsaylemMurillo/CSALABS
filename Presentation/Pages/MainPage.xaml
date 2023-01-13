@@ -5,9 +5,26 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Presentation.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="865" d:DesignWidth="1640"
       Title="MainPage">
     <Grid>
-        <Image Source="/Images/logo.png"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="40">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Image Source="/Images/bigcsa.png" Width="100" Height="100"/>
+                <TextBlock Text="C" VerticalAlignment="Center" FontFamily="Lexend" FontSize="40" FontWeight="SemiBold"/>
+                <TextBlock Text="S" Foreground="#674ea7" VerticalAlignment="Center" FontFamily="Lexend" FontSize="40" FontWeight="SemiBold"/>
+                <TextBlock Text="A" VerticalAlignment="Center" FontFamily="Lexend" FontSize="40" FontWeight="SemiBold"/>
+                <TextBlock Text="L" Margin="20 0 0 0"  VerticalAlignment="Center" FontFamily="Lexend" FontSize="40" FontWeight="SemiBold"/>
+                <TextBlock Text="A" Foreground="Purple" VerticalAlignment="Center" FontFamily="Lexend" FontSize="40" FontWeight="SemiBold"/>
+                <TextBlock Text="B" VerticalAlignment="Center" FontFamily="Lexend" FontSize="40" FontWeight="SemiBold"/>
+                <TextBlock Text="S" Foreground="#e91d63" VerticalAlignment="Center" FontFamily="Lexend" FontSize="40" FontWeight="SemiBold"/>
+            </StackPanel>
+            <TextBlock Text="Bienvenido David, están habilitados para tí los siguientes módulos:" FontSize="20" FontWeight="Bold"
+                       FontFamily="Lexend" Foreground="#434343" HorizontalAlignment="Center" Margin="40"/>
+            <Grid x:Name="modulesGrid"/>
+        </StackPanel>
     </Grid>
 </Page>

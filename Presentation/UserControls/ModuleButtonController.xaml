@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="Presentation.UserControls.ModuleButtonController"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Presentation.UserControls"
+             mc:Ignorable="d">
+    <StackPanel>
+        <Label x:Name="moduleNumberLabel" HorizontalAlignment="Center" FontSize="20" Foreground="Black" FontFamily="lexend"
+                           FontWeight="SemiBold" Margin="0 0 0 -20"/>
+        <Button x:Name="buttonModule" Style="{StaticResource moduleButtonC}" Height="100" Width="100" Click="buttonModule_Click" MouseEnter="buttonModule_MouseEnter" MouseLeave="buttonModule_MouseLeave">
+            <Image x:Name="buttonImage" Stretch="Uniform" Height="30"/>
+        </Button>
+    </StackPanel>
+</UserControl>

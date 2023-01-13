@@ -21,7 +21,7 @@ namespace Presentation.UserControls
     /// </summary>
     public partial class ButtonMenuController : UserControl
     {
-        public Image MyButtonImage { get; set; }
+        public string MyButtonImage { get; set; }
         public string MyButtonText { get; set; }
         public Page PageOfButton { get; set; }
         public Frame MainFrame { get; set; }
@@ -34,6 +34,7 @@ namespace Presentation.UserControls
 
         public void ChangeImageOfButton(string sourceImage)
         {
+            MyButtonImage = sourceImage;
             imageMenu.Source = new BitmapImage(ResourceAccessor.Get(sourceImage));
         }
 
@@ -51,7 +52,6 @@ namespace Presentation.UserControls
             TextFrame.Text = myButtonText.Text;
             buttonMenu.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D4E0FC"));
             myButtonText.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF"));
-            //ChangeImageOfButton("/Images/useradd.png");
         }
     }
 
