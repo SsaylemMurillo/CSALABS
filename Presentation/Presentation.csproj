@@ -181,7 +181,16 @@
   <ItemGroup>
     <Resource Include="Images\minuss.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj">
+      <Project>{2875082f-ddf5-44f0-974e-c39e87f98af4}</Project>
+      <Name>BusinessLogicLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{756c0147-9f93-480f-abdb-92019d421600}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\minusb.png" />
   </ItemGroup>
