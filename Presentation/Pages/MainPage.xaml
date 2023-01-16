@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
         <StackPanel Margin="40">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Image Source="/Images/bigcsa.png" Width="100" Height="100"/>
+                <Image Source="/Images/bigcsa.png" Width="100" Height="100" RenderOptions.BitmapScalingMode="Fant"/>
                 <TextBlock Text="C" VerticalAlignment="Center" FontFamily="Lexend" FontSize="40" FontWeight="SemiBold"/>
                 <TextBlock Text="S" Foreground="#674ea7" VerticalAlignment="Center" FontFamily="Lexend" FontSize="40" FontWeight="SemiBold"/>
                 <TextBlock Text="A" VerticalAlignment="Center" FontFamily="Lexend" FontSize="40" FontWeight="SemiBold"/>

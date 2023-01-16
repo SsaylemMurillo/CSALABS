@@ -28,7 +28,7 @@
                         <TextBlock Text="Registro de Pacientes" FontFamily="Lexend" FontSize="30" FontWeight="Bold"
                        Foreground="#434343" Margin="0 0 0 0" VerticalAlignment="Center">
                         </TextBlock>
-                        <Image Grid.Column="1" Source="/Images/bigcsa.png" Margin="-50 0 0 0" Height="100" Width="130" HorizontalAlignment="Left"/>
+                        <Image Grid.Column="1" Source="/Images/bigcsa.png" Margin="-50 0 0 0" Height="100" Width="130" HorizontalAlignment="Left" RenderOptions.BitmapScalingMode="Fant"/>
                     </Grid>
                     <TextBlock Text="Hacer parte del servicio" Margin="0 20 0 0" FontFamily="Lexend" FontSize="15" FontWeight="SemiBold"
                        Foreground="#434343"/>

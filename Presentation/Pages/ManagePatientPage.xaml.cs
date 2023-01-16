@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessLogicLayer;
+using Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,33 @@ namespace Presentation.Pages
     /// </summary>
     public partial class ManagePatientPage : Page
     {
+        public PatientService MyPatientService { get; set; }
+
         public ManagePatientPage()
         {
             InitializeComponent();
+            MyPatientService = new PatientService(ConnectionStringExtractor.connectionString);
+            LoadPatientDataGrid();
+        }
+
+        private void LoadPatientDataGrid()
+        {
+            var response = MyPatientService.GetAll();
+
+            if (response.PatientDataList != null)
+            {
+                registersTextBlock.Text = response.PatientDataList.Count.ToString();
+                foreach (Patient item in response.PatientDataList)
+                {
+                    patientsDataGrid.Items.Add(item);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ocurrió un error inesperado",
+                    "CSA LABS",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

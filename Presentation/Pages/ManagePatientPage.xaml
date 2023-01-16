@@ -25,7 +25,7 @@
                 </Grid.RowDefinitions>
                 <Border Grid.Row="0" Background="White" CornerRadius="10">
                     <StackPanel Orientation="Horizontal" Margin="10">
-                        <TextBlock x:Name="registersTextBlock" Text="3,334" FontSize="30" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
+                        <TextBlock x:Name="registersTextBlock" Text="0" FontSize="30" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
                                    VerticalAlignment="Center"/>
                         <TextBlock Text="Registros" FontSize="30" Margin="10 0 0 0" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
                                    VerticalAlignment="Center"/>
@@ -50,65 +50,55 @@
                         </StackPanel>
                     </StackPanel>
                 </Border>
-                <DataGrid x:Name="patientsDataGrid" Grid.Row="1" Margin="10" Background="White" AllowDrop="False" AutoGenerateColumns="False" BorderBrush="Transparent"
-                          Height="auto" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" FontFamily="Lexend" FontSize="15" HorizontalScrollBarVisibility="Visible" IsReadOnly="True" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <DataGrid AutoGenerateColumns="False"
+                          x:Name="patientsDataGrid" Grid.Row="1" Margin="10" Background="White"
+                          Height="auto" FontFamily="Lexend" FontSize="15">
                     <DataGrid.Columns>
-                        <DataGridTextColumn>
-                            <DataGridTextColumn.Header>
-                                Tipo de Identificacion
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn>
-                            <DataGridTextColumn.Header>
-                                Identificacion
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn>
-                            <DataGridTextColumn.Header>
-                                Primer Nombre
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn>
-                            <DataGridTextColumn.Header>
-                                Segundo Nombre
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn>
-                            <DataGridTextColumn.Header>
-                                Primer Apellido
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn>
-                            <DataGridTextColumn.Header>
-                                Segundo Apellido
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn>
-                            <DataGridTextColumn.Header>
-                                Fecha de Nacimiento
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn>
-                            <DataGridTextColumn.Header>
-                                Fecha de Expedición
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn>
-                            <DataGridTextColumn.Header>
-                                Lugar de expedición
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn>
-                            <DataGridTextColumn.Header>
-                                Dirección de Residencia
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn>
-                            <DataGridTextColumn.Header>
-                                Teléfono
-                            </DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                    </DataGrid.Columns> 
+                        <DataGridTextColumn x:Name="patientId"
+                                    Header="Id"
+                                    Binding="{Binding Path=Id}"
+                                    IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="patientIdType"
+                                    Header="Tipo"
+                                    Binding="{Binding Path=IdType}"
+                                    IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="patientFirstName"
+                                    Header="Primer Nombre"
+                                    Binding="{Binding Path=FirstName}"
+                                    IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="patientSecondName"
+                                    Header="Segundo Nombre"
+                                    Binding="{Binding Path=SecondName}"
+                                    IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="patientLastName"
+                                    Header="Primer Apellido"
+                                    Binding="{Binding Path=LastName}"
+                                    IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="patientSecondLastName"
+                                    Header="Segundo Apellido"
+                                    Binding="{Binding Path=SecondLastName}"
+                                    IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="patientBornDate"
+                                    Header="Fecha de Nacimiento"
+                                    Binding="{Binding Path=BornDate}"
+                                    IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="patientExpeditionDate"
+                                    Header="Fecha de Expedición"
+                                    Binding="{Binding Path=ExpeditionDate}"
+                                    IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="patientExpeditionPlace"
+                                    Header="Lugar de Expedición"
+                                    Binding="{Binding Path=ExpeditionPlace}"
+                                    IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="patientPhone"
+                                    Header="Télefono"
+                                    Binding="{Binding Path=Phone}"
+                                    IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="patientAddress"
+                                    Header="Dirección de residencia"
+                                    Binding="{Binding Path=Address}"
+                                    IsReadOnly="True"/>
+                    </DataGrid.Columns>
                 </DataGrid>
                 <Border Grid.Row="2" Background="White" CornerRadius="10">
                     <StackPanel Orientation="Horizontal" Margin="10">
