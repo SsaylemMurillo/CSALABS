@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
      Background="White"
       Height="865"
-      Width="1360"
+      Width="1640"
       Title="Gestión Paciente">
 
     <Border Background="#efefefff" BorderBrush="#efefefff" BorderThickness="10" CornerRadius="5" Margin="10">
@@ -24,31 +24,42 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Border Grid.Row="0" Background="White" CornerRadius="10">
-                    <StackPanel Orientation="Horizontal" Margin="10">
-                        <TextBlock x:Name="registersTextBlock" Text="0" FontSize="30" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <TextBlock x:Name="registersTextBlock" Text="0" FontSize="30" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
                                    VerticalAlignment="Center"/>
-                        <TextBlock Text="Registros" FontSize="30" Margin="10 0 0 0" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
+                            <TextBlock Text="Registros" FontSize="30" Margin="10 0 0 0" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
                                    VerticalAlignment="Center"/>
-                        <Border Background="#efefefff" CornerRadius="20" Margin="5">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <TextBlock x:Name="filtersTextBlock" Margin="10 0 0 0" Text="0" FontSize="20" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
+                            <Border Background="#efefefff" CornerRadius="20" Margin="5">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <TextBlock x:Name="filtersTextBlock" Margin="10 0 0 0" Text="0" FontSize="20" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
                                    VerticalAlignment="Center"/>
-                                <TextBlock Margin="10 0 10 0" Text="Filtros Aplicados" FontSize="20" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
+                                    <TextBlock Margin="10 0 10 0" Text="Filtros Aplicados" FontSize="20" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
                                    VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </Border>
-                        <StackPanel Margin="450 0 0 0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                        <Grid HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
                             <CheckBox Content="Ordenar" FontFamily="Lexend" FontWeight="DemiBold" Opacity="0.7" FontSize="15" HorizontalContentAlignment="Left"
-                                      VerticalContentAlignment="Center"/>
+                                      VerticalContentAlignment="Center" Grid.Column="0"/>
                             <ComboBox x:Name="orderRegistersByComboBox" Margin="30 0 0 0" Width="200" Height="30" Background="Transparent" BorderBrush="Transparent"
                                      SelectedIndex="0" FontWeight="SemiBold" FontFamily="Lexend" VerticalContentAlignment="Center"
-                                      HorizontalContentAlignment="Center" Foreground="Black" Opacity="0.7">
+                                      HorizontalContentAlignment="Center" Foreground="Black" Opacity="0.7"
+                                      Grid.Column="1">
                                 <ComboBoxItem>
                                     Alfabeticamente A-Z
                                 </ComboBoxItem>
                             </ComboBox>
-                        </StackPanel>
-                    </StackPanel>
+                        </Grid>
+                    </Grid>
                 </Border>
                 <DataGrid AutoGenerateColumns="False"
                           x:Name="patientsDataGrid" Grid.Row="1" Margin="10" Background="White"
@@ -101,57 +112,63 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <Border Grid.Row="2" Background="White" CornerRadius="10">
-                    <StackPanel Orientation="Horizontal" Margin="10">
-                        <Border Style="{StaticResource tablePageResults}" MouseDown="Border_MouseDown_2">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Image Source="/Images/back.png" Height="30" Margin="5" Opacity="0.5"/>
-                                <TextBlock Margin="10 0 10 0" Text="Atras" FontSize="20" FontWeight="Bold" FontFamily="Lexend" Opacity="0.5"
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.Column="0">
+                            <Border Style="{StaticResource tablePageResults}" MouseDown="Border_MouseDown_2">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Image Source="/Images/back.png" Height="30" Margin="5" Opacity="0.5"/>
+                                    <TextBlock Margin="10 0 10 0" Text="Atras" FontSize="20" FontWeight="Bold" FontFamily="Lexend" Opacity="0.5"
                                    VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </Border>
-                        <Border Style="{StaticResource tablePageResults}" MouseDown="Border_MouseDown_3" Width="45">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <TextBlock Margin="10 0 10 0" Text="1" FontSize="20" FontWeight="Bold" FontFamily="Lexend" Opacity="0.5"
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource tablePageResults}" MouseDown="Border_MouseDown_3" Width="45">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <TextBlock Margin="10 0 10 0" Text="1" FontSize="20" FontWeight="Bold" FontFamily="Lexend" Opacity="0.5"
                                    VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </Border>
-                        <Border Style="{StaticResource tablePageResults}" MouseDown="Border_MouseDown_4" Width="45">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <TextBlock Margin="10 0 10 0" Text="2" FontSize="20" FontWeight="Bold" FontFamily="Lexend" Opacity="0.5"
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource tablePageResults}" MouseDown="Border_MouseDown_4" Width="45">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <TextBlock Margin="10 0 10 0" Text="2" FontSize="20" FontWeight="Bold" FontFamily="Lexend" Opacity="0.5"
                                    VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </Border>
-                        <Border Style="{StaticResource tablePageResults}" MouseDown="Border_MouseDown_5" Width="45">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <TextBlock Margin="10 0 10 0" Text="3" FontSize="20" FontWeight="Bold" FontFamily="Lexend" Opacity="0.5"
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource tablePageResults}" MouseDown="Border_MouseDown_5" Width="45">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <TextBlock Margin="10 0 10 0" Text="3" FontSize="20" FontWeight="Bold" FontFamily="Lexend" Opacity="0.5"
                                    VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </Border>
-                        <Border Style="{StaticResource tablePageResults}" MouseDown="Border_MouseDown_6">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <TextBlock Margin="10 0 10 0" Text="Siguiente" FontSize="20" FontWeight="Bold" FontFamily="Lexend" Opacity="0.5"
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource tablePageResults}" MouseDown="Border_MouseDown_6">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <TextBlock Margin="10 0 10 0" Text="Siguiente" FontSize="20" FontWeight="Bold" FontFamily="Lexend" Opacity="0.5"
                                    VerticalAlignment="Center"/>
-                                <Image Source="/Images/next.png" Height="30" Margin="5" Opacity="0.5"/>
-                            </StackPanel>
-                        </Border>
-                        <TextBlock Text="Mostrando" FontSize="15" Margin="5 0 0 0" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
+                                    <Image Source="/Images/next.png" Height="30" Margin="5" Opacity="0.5"/>
+                                </StackPanel>
+                            </Border>
+                            <TextBlock Text="Mostrando" FontSize="15" Margin="5 0 0 0" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
                                    VerticalAlignment="Center"/>
-                        <TextBlock x:Name="registerNumberTextBlock" Text="100" FontSize="15" Margin="5 0 0 0" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
+                            <TextBlock x:Name="registerNumberTextBlock" Text="0" FontSize="15" Margin="5 0 0 0" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
                                    VerticalAlignment="Center"/>
-                        <TextBlock Text="Registros" FontSize="15" Margin="5 0 0 0" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
+                            <TextBlock Text="Registros" FontSize="15" Margin="5 0 0 0" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
                                    VerticalAlignment="Center"/>
-                        <StackPanel Margin="365 0 0 0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                            <ComboBox x:Name="resultsByPageComboBox" Margin="0 0 0 0" Width="200" Height="30" Background="Transparent" BorderBrush="Transparent"
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <ComboBox x:Name="resultsByPageComboBox" Width="200" Height="30" Background="Transparent" BorderBrush="Transparent"
                                      SelectedIndex="4" FontWeight="SemiBold" FontFamily="Lexend" VerticalContentAlignment="Center"
-                                      HorizontalContentAlignment="Center" Foreground="Black" Opacity="0.7">
-                                <ComboBoxItem>
-                                    10 Resultados Por Página
-                                </ComboBoxItem>
+                                      HorizontalContentAlignment="Center" Foreground="Black" Opacity="0.7" SelectionChanged="resultsByPageComboBox_SelectionChanged">
                                 <ComboBoxItem>
                                     20 Resultados Por Página
                                 </ComboBoxItem>
                                 <ComboBoxItem>
                                     40 Resultados Por Página
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    60 Resultados Por Página
                                 </ComboBoxItem>
                                 <ComboBoxItem>
                                     80 Resultados Por Página
@@ -161,7 +178,7 @@
                                 </ComboBoxItem>
                             </ComboBox>
                         </StackPanel>
-                    </StackPanel>
+                    </Grid>
                 </Border>
             </Grid>
             <Border Grid.Column="1" Background="White" CornerRadius="10" Margin="3 0 0 0">
@@ -172,6 +189,84 @@
                     <Border Style="{StaticResource sideBarButtons}" MouseDown="Border_MouseDown_1">
                         <Image Source="/Images/filter.png" Height="30" Width="auto" Opacity="0.5" Stretch="Uniform"/>
                     </Border>
+                    <StackPanel x:Name="editPanel" Orientation="Vertical" Margin="-312,-135,0,0" Background="White" Height="825"
+                                Visibility="Collapsed">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Border HorizontalAlignment="Left" Style="{StaticResource sideBarButtons}" Height="30" Width="30" MouseDown="Border_MouseDown_7">
+                                <Image Source="/Images/close.png" Height="15" Width="auto" Opacity="0.5" Stretch="Uniform"/>
+                            </Border>
+                            <Border BorderThickness="1" Width="250" Height="40" BorderBrush="#acb0af" HorizontalAlignment="Center" Margin="10" CornerRadius="5">
+                                <Grid Margin="7 9">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Source="/Images/search.png" Height="25" Opacity="0.5"/>
+                                    <TextBlock x:Name="textSearchFilter" 
+                                   Grid.Column="1"
+                                   Text="Buscar Filtros..."
+                                   VerticalAlignment="Center"
+                                   MouseDown="textSearchFilter_MouseDown"
+                                   Style="{StaticResource textHint}"/>
+                                    <TextBox x:Name="txtFilterSearch" 
+                                 Grid.Column="1"
+                                 VerticalAlignment="Center"
+                                 TextChanged="txtFilterSearch_TextChanged"
+                                 Style="{StaticResource textBox}"/>
+                                </Grid>
+                            </Border>
+                            <Grid Margin="15" Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock  Foreground="Black" Margin="5" FontFamily="Lexend" FontWeight="Bold"
+                                        Text="F I L T R O S" Opacity="0.7" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <StackPanel HorizontalAlignment="Left" Margin="5" Grid.Row="1">
+                                    <TextBlock Margin="0 10 0 0" Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                        Text="N° IDENTIFICACIÓN" Opacity="0.7"/>
+                                    <TextBox Name="idFilterTextBox" Style="{StaticResource infoTextbox2}" Width="350" TextChanged="idFilterTextBox_TextChanged"
+                                             LostFocus="idFilterTextBox_LostFocus"/>
+                                </StackPanel>
+                                <StackPanel HorizontalAlignment="Left" Margin="5" Grid.Row="2">
+                                    <TextBlock Margin="0 10 0 0" Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                        Text="TIPO ID" Opacity="0.7"/>
+                                    <TextBox Name="idTypeFilterTextBox" Style="{StaticResource infoTextbox2}" Width="350" TextChanged="idTypeFilterTextBox_TextChanged"
+                                             LostFocus="idTypeFilterTextBox_LostFocus"/>
+                                </StackPanel>
+                                <StackPanel HorizontalAlignment="Left" Margin="5" Grid.Row="3">
+                                    <TextBlock Margin="0 10 0 0" Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                        Text="PRIMER NOMBRE" Opacity="0.7"/>
+                                    <TextBox Name="firstNameFilterTextBox" Style="{StaticResource infoTextbox2}" Width="350" TextChanged="firstNameFilterTextBox_TextChanged"
+                                             LostFocus="firstNameFilterTextBox_LostFocus"/>
+                                </StackPanel>
+                                <StackPanel HorizontalAlignment="Left" Margin="5" Grid.Row="4">
+                                    <TextBlock Margin="0 10 0 0" Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                        Text="DIRECCIÓN DE RESIDENCIA" Opacity="0.7"/>
+                                    <TextBox Name="addressFilterTextBox" Style="{StaticResource infoTextbox2}" Width="350" TextChanged="addressFilterTextBox_TextChanged"
+                                             LostFocus="addressFilterTextBox_LostFocus"/>
+                                </StackPanel>
+                                <StackPanel HorizontalAlignment="Left" Margin="5" Grid.Row="5">
+                                    <TextBlock Margin="0 10 0 0" Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                        Text="FECHA DE NACIMIENTO" Opacity="0.7"/>
+                                    <TextBox Name="bornDateFilterTextBox" Style="{StaticResource infoTextbox2}" Width="350" TextChanged="bornDateFilterTextBox_TextChanged"
+                                             LostFocus="bornDateFilterTextBox_LostFocus"/>
+                                </StackPanel>
+                                <Button Margin="10" Grid.Row="6" Content="Limpiar Filtros" Style="{StaticResource loginButton2}" Click="Button_Click"
+                                        Width="240" Height="50"/>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
                 </StackPanel>
             </Border>
         </Grid>

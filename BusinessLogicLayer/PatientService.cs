@@ -41,5 +41,32 @@ namespace BusinessLogicLayer
             else
                 return new GenericResponse(patientList);
         }
+
+        public GenericResponse SavePatient(Patient patient)
+        {
+            string message = "Guardado Exitoso";
+            Patient patientSaved;
+            if (patient != null)
+            {
+                try
+                {
+                    connectionManager.OpenDataBase();
+                    patientSaved = patientRepository.Save(patient);
+                }
+                catch (Exception e)
+                {
+                    message = "Ocurrio un error: " + e.Message;
+                }
+                finally
+                {
+                    connectionManager.CloseDataBase();
+                }
+            }
+            else
+            {
+                message = "El paciente tiene valor NULL";
+            }
+            return new GenericResponse(message);
+        }
     }
 }

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BusinessLogicLayer;
+using Entity;
 
 namespace Presentation.Pages
 {
@@ -20,6 +22,7 @@ namespace Presentation.Pages
     /// </summary>
     public partial class RegisterPatientPage : Page
     {
+        public PatientService MyPatientService { get; set; }
         List<TextBox> registerTextBoxes;
 
         public RegisterPatientPage()
@@ -27,6 +30,7 @@ namespace Presentation.Pages
             InitializeComponent();
             ChargeRegisterInformation();
             registerTextBoxes = new List<TextBox>();
+            MyPatientService = new PatientService(ConnectionStringExtractor.connectionString);
             FillTextBoxesList();
         }
 
@@ -69,6 +73,13 @@ namespace Presentation.Pages
             if (ValidateFields())
             {
                 // Patient Object Creation...
+                Patient patient = new Patient(int.Parse(idTextBox.Text), "CC", firstNameTextBox.Text, 
+                    secondNameTextBox.Text, firstLastNameTextBox.Text, secondLastNameTextBox.Text, 
+                    dateTextBox.Text, expeditionTextBox.Text, placeExpeditionTextBox.Text, int.Parse(phoneTextBox.Text),
+                    addressTextBox.Text);
+
+                string message = MyPatientService.SavePatient(patient).Message;
+                MessageBox.Show(message, "CSA LABS");
             }
             else
             {

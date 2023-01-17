@@ -7,7 +7,7 @@
       mc:Ignorable="d"
       Background="White"
       Height="865"
-      Width="1360"
+      Width="1640"
       Title="Registro Paciente">
 
     <Border BorderBrush="#efefefff" BorderThickness="10" CornerRadius="5">
