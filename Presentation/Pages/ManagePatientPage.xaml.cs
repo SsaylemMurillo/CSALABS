@@ -130,7 +130,16 @@ namespace Presentation.Pages
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // Edition Window: Pencil On Right Side Bar
-            new EditPatientWindow().Show();
+            var myPatient = (Patient)patientsDataGrid.SelectedItem;
+            if (myPatient != null)
+            {
+                new EditPatientWindow(MyPatientService, myPatient, patientsDataGrid.SelectedIndex).Show();
+            }
+            else
+            {
+                MessageBox.Show("Debes seleccionar un paciente del registro para poder editar", "CSA LABS",
+                    MessageBoxButton.OK);
+            }
         }
 
         private void Border_MouseDown_1(object sender, MouseButtonEventArgs e)
@@ -185,27 +194,97 @@ namespace Presentation.Pages
 
         private void idFilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+            var response = MyPatientService.GetAllFilterId(idFilterTextBox.Text);
+
+            if (response.PatientDataList != null)
+            {
+                registersTextBlock.Text = response.PatientDataList.Count.ToString();
+                patientsDataGrid.Items.Clear();
+                foreach (Patient item in response.PatientDataList)
+                {
+                    patientsDataGrid.Items.Add(item);
+                }
+            }
+            else
+            {
+                patientsDataGrid.Items.Clear();
+            }
         }
 
         private void idTypeFilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+            var response = MyPatientService.GetAllFilterIdType(idTypeFilterTextBox.Text);
+
+            if (response.PatientDataList != null)
+            {
+                registersTextBlock.Text = response.PatientDataList.Count.ToString();
+                patientsDataGrid.Items.Clear();
+                foreach (Patient item in response.PatientDataList)
+                {
+                    patientsDataGrid.Items.Add(item);
+                }
+            }
+            else
+            {
+                patientsDataGrid.Items.Clear();
+            }
         }
 
         private void firstNameFilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+            var response = MyPatientService.GetAllFilterFirstName(firstNameFilterTextBox.Text);
+
+            if (response.PatientDataList != null)
+            {
+                registersTextBlock.Text = response.PatientDataList.Count.ToString();
+                patientsDataGrid.Items.Clear();
+                foreach (Patient item in response.PatientDataList)
+                {
+                    patientsDataGrid.Items.Add(item);
+                }
+            }
+            else
+            {
+                patientsDataGrid.Items.Clear();
+            }
         }
 
         private void addressFilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+            var response = MyPatientService.GetAllFilterAddress(addressFilterTextBox.Text);
+
+            if (response.PatientDataList != null)
+            {
+                registersTextBlock.Text = response.PatientDataList.Count.ToString();
+                patientsDataGrid.Items.Clear();
+                foreach (Patient item in response.PatientDataList)
+                {
+                    patientsDataGrid.Items.Add(item);
+                }
+            }
+            else
+            {
+                patientsDataGrid.Items.Clear();
+            }
         }
 
         private void bornDateFilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+            var response = MyPatientService.GetAllFilterBornDate(bornDateFilterTextBox.Text);
+
+            if (response.PatientDataList != null)
+            {
+                registersTextBlock.Text = response.PatientDataList.Count.ToString();
+                patientsDataGrid.Items.Clear();
+                foreach (Patient item in response.PatientDataList)
+                {
+                    patientsDataGrid.Items.Add(item);
+                }
+            }
+            else
+            {
+                patientsDataGrid.Items.Clear();
+            }
 
         }
 
@@ -233,7 +312,7 @@ namespace Presentation.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             FilterValue = 0;
-            filtersTextBlock.Text = "" + FilterValue;
+            UpdateFilterTextValue();
             // Clean Fields
 
             foreach (TextBox item in filterTextBoxes)
