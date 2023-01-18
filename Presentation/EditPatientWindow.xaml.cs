@@ -22,13 +22,13 @@ namespace Presentation
     public partial class EditPatientWindow : Window
     {
 
-
+        public DataGrid TheDataGrid { get; set; }
         List<TextBox> editTextBoxes;
         public Patient MyPatient { get; set; }
         public int SelectedRow { get; set; }
         public PatientService MyService { get; set; }
 
-        public EditPatientWindow(PatientService service, Patient patient, int rowSelected)
+        public EditPatientWindow(DataGrid dataGridPatient, PatientService service, Patient patient, int rowSelected)
         {
             MyPatient = patient;
             SelectedRow = rowSelected;
@@ -38,6 +38,7 @@ namespace Presentation
             editTextBoxes = new List<TextBox>();
             LoadFields();
             LoadFieldsValues();
+            TheDataGrid = dataGridPatient;
         }
 
         private void LoadFields()
@@ -64,7 +65,7 @@ namespace Presentation
             secondNameTextBox.Text = MyPatient.SecondName;
             secondNameTextBox.IsEnabled = false;
 
-            firstLastNameTextBox.Text = MyPatient.SecondName;
+            firstLastNameTextBox.Text = MyPatient.LastName;
             firstLastNameTextBox.IsEnabled = false;
 
             secondLastNameTextBox.Text = MyPatient.SecondLastName;
@@ -87,6 +88,32 @@ namespace Presentation
             phoneTextBox.IsEnabled = false;
 
         }
+
+        public string[] DateSeparator(string stringValue)
+        {
+            if (stringValue != null)
+            {
+                var strings = stringValue.Split('/');
+                return strings;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+        private string stringDateFormat(string stringValue)
+        {
+            string newString = "";
+            var stringArray = DateSeparator(stringValue);
+
+            if (stringArray.Length > 0)
+            {
+                newString = stringArray[1] + "/" + stringArray[0] + "/" + stringArray[2];
+            }
+            return newString;
+        }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -139,6 +166,15 @@ namespace Presentation
             {
                 // Create Patient Elimination Petition To the Database
                 // Use the service...
+                if (idTextBox.Text != null)
+                {
+                    Patient patient = new Patient();
+                    patient.Id = int.Parse(idTextBox.Text);
+                    var serviceResponse = MyService.DeletePatient(patient);
+                    MessageBox.Show(serviceResponse.Message, "CSA LABS", MessageBoxButton.OK);
+                    TheDataGrid.Items.Refresh();
+                    Close();
+                }
             }
             else
             {
@@ -150,6 +186,42 @@ namespace Presentation
         {
             // Create Patient Edition...
             // Send it to the database
+
+            var value = MessageBox.Show("Estás Seguro de querer editar a este paciente?", "CSA LABS",
+                MessageBoxButton.OKCancel);
+
+            if (value == MessageBoxResult.OK)
+            {
+                // Create Patient Elimination Petition To the Database
+                // Use the service...
+                if (ValidateFields())
+                {
+                    Patient patient = new Patient(int.Parse(idTextBox.Text), "CC", firstNameTextBox.Text,
+                    secondNameTextBox.Text, firstLastNameTextBox.Text, secondLastNameTextBox.Text,
+                    stringDateFormat(bornDateTextBox.Text), stringDateFormat(expeditionTextBox.Text), expeditionPlaceTextBox.Text, int.Parse(phoneTextBox.Text),
+                    addressTextBox.Text);
+                    var serviceResponse = MyService.UpdatePatient(patient);
+                    MessageBox.Show(serviceResponse.Message, "CSA LABS", MessageBoxButton.OK);
+                    TheDataGrid.Items.Refresh();
+                    Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Campos Vacíos Encontrados, Por Favor Completa La Información", "CSA LABS", MessageBoxButton.OK);
+            }
+        }
+
+        private bool ValidateFields()
+        {
+            foreach (TextBox item in editTextBoxes)
+            {
+                if (string.IsNullOrEmpty(item.Text) && item.Text.Length <= 0)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void Button_Click_5(object sender, RoutedEventArgs e)

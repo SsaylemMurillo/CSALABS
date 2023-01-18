@@ -43,6 +43,20 @@ namespace Presentation.Pages
                 " it to make a type specimen book.\r\n";
         }
 
+        public string[] DateSeparator(string stringValue)
+        {
+            if (stringValue != null)
+            {
+                var strings = stringValue.Split('/');
+                return strings;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
         private void FillTextBoxesList()
         {
             registerTextBoxes.Add(firstNameTextBox);
@@ -67,6 +81,17 @@ namespace Presentation.Pages
             }
         }
 
+        private string stringDateFormat(string stringValue)
+        {
+            string newString = "";
+            var stringArray = DateSeparator(stringValue);
+
+            if (stringArray.Length > 0)
+            {
+                newString = stringArray[1] + "/" + stringArray[0] + "/" + stringArray[2];
+            }return newString;
+        }
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             // Create Patient
@@ -75,7 +100,7 @@ namespace Presentation.Pages
                 // Patient Object Creation...
                 Patient patient = new Patient(int.Parse(idTextBox.Text), "CC", firstNameTextBox.Text, 
                     secondNameTextBox.Text, firstLastNameTextBox.Text, secondLastNameTextBox.Text, 
-                    dateTextBox.Text, expeditionTextBox.Text, placeExpeditionTextBox.Text, int.Parse(phoneTextBox.Text),
+                    stringDateFormat(dateTextBox.Text), stringDateFormat(expeditionTextBox.Text), placeExpeditionTextBox.Text, int.Parse(phoneTextBox.Text),
                     addressTextBox.Text);
 
                 string message = MyPatientService.SavePatient(patient).Message;

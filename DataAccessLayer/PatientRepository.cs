@@ -18,6 +18,26 @@ namespace DataAccessLayer
             _connection = connection;
         }
 
+        public Patient DeletePatient(Patient patient)
+        {
+            if (Search(patient.Id) != null)
+            {
+                DbCommand command = new SqlCommand();
+                command.Connection = _connection;
+                command.CommandText = $"delete from patient where patient.id = @patientId;";
+                command.Parameters.Add(new SqlParameter("@patientId", patient.Id));
+                var value = command.ExecuteNonQuery();
+                if (value == 1)
+                    return patient;
+                else
+                    return null;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public Patient Save(Patient patient)
         {
             Patient patientUnSaved = null;
@@ -36,9 +56,9 @@ namespace DataAccessLayer
                 command.Parameters.Add(new SqlParameter("@patientSecondName", patient.SecondName));
                 command.Parameters.Add(new SqlParameter("@patientLastName", patient.LastName));
                 command.Parameters.Add(new SqlParameter("@patientSecondLastName", patient.SecondLastName));
-                var date = "" + patient.BornDate.Day + "/" + patient.BornDate.Month + "/" + patient.BornDate.Year;
+                var date = "" + patient.BornDate.Month + "/" + patient.BornDate.Day + "/" + patient.BornDate.Year;
                 command.Parameters.Add(new SqlParameter("@patientBornDate", date));
-                var date2 = "" + patient.ExpeditionDate.Day + "/" + patient.ExpeditionDate.Month + "/" + patient.ExpeditionDate.Year;
+                var date2 = "" + patient.ExpeditionDate.Month + "/" + patient.ExpeditionDate.Day + "/" + patient.ExpeditionDate.Year;
                 command.Parameters.Add(new SqlParameter("@patientExpeditionDate", date2));
                 command.Parameters.Add(new SqlParameter("@patientExpeditionPlace", patient.ExpeditionPlace));
                 command.Parameters.Add(new SqlParameter("@patientPhone", patient.Phone));
@@ -62,14 +82,15 @@ namespace DataAccessLayer
                 $" second_name = @patientSecondName, last_name = @patientLastName, second_lastname = @patientSecondLastName, " +
                 $"born_date = @patientBornDate, expedition_date = @patientExpeditionDate, expedition_place = @patientExpeditionPlace, phone = @patientPhone, " +
                 $"address = @patientAddress WHERE id = @id";
+            command.Parameters.Add(new SqlParameter("@id", patient.Id));
             command.Parameters.Add(new SqlParameter("@patientIdType", patient.IdType));
             command.Parameters.Add(new SqlParameter("@patientFirstName", patient.FirstName));
             command.Parameters.Add(new SqlParameter("@patientSecondName", patient.SecondName));
             command.Parameters.Add(new SqlParameter("@patientLastName", patient.LastName));
             command.Parameters.Add(new SqlParameter("@patientSecondLastName", patient.SecondLastName));
-            var date = "" + patient.BornDate.Day + "/" + patient.BornDate.Month + "/" + patient.BornDate.Year;
+            var date = "" + patient.BornDate.Month + "/" + patient.BornDate.Day + "/" + patient.BornDate.Year;
             command.Parameters.Add(new SqlParameter("@patientBornDate", date));
-            var date2 = "" + patient.ExpeditionDate.Day + "/" + patient.ExpeditionDate.Month + "/" + patient.ExpeditionDate.Year;
+            var date2 = "" + patient.ExpeditionDate.Month + "/" + patient.ExpeditionDate.Day + "/" + patient.ExpeditionDate.Year;
             command.Parameters.Add(new SqlParameter("@patientExpeditionDate", date2));
             command.Parameters.Add(new SqlParameter("@patientExpeditionPlace", patient.ExpeditionPlace));
             command.Parameters.Add(new SqlParameter("@patientPhone", patient.Phone));
@@ -96,9 +117,9 @@ namespace DataAccessLayer
                 string patientLastName = reader.GetString(4);
                 string patientSecondLastName = reader.GetString(5);
                 DateTime patientBornDate = Convert.ToDateTime(reader.GetDateTime(6));
-                var patientBornDateTime = "" + patientBornDate.Day + "/" + patientBornDate.Month + "/" + patientBornDate.Year;
+                var patientBornDateTime = "" + patientBornDate.Month + "/" + patientBornDate.Day + "/" + patientBornDate.Year;
                 DateTime patientExpeditionDate = Convert.ToDateTime(reader.GetDateTime(7));
-                var patientExpeditionDateTime = "" + patientBornDate.Day + "/" + patientBornDate.Month + "/" + patientBornDate.Year;
+                var patientExpeditionDateTime = "" + patientExpeditionDate.Month + "/" + patientExpeditionDate.Day + "/" + patientExpeditionDate.Year;
                 string patientExpeditionPlace = reader.GetString(8);
                 int patientPhone = reader.GetInt32(9);
                 string patientAddress = reader.GetString(10);

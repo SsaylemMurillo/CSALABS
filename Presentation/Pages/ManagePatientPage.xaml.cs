@@ -78,6 +78,7 @@ namespace Presentation.Pages
 
         private void LoadPatientDataGrid()
         {
+            patientsDataGrid.Items.Clear();
             var response = MyPatientService.GetAll();
 
             if (response.PatientDataList != null)
@@ -130,10 +131,10 @@ namespace Presentation.Pages
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // Edition Window: Pencil On Right Side Bar
-            var myPatient = (Patient)patientsDataGrid.SelectedItem;
+            var myPatient = (Patient)patientsDataGrid.SelectedItem;     
             if (myPatient != null)
             {
-                new EditPatientWindow(MyPatientService, myPatient, patientsDataGrid.SelectedIndex).Show();
+                new EditPatientWindow(patientsDataGrid, MyPatientService, myPatient, patientsDataGrid.SelectedIndex).Show();
             }
             else
             {

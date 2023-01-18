@@ -69,6 +69,59 @@ namespace BusinessLogicLayer
             return new GenericResponse(message);
         }
 
+        public GenericResponse UpdatePatient(Patient patient)
+        {
+            string message = "Edición Exitosa";
+            if (patient != null)
+            {
+                try
+                {
+                    connectionManager.OpenDataBase();
+                    patientRepository.UpdatePatient(patient);
+                }
+                catch (Exception e)
+                {
+                    message = "Ocurrio un error: " + e.Message;
+                }
+                finally
+                {
+                    connectionManager.CloseDataBase();
+                }
+            }
+            else
+            {
+                message = "El paciente tiene valor NULL";
+            }
+            return new GenericResponse(message);
+        }
+
+        public GenericResponse DeletePatient(Patient patient)
+        {
+            string message = "Borrado Exitoso";
+            Patient patientDeleted;
+            if (patient != null)
+            {
+                try
+                {
+                    connectionManager.OpenDataBase();
+                    patientDeleted = patientRepository.DeletePatient(patient);
+                }
+                catch (Exception e)
+                {
+                    message = "Ocurrio un error: " + e.Message;
+                }
+                finally
+                {
+                    connectionManager.CloseDataBase();
+                }
+            }
+            else
+            {
+                message = "El paciente tiene valor NULL";
+            }
+            return new GenericResponse(message);
+        }
+
         public GenericResponse GetAllFilterId(string id)
         {
             List<Patient> patientsListFilter = null;
