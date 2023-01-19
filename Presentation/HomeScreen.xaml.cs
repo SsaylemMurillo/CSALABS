@@ -97,5 +97,17 @@ namespace Presentation
         {
             MainFrame.Content = new MainPage(MainFrame);
         }
+
+        private void menuButton_Click(object sender, RoutedEventArgs e)
+        {
+            sidePanelButton.Visibility = Visibility.Visible;
+            borderSidePanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void exitMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            sidePanelButton.Visibility = Visibility.Collapsed;
+            borderSidePanel.Visibility = Visibility.Visible;
+        }
     }
 }

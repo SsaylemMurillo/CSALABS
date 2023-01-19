@@ -98,13 +98,20 @@ namespace Presentation.Pages
             if (ValidateFields())
             {
                 // Patient Object Creation...
-                Patient patient = new Patient(int.Parse(idTextBox.Text), "CC", firstNameTextBox.Text, 
-                    secondNameTextBox.Text, firstLastNameTextBox.Text, secondLastNameTextBox.Text, 
+                try
+                {
+                    Patient patient = new Patient(int.Parse(idTextBox.Text), "CC", firstNameTextBox.Text,
+                    secondNameTextBox.Text, firstLastNameTextBox.Text, secondLastNameTextBox.Text,
                     stringDateFormat(dateTextBox.Text), stringDateFormat(expeditionTextBox.Text), placeExpeditionTextBox.Text, int.Parse(phoneTextBox.Text),
                     addressTextBox.Text);
 
-                string message = MyPatientService.SavePatient(patient).Message;
-                MessageBox.Show(message, "CSA LABS");
+                    string message = MyPatientService.SavePatient(patient).Message;
+                    MessageBox.Show(message, "CSA LABS");
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message, "CSA LABS");
+                }
             }
             else
             {

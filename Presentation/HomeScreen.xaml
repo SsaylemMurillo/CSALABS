@@ -11,49 +11,125 @@
         Title="CSA LABS" Height="900" Width="1700" Icon="Images/logo.png">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <!-- Left Menu -->
-        <Border>
-            <Border.Background>
-                <SolidColorBrush Color="White" Opacity="0.95"/>
-            </Border.Background>
+        <Grid>
+            <Border x:Name="borderSidePanel">
+                <Border.Background>
+                    <SolidColorBrush Color="White" Opacity="0.95"/>
+                </Border.Background>
 
-            <Grid>
-                <StackPanel VerticalAlignment="Top">
-                    <Button x:Name="menuButton" Style="{StaticResource menuButton}">
-                        <Image Source="Images/menub.png" Stretch="Uniform" Height="20" Opacity="0.5" />
-                    </Button>
-                    <Separator Background="gray" Margin="20 0 20 10" Height="0.8"/>
-                    <Button x:Name="searchButton" Style="{StaticResource menuButton}">
-                        <Image Source="Images/searchb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
-                    </Button>
-                    <Button x:Name="homeButton" Style="{StaticResource menuButton}" Click="homeButton_Click">
-                        <Image Source="Images/home.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
-                    </Button>
-                    <Button Style="{StaticResource menuButton}">
-                        <Image Source="Images/settingsb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
-                    </Button>
-                    <Button Style="{StaticResource menuButton}" >
-                        <Image Source="Images/activityb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
-                    </Button>
-                    <Button Style="{StaticResource menuButton}" >
-                        <Image Source="Images/alertb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
-                    </Button>
-                    <Button Style="{StaticResource menuButton}" >
-                        <Image Source="Images/bellb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
-                    </Button>
-                </StackPanel>
-                <StackPanel VerticalAlignment="Bottom" Background="Transparent">
-                    <Separator Background="Gray" Height="0.8" Margin="20 0 20 10"/>
-                    <Button Style="{StaticResource userProfileButton}">
-                        <Image Source="Images/userw.png" Stretch="Uniform" Height="20"/>
-                    </Button>
-                </StackPanel>
+                <Grid Margin="10">
+                    <StackPanel VerticalAlignment="Top">
+                        <Button x:Name="menuButton" Style="{StaticResource menuButton}" Click="menuButton_Click">
+                            <Image Source="Images/menub.png" Stretch="Uniform" Height="20" Opacity="0.5" />
+                        </Button>
+                        <Separator Background="gray" Margin="20 0 20 10" Height="0.8"/>
+                        <Button x:Name="searchButton" Style="{StaticResource menuButton}">
+                            <Image Source="Images/searchb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                        </Button>
+                        <Button x:Name="homeButton" Style="{StaticResource menuButton}" Click="homeButton_Click">
+                            <Image Source="Images/home.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                        </Button>
+                        <Button Style="{StaticResource menuButton}">
+                            <Image Source="Images/settingsb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                        </Button>
+                        <Button Style="{StaticResource menuButton}" >
+                            <Image Source="Images/activityb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                        </Button>
+                        <Button Style="{StaticResource menuButton}" >
+                            <Image Source="Images/alertb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                        </Button>
+                        <Button Style="{StaticResource menuButton}" >
+                            <Image Source="Images/bellb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Bottom" Background="Transparent">
+                        <Separator Background="Gray" Height="0.8" Margin="20 0 20 10"/>
+                        <Button Style="{StaticResource userProfileButton}">
+                            <Image Source="Images/userw.png" Stretch="Uniform" Height="20"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Grid x:Name="sidePanelButton" Width="250" Visibility="Collapsed" Background="Transparent">
+                <Border>
+                    <Border.Background>
+                        <SolidColorBrush Color="White" Opacity="0.95"/>
+                    </Border.Background>
+
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0">
+                            <Button Height="40" Width="40" Style="{StaticResource menuButton}" Click="exitMenuButton_Click">
+                                <Image Source="Images/menub.png" Stretch="Uniform" Height="20" Opacity="0.5" />
+                            </Button>
+                        </StackPanel>
+                        <TextBlock Margin="5" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                Text="M E N U   P R I N C I P A L" Opacity="0.5"/>
+                        <Separator Background="gray" Margin="20 0 20 10" Height="0.8" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
+                        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="2">
+                            <Button Style="{StaticResource menuButton}">
+                                <Image Source="Images/searchb.png" Stretch="Uniform" Height="20" Opacity="0.5" />
+                            </Button>
+                        </StackPanel>
+                        <TextBlock Margin="5" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                Text="Busqueda" Opacity="0.5"/>
+                        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="3">
+                            <Button Style="{StaticResource menuButton}" Click="homeButton_Click">
+                                <Image Source="Images/home.png" Stretch="Uniform" Height="20" Opacity="0.5" />
+                            </Button>
+                        </StackPanel>
+                        <TextBlock Margin="5" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                Text="Inicio" Opacity="0.5"/>
+                        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="4">
+                            <Button Style="{StaticResource menuButton}">
+                                <Image Source="Images/settingsb.png" Stretch="Uniform" Height="20" Opacity="0.5" />
+                            </Button>
+                        </StackPanel>
+                        <TextBlock Margin="5" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                Text="Configuración" Opacity="0.5"/>
+                        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="5">
+                            <Button Style="{StaticResource menuButton}">
+                                <Image Source="Images/activityb.png" Stretch="Uniform" Height="20" Opacity="0.5" />
+                            </Button>
+                        </StackPanel>
+                        <TextBlock Margin="5" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                Text="Analiticas" Opacity="0.5"/>
+                        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="6">
+                            <Button Style="{StaticResource menuButton}">
+                                <Image Source="Images/alertb.png" Stretch="Uniform" Height="20" Opacity="0.5" />
+                            </Button>
+                        </StackPanel>
+                        <TextBlock Margin="5" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                Text="Reportes" Opacity="0.5"/>
+                        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="7">
+                            <Button Style="{StaticResource menuButton}">
+                                <Image Source="Images/bellb.png" Stretch="Uniform" Height="20" Opacity="0.5" />
+                            </Button>
+                        </StackPanel>
+                        <TextBlock Margin="5" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                Text="Notificaciones" Opacity="0.5"/>
+                    </Grid>
+                </Border>
             </Grid>
-        </Border>
-        
+        </Grid>
+
         <!-- Main Section -->
         <Grid Background="White" Grid.Column="1">
             <Grid>
@@ -72,7 +148,7 @@
                         </Button>
                     </StackPanel>
                 </Grid>
-                <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+                <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" HorizontalContentAlignment="Center"/>
             </Grid>
         </Grid>
     </Grid>
