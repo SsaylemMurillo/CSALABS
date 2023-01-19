@@ -80,8 +80,15 @@
                                 <Image Source="Images/menub.png" Stretch="Uniform" Height="20" Opacity="0.5" />
                             </Button>
                         </StackPanel>
-                        <TextBlock Margin="5" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
-                                Text="M E N U   P R I N C I P A L" Opacity="0.5"/>
+                        <StackPanel Orientation="Horizontal" Margin="5" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <TextBlock Text="C" VerticalAlignment="Center" FontFamily="Lexend" FontSize="25" FontWeight="SemiBold"/>
+                            <TextBlock Text="S" Foreground="#674ea7" VerticalAlignment="Center" FontFamily="Lexend" FontSize="25" FontWeight="SemiBold"/>
+                            <TextBlock Text="A" VerticalAlignment="Center" FontFamily="Lexend" FontSize="25" FontWeight="SemiBold"/>
+                            <TextBlock Text="L" Margin="10 0 0 0"  VerticalAlignment="Center" FontFamily="Lexend" FontSize="25" FontWeight="SemiBold"/>
+                            <TextBlock Text="A" Foreground="Purple" VerticalAlignment="Center" FontFamily="Lexend" FontSize="25" FontWeight="SemiBold"/>
+                            <TextBlock Text="B" VerticalAlignment="Center" FontFamily="Lexend" FontSize="25" FontWeight="SemiBold"/>
+                            <TextBlock Text="S" Foreground="#e91d63" VerticalAlignment="Center" FontFamily="Lexend" FontSize="25" FontWeight="SemiBold"/>
+                        </StackPanel>
                         <Separator Background="gray" Margin="20 0 20 10" Height="0.8" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
                         <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="2">
                             <Button Style="{StaticResource menuButton}">
@@ -148,7 +155,7 @@
                         </Button>
                     </StackPanel>
                 </Grid>
-                <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" HorizontalContentAlignment="Center"/>
+                <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
             </Grid>
         </Grid>
     </Grid>
