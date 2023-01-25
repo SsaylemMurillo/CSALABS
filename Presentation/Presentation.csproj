@@ -64,11 +64,20 @@
     <Compile Include="EditPatientWindow.xaml.cs">
       <DependentUpon>EditPatientWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ConfigurationPage.xaml.cs">
+      <DependentUpon>ConfigurationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainSettingsPage.xaml.cs">
+      <DependentUpon>MainSettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ManagePatientPage.xaml.cs">
       <DependentUpon>ManagePatientPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegisterPatientPage.xaml.cs">
       <DependentUpon>RegisterPatientPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ThemesConfigPage.xaml.cs">
+      <DependentUpon>ThemesConfigPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ButtonMenuController.xaml.cs">
       <DependentUpon>ButtonMenuController.xaml</DependentUpon>
@@ -106,7 +115,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\ConfigurationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RegisterPatientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ThemesConfigPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,6 +235,9 @@
     <Resource Include="Images\activityb.png" />
     <Resource Include="Images\alertb.png" />
     <Resource Include="Images\bellb.png" />
+    <Resource Include="Images\alert.png" />
+    <Resource Include="Images\feather.png" />
+    <Resource Include="Images\analitics.png" />
     <Content Include="Images\home.svg" />
     <Resource Include="Images\homew.png" />
     <Content Include="Images\loading.gif">
@@ -227,6 +251,9 @@
     <Resource Include="Images\userw.png" />
     <Resource Include="Images\menub.png" />
     <Resource Include="Images\searchb.png" />
+    <Resource Include="Images\shield.png" />
+    <Resource Include="Images\toggle.png" />
+    <Resource Include="Images\tool.png" />
     <Content Include="Images\user_m.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
