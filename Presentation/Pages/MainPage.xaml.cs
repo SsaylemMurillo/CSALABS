@@ -36,23 +36,23 @@ namespace Presentation.Pages
         public void FillModules()
         {
             modules.Add(new ModuleButtonController(mainFrame,
-                new RegisterPatientPage(), "Registro de Pacientes", "#674ea7", "#e91d63", "/Images/userw.png"));
+                new RegisterPatientPage(mainFrame, this), "Registro de Pacientes", "#674ea7", "#e91d63", "/Images/add_user.png"));
             modules.Add(new ModuleButtonController(mainFrame,
-                new ManagePatientPage(), "Gestor de Pacientes", "#5aef6a", "#e91d63", "/Images/userw.png"));
+                new ManagePatientPage(mainFrame, this), "Gestor de Pacientes", "#5aef6a", "#e91d63", "/Images/edit.png"));
             modules.Add(new ModuleButtonController(mainFrame,
-                new RegisterPatientPage(), "Modulo #1", "#f76f81", "#e91d63", "/Images/userw.png"));
+                new RegisterPatientPage(mainFrame, this), "Modulo #1", "#f76f81", "#e91d63", "/Images/add_user.png"));
             modules.Add(new ModuleButtonController(mainFrame,
-                new RegisterPatientPage(), "Modulo #2", "#d2be77", "#e91d63", "/Images/userw.png"));
+                new RegisterPatientPage(mainFrame, this), "Modulo #2", "#d2be77", "#e91d63", "/Images/add_user.png"));
             modules.Add(new ModuleButtonController(mainFrame,
-                new RegisterPatientPage(), "Modulo #3", "#4400bf", "#e91d63", "/Images/userw.png"));
+                new RegisterPatientPage(mainFrame, this), "Modulo #3", "#4400bf", "#e91d63", "/Images/add_user.png"));
             modules.Add(new ModuleButtonController(mainFrame,
-                new RegisterPatientPage(), "Modulo #4", "#fa7603", "#e91d63", "/Images/userw.png"));
+                new RegisterPatientPage(mainFrame, this), "Modulo #4", "#fa7603", "#e91d63", "/Images/add_user.png"));
             modules.Add(new ModuleButtonController(mainFrame,
-                new RegisterPatientPage(), "Modulo #5", "#64cf06", "#e91d63", "/Images/userw.png"));
+                new RegisterPatientPage(mainFrame, this), "Modulo #5", "#64cf06", "#e91d63", "/Images/add_user.png"));
             modules.Add(new ModuleButtonController(mainFrame,
-                new RegisterPatientPage(), "Modulo #6", "#c58fa6", "#e91d63", "/Images/userw.png"));
+                new RegisterPatientPage(mainFrame, this), "Modulo #6", "#c58fa6", "#e91d63", "/Images/add_user.png"));
             modules.Add(new ModuleButtonController(mainFrame,
-                new RegisterPatientPage(), "Modulo #7", "#add344", "#e91d63", "/Images/userw.png"));
+                new RegisterPatientPage(mainFrame, this), "Modulo #7", "#add344", "#e91d63", "/Images/add_user.png"));
         }
 
         public void SendModulesToDataGrid()

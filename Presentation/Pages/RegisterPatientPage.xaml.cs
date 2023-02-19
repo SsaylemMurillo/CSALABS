@@ -22,19 +22,23 @@ namespace Presentation.Pages
     /// </summary>
     public partial class RegisterPatientPage : Page
     {
+        public Page PreviousPage { get; set; }
+        public Frame MainFrame { get; set; }
         public PatientService MyPatientService { get; set; }
         List<TextBox> registerTextBoxes;
 
-        public RegisterPatientPage()
+        public RegisterPatientPage(Frame mainFrame, Page previousPage)
         {
             InitializeComponent();
             ChargeRegisterInformation();
             registerTextBoxes = new List<TextBox>();
             MyPatientService = new PatientService(ConnectionStringExtractor.connectionString);
             FillTextBoxesList();
+            MainFrame = mainFrame;
+            PreviousPage = previousPage;
         }
 
-        
+
         public void ChargeRegisterInformation()
         {
             registerTextInformation.Text = "Lorem Ipsum is simply dummy text of the printing and " +
@@ -130,6 +134,11 @@ namespace Presentation.Pages
                 }
             }
             return true;
+        }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = PreviousPage;
         }
     }
 }

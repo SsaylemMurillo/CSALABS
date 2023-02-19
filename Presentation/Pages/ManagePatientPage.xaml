@@ -29,6 +29,10 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <Button x:Name="backButton" Margin="-5 0 10 0" Style="{StaticResource userProfileButton}"
+                              Click="backButton_Click">
+                                <Image Source="/Images/left.png" Stretch="Uniform" Height="20" RenderOptions.BitmapScalingMode="Fant"/>
+                            </Button>
                             <TextBlock x:Name="registersTextBlock" Text="0" FontSize="30" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
                                    VerticalAlignment="Center"/>
                             <TextBlock Text="Registros" FontSize="30" Margin="10 0 0 0" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"

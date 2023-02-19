@@ -114,5 +114,25 @@ namespace Presentation
         {
             MainFrame.Content = new ConfigurationPage();
         }
+
+        private void searchButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void activityButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void alertButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void notificationButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

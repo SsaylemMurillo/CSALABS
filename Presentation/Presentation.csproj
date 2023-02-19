@@ -93,10 +93,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Loading.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -107,9 +103,6 @@
     </Compile>
     <Compile Include="HomeScreen.xaml.cs">
       <DependentUpon>HomeScreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Loading.xaml.cs">
-      <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -238,8 +231,11 @@
     <Resource Include="Images\alert.png" />
     <Resource Include="Images\feather.png" />
     <Resource Include="Images\analitics.png" />
+    <Resource Include="Images\add_user.png" />
+    <Resource Include="Images\edit.png" />
     <Content Include="Images\home.svg" />
     <Resource Include="Images\homew.png" />
+    <Resource Include="Images\left.png" />
     <Content Include="Images\loading.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

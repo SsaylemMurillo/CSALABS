@@ -27,24 +27,26 @@
                             <Image Source="Images/menub.png" Stretch="Uniform" Height="20" Opacity="0.5" />
                         </Button>
                         <Separator Background="gray" Margin="20 0 20 10" Height="0.8"/>
-                        <Button x:Name="searchButton" Style="{StaticResource menuButton}">
-                            <Image Source="Images/searchb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
-                        </Button>
-                        <Button x:Name="homeButton" Style="{StaticResource menuButton}" Click="homeButton_Click">
-                            <Image Source="Images/home.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
-                        </Button>
-                        <Button x:Name="settingsButton" Style="{StaticResource menuButton}" Click="settingsButton_Click">
-                            <Image Source="Images/settingsb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
-                        </Button>
-                        <Button Style="{StaticResource menuButton}" >
-                            <Image Source="Images/activityb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
-                        </Button>
-                        <Button Style="{StaticResource menuButton}" >
-                            <Image Source="Images/alertb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
-                        </Button>
-                        <Button Style="{StaticResource menuButton}" >
-                            <Image Source="Images/bellb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
-                        </Button>
+                        <StackPanel x:Name="buttonsPanel">
+                            <Button x:Name="searchButton" Style="{StaticResource menuButton}" Click="searchButton_Click">
+                                <Image Source="Images/searchb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                            </Button>
+                            <Button x:Name="homeButton" Style="{StaticResource menuButton}" Click="homeButton_Click">
+                                <Image Source="Images/home.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                            </Button>
+                            <Button x:Name="settingsButton" Style="{StaticResource menuButton}" Click="settingsButton_Click">
+                                <Image Source="Images/settingsb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                            </Button>
+                            <Button x:Name="activityButton" Style="{StaticResource menuButton}" Click="activityButton_Click">
+                                <Image Source="Images/activityb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                            </Button>
+                            <Button x:Name="alertButton" Style="{StaticResource menuButton}" Click="alertButton_Click" >
+                                <Image Source="Images/alertb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                            </Button>
+                            <Button x:Name="notificationButton" Style="{StaticResource menuButton}" Click="notificationButton_Click" >
+                                <Image Source="Images/bellb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
                     <StackPanel VerticalAlignment="Bottom" Background="Transparent">
                         <Separator Background="Gray" Height="0.8" Margin="20 0 20 10"/>

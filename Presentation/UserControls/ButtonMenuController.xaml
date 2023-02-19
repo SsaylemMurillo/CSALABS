@@ -9,7 +9,7 @@
     <ListBoxItem Style="{StaticResource listBoxItemMenu}">
         <Button x:Name="buttonMenu" Style="{StaticResource menuButton}" Click="buttonMenu_Click">
             <StackPanel Orientation="Horizontal">
-                <Image x:Name="imageMenu" Style="{StaticResource menuButtonIcon}"/>
+                <Image x:Name="imageMenu" Style="{StaticResource menuButtonIcon}" RenderOptions.BitmapScalingMode="Fant"/>
                 <TextBlock x:Name="myButtonText" VerticalAlignment="Center" Margin="5 0 0 0"/>
             </StackPanel>
         </Button>

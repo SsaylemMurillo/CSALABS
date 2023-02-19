@@ -21,8 +21,6 @@ namespace Presentation
     /// </summary>
     public partial class MainWindow : Window
     {
-        Loading loading;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -86,8 +84,6 @@ namespace Presentation
                 await doVerification;
                 //
 
-                HideLoading();
-
                 /* ERROR IN LOGIN
                 MessageBox.Show("TODO: Login Verification...", "CS LABS");
                 */
@@ -102,20 +98,22 @@ namespace Presentation
 
         public void LoginVerification()
         {
-            Thread.Sleep(5000);
+            Thread.Sleep(3000);
         }
 
         private void ShowLoading()
         {
-            loading = new Loading();
-            loading.Show();
+            if (mainPanel.Children.Count > 0)
+            {
+                int childrenNumber = mainPanel.Children.Count;
+                for (int i = 1; i < childrenNumber; i++)
+                {
+                    mainPanel.Children.RemoveAt(1);
+                }
+            }
+            gridLoading.Visibility = Visibility.Visible;
         }
 
-        private void HideLoading()
-        {
-            if (loading != null)
-                loading.Close();
-        }
 
         private bool ValidateFields()
         {

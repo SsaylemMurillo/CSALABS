@@ -9,7 +9,7 @@
         <Label x:Name="moduleNumberLabel" HorizontalAlignment="Center" FontSize="20" Foreground="Black" FontFamily="lexend"
                            FontWeight="SemiBold" Margin="0 0 0 -20"/>
         <Button x:Name="buttonModule" Style="{StaticResource moduleButtonC}" Height="100" Width="100" Click="buttonModule_Click" MouseEnter="buttonModule_MouseEnter" MouseLeave="buttonModule_MouseLeave">
-            <Image x:Name="buttonImage" Stretch="Uniform" Height="30"/>
+            <Image x:Name="buttonImage" Stretch="Uniform" Height="30" RenderOptions.BitmapScalingMode="Fant"/>
         </Button>
     </StackPanel>
 </UserControl>

@@ -22,11 +22,14 @@ namespace Presentation.Pages
     /// </summary>
     public partial class ManagePatientPage : Page
     {
+        public Frame MainFrame { get; set; }
+        public Page PreviousPage { get; set; }
+
         public int FilterValue { get; set; }
         List<TextBox> filterTextBoxes;
         public PatientService MyPatientService { get; set; }
 
-        public ManagePatientPage()
+        public ManagePatientPage(Frame mainFrame, Page previousPage)
         {
             filterTextBoxes = new List<TextBox>();
             MyPatientService = new PatientService(ConnectionStringExtractor.connectionString);
@@ -35,6 +38,8 @@ namespace Presentation.Pages
             LoadComboBox();
             FillTextBoxesList();
             FilterValue = 0;
+            MainFrame = mainFrame;
+            PreviousPage = previousPage;
         }
 
         private void FillTextBoxesList()
@@ -345,6 +350,11 @@ namespace Presentation.Pages
         private void bornDateFilterTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             CheckTextBoxStringValue(bornDateFilterTextBox);
+        }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = PreviousPage;
         }
     }
 }
