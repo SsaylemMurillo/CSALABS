@@ -44,22 +44,31 @@ namespace DataAccessLayer
 
         public string Save(Exam exam)
         {
-            DbCommand command = new SqlCommand();
-            command.Connection = _connection;
-            command.CommandText = $"insert into exam (id_exam, value_measures, name, description, results) " +
-                "values (@examId, @examMeasures, @examName, @examDescription, @examResults)";
-            command.Parameters.Add(new SqlParameter("@id_exam", exam.Id));
-            command.Parameters.Add(new SqlParameter("@examMeasures", exam.ValuesMeasures));
-            command.Parameters.Add(new SqlParameter("@examName", exam.Name));
-            command.Parameters.Add(new SqlParameter("@examDescription", exam.Description));
-            command.Parameters.Add(new SqlParameter("@examResults", ""));
-
-            int fila = command.ExecuteNonQuery();
-            if (fila == 1)
+            string message="";
+            if (Search(exam) == null)
             {
-                return "Se anexó la tabla examenes con nuevo exam de id: " + exam.Id;
+                DbCommand command = new SqlCommand();
+                command.Connection = _connection;
+                command.CommandText = $"insert into exam (id_exam, value_measures, name, description, results) " +
+                    "values (@examId, @examMeasures, @examName, @examDescription, @examResults)";
+                command.Parameters.Add(new SqlParameter("@id_exam", exam.Id));
+                command.Parameters.Add(new SqlParameter("@examMeasures", exam.ValuesMeasures));
+                command.Parameters.Add(new SqlParameter("@examName", exam.Name));
+                command.Parameters.Add(new SqlParameter("@examDescription", exam.Description));
+                command.Parameters.Add(new SqlParameter("@examResults", ""));
+
+                int fila = command.ExecuteNonQuery();
+
+                if (fila == 1)
+                {
+                    message="Guardado exitosamente " + exam.Name;
+                }
             }
-            return "Error en tabla examenes al registrar al examen " + exam.Name + " con id: " + exam.Id;
+            else
+            {
+                message="Error en tabla examenes al registrar al examen " + exam.Name;
+            }
+            return message;
         }
 
         public Exam Delete(Exam exam)
