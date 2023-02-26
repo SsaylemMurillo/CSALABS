@@ -11,12 +11,19 @@ namespace BusinessLogicLayer
     {
         private ExamRepository ExamRepository { get; set; }
         private LabsExamsRepository LabsExamRepository { get; set; }
-        ConnectionManager connectionManager;
+
+        private ConnectionManager ConnectionManager { get; set; }
 
         public ExamService(string connectionString)
         {
-            connectionManager = new ConnectionManager(connectionString);
-            ExamRepository = new ExamRepository(connectionManager.Connection);
+            ConnectionManager = new ConnectionManager(connectionString);
+            ExamRepository = new ExamRepository(ConnectionManager.Connection);
+        }
+
+        public ExamService(ConnectionManager connectionManager)
+        {
+            ConnectionManager = connectionManager;
+            ExamRepository = new ExamRepository(ConnectionManager.Connection);
         }
 
         public GenericResponse<Exam> GetAll()
@@ -25,7 +32,7 @@ namespace BusinessLogicLayer
             string message = "";
             try
             {
-                connectionManager.OpenDataBase();
+                ConnectionManager.OpenDataBase();
                 examList = ExamRepository.GetAll();
             }
             catch (Exception e)
@@ -34,7 +41,7 @@ namespace BusinessLogicLayer
             }
             finally
             {
-                connectionManager.CloseDataBase();
+                ConnectionManager.CloseDataBase();
             }
             if (examList == null)
                 return new GenericResponse<Exam>(message);
@@ -44,14 +51,14 @@ namespace BusinessLogicLayer
 
         public GenericResponse<Exam> SaveExam(Exam exam)
         {
-            string message = "";
+            string message = null;
             if (exam != null)
             {
                 try
                 {
-                    
-                    connectionManager.OpenDataBase();
+                    ConnectionManager.OpenDataBase();
                     message = ExamRepository.Save(exam);
+                    
                 }
                 catch (Exception e)
                 {
@@ -59,7 +66,7 @@ namespace BusinessLogicLayer
                 }
                 finally
                 {
-                    connectionManager.CloseDataBase();
+                    ConnectionManager.CloseDataBase();
                 }
             }
             else
@@ -76,7 +83,7 @@ namespace BusinessLogicLayer
             {
                 try
                 {
-                    connectionManager.OpenDataBase();
+                    ConnectionManager.OpenDataBase();
                     ExamRepository.Update(exam);
                 }
                 catch (Exception e)
@@ -85,7 +92,7 @@ namespace BusinessLogicLayer
                 }
                 finally
                 {
-                    connectionManager.CloseDataBase();
+                    ConnectionManager.CloseDataBase();
                 }
             }
             else
@@ -103,7 +110,7 @@ namespace BusinessLogicLayer
             {
                 try
                 {
-                    connectionManager.OpenDataBase();
+                    ConnectionManager.OpenDataBase();
                     patientDeleted = ExamRepository.Delete(exam);
                 }
                 catch (Exception e)
@@ -112,7 +119,7 @@ namespace BusinessLogicLayer
                 }
                 finally
                 {
-                    connectionManager.CloseDataBase();
+                    ConnectionManager.CloseDataBase();
                 }
             }
             else
@@ -128,7 +135,7 @@ namespace BusinessLogicLayer
             string message = "";
             try
             {
-                connectionManager.OpenDataBase();
+                ConnectionManager.OpenDataBase();
                 var patients = ExamRepository.GetAll();
                 examListFilter = patients.Where(patient => patient.Id.ToString().Contains(id)).ToList();
             }
@@ -138,7 +145,7 @@ namespace BusinessLogicLayer
             }
             finally
             {
-                connectionManager.CloseDataBase();
+                ConnectionManager.CloseDataBase();
             }
             if (examListFilter == null || examListFilter.Count <= 0)
                 return new GenericResponse<Exam>(message);
@@ -151,7 +158,7 @@ namespace BusinessLogicLayer
             string message = "";
             try
             {
-                connectionManager.OpenDataBase();
+                ConnectionManager.OpenDataBase();
                 examList = LabsExamRepository.GetAllExamsFromLab(id_laboratory);
             }
             catch (Exception e)
@@ -160,7 +167,7 @@ namespace BusinessLogicLayer
             }
             finally
             {
-                connectionManager.CloseDataBase();
+                ConnectionManager.CloseDataBase();
             }
             if (examList == null)
                 return new GenericResponse<Exam>(message);
