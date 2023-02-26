@@ -21,6 +21,14 @@ namespace Entity
             this.ValuesMeasures = valuesMeasures;
         }
 
+        public Exam(int id)
+        {
+            Id = id;
+            Name = "";
+            Description = "";
+            ValuesMeasures = "";
+        }
+
         public Exam()
         {
         }

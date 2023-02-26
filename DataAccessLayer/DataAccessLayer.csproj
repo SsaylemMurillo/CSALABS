@@ -45,6 +45,7 @@
     <Compile Include="ExamRepository.cs" />
     <Compile Include="ICRUD.cs" />
     <Compile Include="LaboratoryRepository.cs" />
+    <Compile Include="LabsExamsRepository.cs" />
     <Compile Include="PatientRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
