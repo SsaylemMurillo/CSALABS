@@ -20,12 +20,12 @@ namespace BusinessLogicLayer
 
         public GenericResponse<Exam> GetAll()
         {
-            List<Exam> patientList = null;
+            List<Exam> examList = null;
             string message = "";
             try
             {
                 connectionManager.OpenDataBase();
-                patientList = DataAccessLayer.ExamRepository.GetAll();
+                examList = ExamRepository.GetAll();
             }
             catch (Exception e)
             {
@@ -35,21 +35,21 @@ namespace BusinessLogicLayer
             {
                 connectionManager.CloseDataBase();
             }
-            if (patientList == null)
+            if (examList == null)
                 return new GenericResponse<Exam>(message);
             else
-                return new GenericResponse<Exam>(patientList);
+                return new GenericResponse<Exam>(examList);
         }
 
-        public GenericResponse<Patient> SavePatient(Patient patient)
+        public GenericResponse<Patient> SavePatient(Exam exam)
         {
             string message = "";
-            if (patient != null)
+            if (exam != null)
             {
                 try
                 {
                     connectionManager.OpenDataBase();
-                    message = ExamRepository.Save(patient);
+                    message = ExamRepository.Save(exam);
                 }
                 catch (Exception e)
                 {
@@ -67,15 +67,15 @@ namespace BusinessLogicLayer
             return new GenericResponse<Patient>(message);
         }
 
-        public GenericResponse<Patient> UpdatePatient(Patient patient)
+        public GenericResponse<Patient> UpdatePatient(Exam exam)
         {
             string message = "Edición Exitosa";
-            if (patient != null)
+            if (exam != null)
             {
                 try
                 {
                     connectionManager.OpenDataBase();
-                    ExamRepository.Update(patient);
+                    ExamRepository.Update(exam);
                 }
                 catch (Exception e)
                 {
@@ -93,16 +93,16 @@ namespace BusinessLogicLayer
             return new GenericResponse<Patient>(message);
         }
 
-        public GenericResponse<Patient> DeletePatient(Patient patient)
+        public GenericResponse<Exam> DeletePatient(Exam exam)
         {
             string message = "Borrado Exitoso";
-            Patient patientDeleted;
-            if (patient != null)
+            Exam patientDeleted;
+            if (exam != null)
             {
                 try
                 {
                     connectionManager.OpenDataBase();
-                    patientDeleted = ExamRepository.Delete(patient);
+                    patientDeleted = ExamRepository.Delete(exam);
                 }
                 catch (Exception e)
                 {
@@ -115,20 +115,20 @@ namespace BusinessLogicLayer
             }
             else
             {
-                message = "El paciente tiene valor NULL";
+                message = "El examen tiene valor NULL";
             }
-            return new GenericResponse<Patient>(message);
+            return new GenericResponse<Exam>(message);
         }
 
-        public GenericResponse<Patient> GetAllFilterId(string id)
+        public GenericResponse<Exam> GetAllFilterId(string id)
         {
-            List<Patient> patientsListFilter = null;
+            List<Exam> examListFilter = null;
             string message = "";
             try
             {
                 connectionManager.OpenDataBase();
                 var patients = ExamRepository.GetAll();
-                patientsListFilter = patients.Where(patient => patient.Id.ToString().Contains(id)).ToList();
+                examListFilter = patients.Where(patient => patient.Id.ToString().Contains(id)).ToList();
             }
             catch (Exception e)
             {
@@ -138,10 +138,10 @@ namespace BusinessLogicLayer
             {
                 connectionManager.CloseDataBase();
             }
-            if (patientsListFilter == null || patientsListFilter.Count <= 0)
-                return new GenericResponse<Patient>(message);
+            if (examListFilter == null || examListFilter.Count <= 0)
+                return new GenericResponse<Exam>(message);
             else
-                return new GenericResponse<Patient>(patientsListFilter);
+                return new GenericResponse<Exam>(examListFilter);
         }
     }
 }
