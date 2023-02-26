@@ -96,10 +96,11 @@ namespace DataAccessLayer
             DbCommand command = new SqlCommand();
             command.Connection = _connection;
 
-            command.CommandText = $"update exam set valores_medidas = @valoresMedidas, nombre = @nombre,descripcion = @descripcion ";
-            command.Parameters.Add(new SqlParameter("@valoresMedidas", exam.ValuesMeasures));
-            command.Parameters.Add(new SqlParameter("@nombre", exam.Name));
-            command.Parameters.Add(new SqlParameter("@descripcion", exam.Description));
+            command.CommandText = $"update exam set id_exam= @idExam,value_measures = @valueMeasures, name = @name,description = @description ";
+            command.Parameters.Add(new SqlParameter("@idExam", exam.Id));
+            command.Parameters.Add(new SqlParameter("@valueMeasures", exam.ValuesMeasures));
+            command.Parameters.Add(new SqlParameter("@name", exam.Name));
+            command.Parameters.Add(new SqlParameter("@description", exam.Description));
             int fila = command.ExecuteNonQuery();
             if (fila == 1)
             {
