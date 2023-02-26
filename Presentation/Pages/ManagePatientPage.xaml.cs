@@ -86,10 +86,10 @@ namespace Presentation.Pages
             patientsDataGrid.Items.Clear();
             var response = MyPatientService.GetAll();
 
-            if (response.PatientDataList != null)
+            if (response.DataList != null)
             {
-                registersTextBlock.Text = response.PatientDataList.Count.ToString();
-                foreach (Patient item in response.PatientDataList)
+                registersTextBlock.Text = response.DataList.Count.ToString();
+                foreach (Patient item in response.DataList)
                 {
                     patientsDataGrid.Items.Add(item);
                 }
@@ -107,11 +107,11 @@ namespace Presentation.Pages
             patientsDataGrid.Items.Clear();
             var response = MyPatientService.GetAll();
 
-            if (response.PatientDataList != null)
+            if (response.DataList != null)
             {
                 int i = 0;
-                registersTextBlock.Text = response.PatientDataList.Count.ToString();
-                foreach (Patient item in response.PatientDataList)
+                registersTextBlock.Text = response.DataList.Count.ToString();
+                foreach (Patient item in response.DataList)
                 {
                     if (i < value)
                     {
@@ -202,11 +202,11 @@ namespace Presentation.Pages
         {
             var response = MyPatientService.GetAllFilterId(idFilterTextBox.Text);
 
-            if (response.PatientDataList != null)
+            if (response.DataList != null)
             {
-                registersTextBlock.Text = response.PatientDataList.Count.ToString();
+                registersTextBlock.Text = response.DataList.Count.ToString();
                 patientsDataGrid.Items.Clear();
-                foreach (Patient item in response.PatientDataList)
+                foreach (Patient item in response.DataList)
                 {
                     patientsDataGrid.Items.Add(item);
                 }
@@ -221,11 +221,11 @@ namespace Presentation.Pages
         {
             var response = MyPatientService.GetAllFilterIdType(idTypeFilterTextBox.Text);
 
-            if (response.PatientDataList != null)
+            if (response.DataList != null)
             {
-                registersTextBlock.Text = response.PatientDataList.Count.ToString();
+                registersTextBlock.Text = response.DataList.Count.ToString();
                 patientsDataGrid.Items.Clear();
-                foreach (Patient item in response.PatientDataList)
+                foreach (Patient item in response.DataList)
                 {
                     patientsDataGrid.Items.Add(item);
                 }
@@ -240,11 +240,11 @@ namespace Presentation.Pages
         {
             var response = MyPatientService.GetAllFilterFirstName(firstNameFilterTextBox.Text);
 
-            if (response.PatientDataList != null)
+            if (response.DataList != null)
             {
-                registersTextBlock.Text = response.PatientDataList.Count.ToString();
+                registersTextBlock.Text = response.DataList.Count.ToString();
                 patientsDataGrid.Items.Clear();
-                foreach (Patient item in response.PatientDataList)
+                foreach (Patient item in response.DataList)
                 {
                     patientsDataGrid.Items.Add(item);
                 }
@@ -259,11 +259,11 @@ namespace Presentation.Pages
         {
             var response = MyPatientService.GetAllFilterAddress(addressFilterTextBox.Text);
 
-            if (response.PatientDataList != null)
+            if (response.DataList != null)
             {
-                registersTextBlock.Text = response.PatientDataList.Count.ToString();
+                registersTextBlock.Text = response.DataList.Count.ToString();
                 patientsDataGrid.Items.Clear();
-                foreach (Patient item in response.PatientDataList)
+                foreach (Patient item in response.DataList)
                 {
                     patientsDataGrid.Items.Add(item);
                 }
@@ -278,11 +278,11 @@ namespace Presentation.Pages
         {
             var response = MyPatientService.GetAllFilterBornDate(bornDateFilterTextBox.Text);
 
-            if (response.PatientDataList != null)
+            if (response.DataList != null)
             {
-                registersTextBlock.Text = response.PatientDataList.Count.ToString();
+                registersTextBlock.Text = response.DataList.Count.ToString();
                 patientsDataGrid.Items.Clear();
-                foreach (Patient item in response.PatientDataList)
+                foreach (Patient item in response.DataList)
                 {
                     patientsDataGrid.Items.Add(item);
                 }

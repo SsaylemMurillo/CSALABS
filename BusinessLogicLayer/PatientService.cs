@@ -10,6 +10,7 @@ namespace BusinessLogicLayer
 {
     public class PatientService
     {
+        public GenericResponse<Patient> GenericResponsePatient { get; set; }
         private PatientRepository patientRepository { get; set; }
         ConnectionManager connectionManager;
 
@@ -19,14 +20,14 @@ namespace BusinessLogicLayer
             patientRepository = new PatientRepository(connectionManager.Connection);
         }
 
-        public GenericResponse GetAll()
+        public GenericResponse<Patient> GetAll()
         {
             List<Patient> patientList = null;
             string message = "";
             try
             {
                 connectionManager.OpenDataBase();
-                patientList = patientRepository.GetAllPatients();
+                patientList = patientRepository.GetAll();
             }
             catch (Exception e)
             {
@@ -37,21 +38,20 @@ namespace BusinessLogicLayer
                 connectionManager.CloseDataBase();
             }
             if (patientList == null)
-                return new GenericResponse(message);
+                return new GenericResponse<Patient>("");
             else
-                return new GenericResponse(patientList);
+                return new GenericResponse<Patient>(patientList);
         }
 
-        public GenericResponse SavePatient(Patient patient)
+        public GenericResponse<Patient> SavePatient(Patient patient)
         {
-            string message = "Guardado Exitoso";
-            Patient patientSaved;
+            string message = "";
             if (patient != null)
             {
                 try
                 {
                     connectionManager.OpenDataBase();
-                    patientSaved = patientRepository.Save(patient);
+                    message = patientRepository.Save(patient);
                 }
                 catch (Exception e)
                 {
@@ -66,10 +66,10 @@ namespace BusinessLogicLayer
             {
                 message = "El paciente tiene valor NULL";
             }
-            return new GenericResponse(message);
+            return new GenericResponse<Patient>(message);
         }
 
-        public GenericResponse UpdatePatient(Patient patient)
+        public GenericResponse<Patient> UpdatePatient(Patient patient)
         {
             string message = "Edición Exitosa";
             if (patient != null)
@@ -77,7 +77,7 @@ namespace BusinessLogicLayer
                 try
                 {
                     connectionManager.OpenDataBase();
-                    patientRepository.UpdatePatient(patient);
+                    patientRepository.Update(patient);
                 }
                 catch (Exception e)
                 {
@@ -92,10 +92,10 @@ namespace BusinessLogicLayer
             {
                 message = "El paciente tiene valor NULL";
             }
-            return new GenericResponse(message);
+            return new GenericResponse<Patient>(message);
         }
 
-        public GenericResponse DeletePatient(Patient patient)
+        public GenericResponse<Patient> DeletePatient(Patient patient)
         {
             string message = "Borrado Exitoso";
             Patient patientDeleted;
@@ -104,7 +104,7 @@ namespace BusinessLogicLayer
                 try
                 {
                     connectionManager.OpenDataBase();
-                    patientDeleted = patientRepository.DeletePatient(patient);
+                    patientDeleted = patientRepository.Delete(patient);
                 }
                 catch (Exception e)
                 {
@@ -119,17 +119,17 @@ namespace BusinessLogicLayer
             {
                 message = "El paciente tiene valor NULL";
             }
-            return new GenericResponse(message);
+            return new GenericResponse<Patient>(message);
         }
 
-        public GenericResponse GetAllFilterId(string id)
+        public GenericResponse<Patient> GetAllFilterId(string id)
         {
             List<Patient> patientsListFilter = null;
             string message = "";
             try
             {
                 connectionManager.OpenDataBase();
-                var patients = patientRepository.GetAllPatients();
+                var patients = patientRepository.GetAll();
                 patientsListFilter = patients.Where(patient => patient.Id.ToString().Contains(id)).ToList();
             }
             catch (Exception e)
@@ -141,19 +141,19 @@ namespace BusinessLogicLayer
                 connectionManager.CloseDataBase();
             }
             if (patientsListFilter == null || patientsListFilter.Count <= 0)
-                return new GenericResponse(message);
+                return new GenericResponse<Patient>(message);
             else
-                return new GenericResponse(patientsListFilter);
+                return new GenericResponse<Patient>(patientsListFilter);
         }
 
-        public GenericResponse GetAllFilterIdType(string idType)
+        public GenericResponse<Patient> GetAllFilterIdType(string idType)
         {
             List<Patient> patientsListFilter = null;
             string message = "";
             try
             {
                 connectionManager.OpenDataBase();
-                var patients = patientRepository.GetAllPatients();
+                var patients = patientRepository.GetAll();
                 patientsListFilter = patients.Where(patient => patient.IdType.ToString().Contains(idType)).ToList();
             }
             catch (Exception e)
@@ -165,19 +165,19 @@ namespace BusinessLogicLayer
                 connectionManager.CloseDataBase();
             }
             if (patientsListFilter == null || patientsListFilter.Count <= 0)
-                return new GenericResponse(message);
+                return new GenericResponse<Patient>(message);
             else
-                return new GenericResponse(patientsListFilter);
+                return new GenericResponse<Patient>(patientsListFilter);
         }
 
-        public GenericResponse GetAllFilterFirstName(string firstName)
+        public GenericResponse<Patient> GetAllFilterFirstName(string firstName)
         {
             List<Patient> patientsListFilter = null;
             string message = "";
             try
             {
                 connectionManager.OpenDataBase();
-                var patients = patientRepository.GetAllPatients();
+                var patients = patientRepository.GetAll();
                 patientsListFilter = patients.Where(patient => patient.FirstName.ToString().Contains(firstName)).ToList();
             }
             catch (Exception e)
@@ -189,19 +189,19 @@ namespace BusinessLogicLayer
                 connectionManager.CloseDataBase();
             }
             if (patientsListFilter == null || patientsListFilter.Count <= 0)
-                return new GenericResponse(message);
+                return new GenericResponse<Patient>(message);
             else
-                return new GenericResponse(patientsListFilter);
+                return new GenericResponse<Patient>(patientsListFilter);
         }
 
-        public GenericResponse GetAllFilterAddress(string address)
+        public GenericResponse<Patient> GetAllFilterAddress(string address)
         {
             List<Patient> patientsListFilter = null;
             string message = "";
             try
             {
                 connectionManager.OpenDataBase();
-                var patients = patientRepository.GetAllPatients();
+                var patients = patientRepository.GetAll();
                 patientsListFilter = patients.Where(patient => patient.Address.ToString().Contains(address)).ToList();
             }
             catch (Exception e)
@@ -213,19 +213,19 @@ namespace BusinessLogicLayer
                 connectionManager.CloseDataBase();
             }
             if (patientsListFilter == null || patientsListFilter.Count <= 0)
-                return new GenericResponse(message);
+                return new GenericResponse<Patient>(message);
             else
-                return new GenericResponse(patientsListFilter);
+                return new GenericResponse<Patient>(patientsListFilter);
         }
 
-        public GenericResponse GetAllFilterBornDate(string bornDate)
+        public GenericResponse<Patient> GetAllFilterBornDate(string bornDate)
         {
             List<Patient> patientsListFilter = null;
             string message = "";
             try
             {
                 connectionManager.OpenDataBase();
-                var patients = patientRepository.GetAllPatients();
+                var patients = patientRepository.GetAll();
                 patientsListFilter = patients.Where(patient => patient.BornDate.ToString().Contains(bornDate)).ToList();
             }
             catch (Exception e)
@@ -237,9 +237,9 @@ namespace BusinessLogicLayer
                 connectionManager.CloseDataBase();
             }
             if (patientsListFilter == null || patientsListFilter.Count <= 0)
-                return new GenericResponse(message);
+                return new GenericResponse<Patient>(message);
             else
-                return new GenericResponse(patientsListFilter);
+                return new GenericResponse<Patient>(patientsListFilter);
         }
     }
 }
