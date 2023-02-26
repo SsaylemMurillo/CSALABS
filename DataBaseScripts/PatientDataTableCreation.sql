@@ -37,7 +37,7 @@ CREATE TABLE laboratory(
 	FOREIGN KEY (id_patient) REFERENCES patient(id),
 );
 
-CREATE TABLE [dbo].[laboratorio_examenes](
+CREATE TABLE labs_exams(
 	[id_lab] INT  NOT NULL,
 	[id_exam] INT  NOT NULL,
 	PRIMARY KEY (id_lab, id_exam),
