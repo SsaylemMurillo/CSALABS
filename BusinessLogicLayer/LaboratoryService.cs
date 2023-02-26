@@ -42,7 +42,7 @@ namespace BusinessLogicLayer
                 return new GenericResponse<Laboratory>(labList);
         }
 
-        public GenericResponse<Laboratory> SavePatient(Laboratory lab)
+        public GenericResponse<Laboratory> SaveLaboratory(Laboratory lab)
         {
             string message = "";
             if (lab != null)
