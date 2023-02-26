@@ -11,6 +11,8 @@ namespace BusinessLogicLayer
     public class LaboratoryService
     {
         private LaboratoryRepository labRepository { get; set; }
+        private LabsExamsRepository labsExamsRepository { get; set; }
+
         ConnectionManager connectionManager;
 
         public LaboratoryService(string connectionString)
@@ -52,6 +54,17 @@ namespace BusinessLogicLayer
                     connectionManager.OpenDataBase();
                     // After saving the labs, needs to save the exams and then everything in labs_exams table
                     message = labRepository.Save(lab);
+                    if (message != null)
+                    {
+                        // Save exams using for loop
+                        // Save lab_exam row in labs_exams
+                        ExamService examService = new ExamService(connectionManager);
+                        foreach (var exam in lab.Exams)
+                        {
+                            examService.SavePatient();
+                        }
+                    }
+
                 }
                 catch (Exception e)
                 {

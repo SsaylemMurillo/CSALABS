@@ -84,7 +84,7 @@ namespace DataAccessLayer
             }
             else
             {
-                message = "No fue posible guardar el laboratorio";
+                message = null;
             }
             return message;
         }
