@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class PatientRepository
+    public class PatientRepository : ICRUD<Patient>
     {
         public DbConnection _connection { get; set; }
 
@@ -18,31 +18,12 @@ namespace DataAccessLayer
             _connection = connection;
         }
 
-        public Patient DeletePatient(Patient patient)
-        {
-            if (Search(patient.Id) != null)
-            {
-                DbCommand command = new SqlCommand();
-                command.Connection = _connection;
-                command.CommandText = $"delete from patient where patient.id = @patientId;";
-                command.Parameters.Add(new SqlParameter("@patientId", patient.Id));
-                var value = command.ExecuteNonQuery();
-                if (value == 1)
-                    return patient;
-                else
-                    return null;
-            }
-            else
-            {
-                return null;
-            }
-        }
 
-        public Patient Save(Patient patient)
+        public string Save(Patient patient)
         {
-            Patient patientUnSaved = null;
+            string message;
 
-            if (Search(patient.Id) == null)
+            if (Search(patient) == null)
             {
                 DbCommand command = new SqlCommand();
                 command.Connection = _connection;
@@ -66,15 +47,71 @@ namespace DataAccessLayer
                 command.Parameters.Add(new SqlParameter("@patientNationality", patient.Nacionality));
 
                 command.ExecuteNonQuery();
+                message = "Paciente Correctamente Añadido";
             }
             else
             {
-                patientUnSaved = patient;
+                message = "Ha ocurrido un error inesperado";
             }
-            return patientUnSaved;
+            return message;
         }
 
-        public void UpdatePatient(Patient patient)
+        public Patient Search(Patient patient)
+        {
+            DbCommand command = new SqlCommand();
+            command.Connection = _connection;
+            command.CommandText = $"select * from patient where id = @id;";
+            command.Parameters.Add(new SqlParameter("@id", patient.Id));
+            var reader = command.ExecuteReader();
+
+            Patient searchedPatient = null;
+
+            while (reader.Read())
+            {
+                int patientId = reader.GetInt32(0);
+                string patientIdType = reader.GetString(1);
+                string patientFirstName = reader.GetString(2);
+                string patientSecondName = reader.GetString(3);
+                string patientLastName = reader.GetString(4);
+                string patientSecondLastName = reader.GetString(5);
+                DateTime patientBornDate = Convert.ToDateTime(reader.GetDateTime(6));
+                var patientBornDateTime = "" + patientBornDate.Month + "/" + patientBornDate.Day + "/" + patientBornDate.Year;
+                DateTime patientExpeditionDate = Convert.ToDateTime(reader.GetDateTime(7));
+                var patientExpeditionDateTime = "" + patientExpeditionDate.Month + "/" + patientExpeditionDate.Day + "/" + patientExpeditionDate.Year;
+                string patientExpeditionPlace = reader.GetString(8);
+                int patientPhone = reader.GetInt32(9);
+                string patientAddress = reader.GetString(10);
+                string nacionality = reader.GetString(11);
+
+                searchedPatient = new Patient(patientId, patientIdType, patientFirstName, patientSecondName, patientLastName, patientSecondLastName,
+                    patientBornDateTime, patientExpeditionDateTime, patientExpeditionPlace, patientPhone, patientAddress, nacionality);
+            }
+
+            reader.Close();
+            return searchedPatient;
+        }
+
+        public Patient Delete(Patient patient)
+        {
+            if (Search(patient) != null)
+            {
+                DbCommand command = new SqlCommand();
+                command.Connection = _connection;
+                command.CommandText = $"delete from patient where patient.id = @patientId;";
+                command.Parameters.Add(new SqlParameter("@patientId", patient.Id));
+                var value = command.ExecuteNonQuery();
+                if (value == 1)
+                    return patient;
+                else
+                    return null;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public string Update(Patient patient)
         {
             DbCommand command = new SqlCommand();
             command.Connection = _connection;
@@ -98,44 +135,11 @@ namespace DataAccessLayer
             command.Parameters.Add(new SqlParameter("@patientAddress", patient.Address));
             command.Parameters.Add(new SqlParameter("@patientNationality", patient.Nacionality));
             command.ExecuteNonQuery();
+
+            return "";
         }
 
-        public Patient Search(int id)
-        {
-            DbCommand command = new SqlCommand();
-            command.Connection = _connection;
-            command.CommandText = $"select * from patient where id = @id;";
-            command.Parameters.Add(new SqlParameter("@id", id));
-            var reader = command.ExecuteReader();
-
-            Patient patient = null;
-
-            while (reader.Read())
-            {
-                int patientId = reader.GetInt32(0);
-                string patientIdType = reader.GetString(1);
-                string patientFirstName = reader.GetString(2);
-                string patientSecondName = reader.GetString(3);
-                string patientLastName = reader.GetString(4);
-                string patientSecondLastName = reader.GetString(5);
-                DateTime patientBornDate = Convert.ToDateTime(reader.GetDateTime(6));
-                var patientBornDateTime = "" + patientBornDate.Month + "/" + patientBornDate.Day + "/" + patientBornDate.Year;
-                DateTime patientExpeditionDate = Convert.ToDateTime(reader.GetDateTime(7));
-                var patientExpeditionDateTime = "" + patientExpeditionDate.Month + "/" + patientExpeditionDate.Day + "/" + patientExpeditionDate.Year;
-                string patientExpeditionPlace = reader.GetString(8);
-                int patientPhone = reader.GetInt32(9);
-                string patientAddress = reader.GetString(10);
-                string nacionality = reader.GetString(11);
-
-                patient = new Patient(patientId, patientIdType, patientFirstName, patientSecondName, patientLastName, patientSecondLastName, 
-                    patientBornDateTime, patientExpeditionDateTime, patientExpeditionPlace, patientPhone, patientAddress, nacionality);
-            }
-
-            reader.Close();
-            return patient;
-        }
-
-        public List<Patient> GetAllPatients()
+        public List<Patient> GetAll()
         {
             DbCommand command = new SqlCommand();
             command.Connection = _connection;
