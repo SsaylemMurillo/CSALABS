@@ -71,9 +71,8 @@ namespace DataAccessLayer
             {
                 DbCommand command = new SqlCommand();
                 command.Connection = _connection;
-                command.CommandText = $"insert into laboratory (id_lab, id_patient, result, date_lab, place, " +
+                command.CommandText = $"insert into laboratory (id_patient, result, date_lab, place, " +
                     $"values (@labPatientId, @labResult, @labDate, @labPlace);";
-                command.Parameters.Add(new SqlParameter("@id_lab", laboratory.Id));
                 command.Parameters.Add(new SqlParameter("@labPatientId", laboratory.Patient.Id));
                 command.Parameters.Add(new SqlParameter("@labResult", laboratory.Result));
                 var date = "" + laboratory.LabDate.Month + "/" + laboratory.LabDate.Day + "/" + laboratory.LabDate.Year;
@@ -126,10 +125,9 @@ namespace DataAccessLayer
                 DbCommand command = new SqlCommand();
                 command.Connection = _connection;
 
-                command.CommandText = $"update laboratory set id_lab=@labId id_patient = @labPatientId," +
+                command.CommandText = $"update laboratory set id_patient = @labPatientId," +
                     $" result = @labResult, date_lab = @labDate, place = @labPlace, " +
                     "WHERE id = @id";
-                command.Parameters.Add(new SqlParameter("@labId", laboratory.Id));
                 command.Parameters.Add(new SqlParameter("@labPatientId", laboratory.Patient.Id));
                 command.Parameters.Add(new SqlParameter("@labResult", laboratory.Result));
                 var date = "" + laboratory.LabDate.Month + "/" + laboratory.LabDate.Day + "/" + laboratory.LabDate.Year;
