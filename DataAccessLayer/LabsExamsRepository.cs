@@ -95,7 +95,7 @@ namespace DataAccessLayer
         {
             DbCommand command = new SqlCommand();
             command.Connection = _connection;
-            command.CommandText = $"select * from labs_exam where id_lab = @id";
+            command.CommandText = $"select id_exam from labs_exam where id_lab = @id";
             command.Parameters.Add(new SqlParameter("@id", id));
             var reader = command.ExecuteReader();
 
@@ -103,7 +103,7 @@ namespace DataAccessLayer
 
             while (reader.Read())
             {
-                int examId = reader.GetInt32(1);
+                int examId = reader.GetInt32(0);
 
                 exams.Add(new Exam(examId));
             }

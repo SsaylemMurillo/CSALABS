@@ -18,71 +18,56 @@ namespace DataAccessLayer
         {
             _connection = connection;
         }
-        public Patient Buscar(string id)
-        {
-            return null;
-        }
-
-        //public Paciente MappingPaciente(var reader)
-        //{
-        //    int idPaciente = reader.GetInt32(0);
-        //    string apellidos = reader.GetString(1);
-        //    string nombres = reader.GetString(2);
-        //    string tipo_id = reader.GetString(3);
-        //    string nacionalidad = reader.GetString(4);
-        //    int telefono = Int32.Parse(reader.GetString(5));
-
-        //    return new Paciente(nacionalidad, tipo_id, telefono, "11/11/2003", nombres, apellidos, idPaciente);
-        //}
 
         public Exam Search(Exam exam)
         {
             DbCommand command = new SqlCommand();
             command.Connection = _connection;
-            command.CommandText = $"select * from exam where codigo_examen = @id;";
+            command.CommandText = $"select * from exam where id_exam = @id;";
             command.Parameters.Add(new SqlParameter("@id", exam.Id));
             var reader = command.ExecuteReader();
 
-            Exam pacienteReturn = null;
+            Exam examnSearched = null;
 
             while (reader.Read())
             {
-                int codigo_examen = reader.GetInt32(0);
-                string valores_medidas = reader.GetString(1);
-                string nombre = reader.GetString(2);
-                string descripcion = reader.GetString(3);
+                int examId = reader.GetInt32(0);
+                string examMeasures = reader.GetString(1);
+                string examName = reader.GetString(2);
+                string examDescription = reader.GetString(3);
 
-                pacienteReturn = new Exam(codigo_examen, nombre, descripcion, valores_medidas);
+                examnSearched = new Exam(examId, examMeasures, examName, examDescription);
             }
             reader.Close();
-            return pacienteReturn;
+            return examnSearched;
         }
 
         public string Save(Exam exam)
         {
             DbCommand command = new SqlCommand();
             command.Connection = _connection;
-            command.CommandText = $"insert into exam (codigo_examen, valores_medidas, nombre, descripcion) " +
-                "values (@codigo_examen, @valores_medidas, @nombre, @descripcion)";
+            command.CommandText = $"insert into exam (id_exam, value_measures, name, description, results) " +
+                "values (@examId, @examMeasures, @examName, @examDescription, @examResults)";
             command.Parameters.Add(new SqlParameter("@id_exam", exam.Id));
-            command.Parameters.Add(new SqlParameter("@values_measures", exam.ValuesMeasures));
-            command.Parameters.Add(new SqlParameter("@name", exam.Name));
-            command.Parameters.Add(new SqlParameter("@description", exam.Description));
+            command.Parameters.Add(new SqlParameter("@examMeasures", exam.ValuesMeasures));
+            command.Parameters.Add(new SqlParameter("@examName", exam.Name));
+            command.Parameters.Add(new SqlParameter("@examDescription", exam.Description));
+            command.Parameters.Add(new SqlParameter("@examResults", ""));
 
             int fila = command.ExecuteNonQuery();
             if (fila == 1)
             {
-                return "Se Actualizo la tabla examenes con nuevo exam de id: " + exam.Id;
+                return "Se anexó la tabla examenes con nuevo exam de id: " + exam.Id;
             }
-            return "Error en tabla exam al registrar al exam " + exam.Name + " de id: " + exam.Id;
+            return "Error en tabla examenes al registrar al examen " + exam.Name + " con id: " + exam.Id;
         }
 
         public Exam Delete(Exam exam)
         {
             DbCommand command = new SqlCommand();
             command.Connection = _connection;
-            command.CommandText = $"delete from exam where id_exam = @id;";
-            command.Parameters.Add(new SqlParameter("@id", exam.Id));
+            command.CommandText = $"delete from exam where id_exam = @examId;";
+            command.Parameters.Add(new SqlParameter("@examId", exam.Id));
             int fila = command.ExecuteNonQuery();
             if (fila == 1)
             {
@@ -96,17 +81,19 @@ namespace DataAccessLayer
             DbCommand command = new SqlCommand();
             command.Connection = _connection;
 
-            command.CommandText = $"update exam set id_exam= @idExam,value_measures = @valueMeasures, name = @name,description = @description ";
+            command.CommandText = $"update exam set id_exam= @examId,value_measures = @examValueMeasures, " +
+                $"name = @examName, description = @examDescription, results = @examResults";
             command.Parameters.Add(new SqlParameter("@idExam", exam.Id));
             command.Parameters.Add(new SqlParameter("@valueMeasures", exam.ValuesMeasures));
             command.Parameters.Add(new SqlParameter("@name", exam.Name));
             command.Parameters.Add(new SqlParameter("@description", exam.Description));
+            command.Parameters.Add(new SqlParameter("@examResults", ""));
             int fila = command.ExecuteNonQuery();
             if (fila == 1)
             {
-                return "";
+                return "Se actualizó la tabla examenes con nuevo exam de id: \" + exam.Id;";
             }
-            return "";
+            return "Error en tabla examenes al actualizar al examen " + exam.Name + " con id: " + exam.Id;
         }
 
         public List<Exam> GetAll()
@@ -114,39 +101,19 @@ namespace DataAccessLayer
             DbCommand command = new SqlCommand();
             command.Connection = _connection;
             command.CommandText = $"select * from exam";
-            var ListaExamen = new List<Entity.Exam>();
+            var exams = new List<Entity.Exam>();
 
             var reader = command.ExecuteReader();
             while (reader.Read())
             {
-                int codigoExamen = reader.GetInt32(0);
-                string valoresMedidas = reader.GetString(1);
-                string nombre = reader.GetString(2);
-                string descripcion = reader.GetString(3);
-                var examen = new Entity.Exam(codigoExamen, nombre, descripcion, valoresMedidas);
-                ListaExamen.Add(examen);
+                int examId = reader.GetInt32(0);
+                string examMeasures = reader.GetString(1);
+                string examName = reader.GetString(2);
+                string examDescription = reader.GetString(3);
+                var exam = new Exam(examId, examMeasures, examName, examDescription);
+                exams.Add(exam);
             }
-            return ListaExamen;
+            return exams;
         }
-        //public List<Exam> Todos(int id)
-        //{
-        //    string _sql = string.Format("select * from laboratorio_examenes where id_lab = @id");
-        //    var cmd = new SqlCommand(_sql, conexion);
-        //    AbrirConnexion();
-        //    var listaExamenes = new List<Entity.Exam>();
-
-        //    var reader = cmd.ExecuteReader();
-        //    while (reader.Read())
-        //    {
-        //        int cod_examen = reader.GetInt32(0);
-        //        string valoresMedidas = reader.GetString(1);
-        //        string nombre = reader.GetString(2);
-        //        string descripcion = reader.GetString(3);
-        //        var examen = new Entity.Exam(cod_examen, nombre, descripcion, valoresMedidas);
-        //        listaExamenes.Add(examen);
-        //    }
-        //    CerrarConnexion();
-        //    return listaExamenes;
-        //}
     }
 }
