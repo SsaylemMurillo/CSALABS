@@ -2,7 +2,7 @@
 
 namespace Entity
 {
-    public class Patient
+    public class Patient : Person
     {
         public int Id { get; set; }
         public string IdType { get; set; }
