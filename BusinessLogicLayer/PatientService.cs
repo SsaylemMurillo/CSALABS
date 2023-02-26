@@ -36,7 +36,7 @@ namespace BusinessLogicLayer
             {
                 connectionManager.CloseDataBase();
             }
-            if (patientList == null || patientList.Count <= 0)
+            if (patientList == null)
                 return new GenericResponse(message);
             else
                 return new GenericResponse(patientList);

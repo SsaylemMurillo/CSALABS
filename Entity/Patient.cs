@@ -15,6 +15,7 @@ namespace Entity
         public string ExpeditionPlace { get; set; }
         public int Phone { get; set; }
         public string Address { get; set; }
+        public string Nacionality { get; set; }
 
         public Patient()
         {
@@ -24,7 +25,7 @@ namespace Entity
         public Patient(int id, string idType, string firstName, 
             string secondName, string lastName, string secondLastName,
             string bornDate, string expeditionDate, string expeditionPlace, 
-            int phone, string address)
+            int phone, string address, string nacionality)
         {
             Id = id;
             IdType = idType;
@@ -37,6 +38,7 @@ namespace Entity
             ExpeditionPlace = expeditionPlace;
             Phone = phone;
             Address = address;
+            Nacionality = nacionality;
         }
     }
 }

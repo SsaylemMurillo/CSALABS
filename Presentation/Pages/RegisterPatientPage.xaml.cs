@@ -73,16 +73,21 @@ namespace Presentation.Pages
             registerTextBoxes.Add(dateTextBox);
             registerTextBoxes.Add(addressTextBox);
             registerTextBoxes.Add(phoneTextBox);
+            registerTextBoxes.Add(nationalityTextBox);
+            registerTextBoxes.Add(idTypeTextBox);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CleanFields()
         {
-            // Clean Fields
-
             foreach (TextBox item in registerTextBoxes)
             {
                 item.Text = null;
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CleanFields();
         }
 
         private string stringDateFormat(string stringValue)
@@ -104,13 +109,14 @@ namespace Presentation.Pages
                 // Patient Object Creation...
                 try
                 {
-                    Patient patient = new Patient(int.Parse(idTextBox.Text), "CC", firstNameTextBox.Text,
+                    Patient patient = new Patient(int.Parse(idTextBox.Text), idTypeTextBox.Text, firstNameTextBox.Text,
                     secondNameTextBox.Text, firstLastNameTextBox.Text, secondLastNameTextBox.Text,
                     stringDateFormat(dateTextBox.Text), stringDateFormat(expeditionTextBox.Text), placeExpeditionTextBox.Text, int.Parse(phoneTextBox.Text),
-                    addressTextBox.Text);
+                    addressTextBox.Text, nationalityTextBox.Text);
 
                     string message = MyPatientService.SavePatient(patient).Message;
                     MessageBox.Show(message, "CSA LABS");
+                    CleanFields();
                 }
                 catch (Exception exception)
                 {
@@ -138,7 +144,7 @@ namespace Presentation.Pages
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = PreviousPage;
+            MainFrame.NavigationService.Navigate(new MainPage(MainFrame));
         }
     }
 }

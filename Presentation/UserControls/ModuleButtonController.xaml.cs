@@ -49,7 +49,7 @@ namespace Presentation.UserControls
 
         private void buttonModule_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = moduleDirection;
+            MainFrame.NavigationService.Navigate(moduleDirection);
         }
 
         public BitmapImage ChangeImageOfButton(string path)

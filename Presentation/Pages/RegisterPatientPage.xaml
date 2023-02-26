@@ -55,6 +55,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <StackPanel HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0">
@@ -84,8 +85,8 @@
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1">
                         <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
-                                Text="Fecha de Nacimiento" Opacity="0.7"/>
-                        <TextBox Name="dateTextBox" Style="{StaticResource infoTextbox2}"/>
+                                Text="Tipo Id" Opacity="0.7"/>
+                        <TextBox Name="idTypeTextBox" Style="{StaticResource infoTextbox2}"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0">
                         <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
@@ -106,6 +107,16 @@
                         <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                 Text="Teléfono" Opacity="0.7"/>
                         <TextBox Name="phoneTextBox" Style="{StaticResource infoTextbox2}"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Left" Grid.Row="5" Grid.Column="0">
+                        <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                Text="Nacionalidad" Opacity="0.7"/>
+                        <TextBox Name="nationalityTextBox" Style="{StaticResource infoTextbox2}"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1">
+                        <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                Text="Fecha de Nacimiento" Opacity="0.7"/>
+                        <TextBox Name="dateTextBox" Style="{StaticResource infoTextbox2}"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>

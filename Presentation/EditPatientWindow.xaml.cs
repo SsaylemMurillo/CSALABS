@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BusinessLogicLayer;
+using Presentation.Pages;
 
 namespace Presentation
 {
@@ -21,14 +22,14 @@ namespace Presentation
     /// </summary>
     public partial class EditPatientWindow : Window
     {
+        public ManagePatientPage Page { get; set; }
 
-        public DataGrid TheDataGrid { get; set; }
         List<TextBox> editTextBoxes;
         public Patient MyPatient { get; set; }
         public int SelectedRow { get; set; }
         public PatientService MyService { get; set; }
 
-        public EditPatientWindow(DataGrid dataGridPatient, PatientService service, Patient patient, int rowSelected)
+        public EditPatientWindow(ManagePatientPage page, PatientService service, Patient patient, int rowSelected)
         {
             MyPatient = patient;
             SelectedRow = rowSelected;
@@ -38,7 +39,7 @@ namespace Presentation
             editTextBoxes = new List<TextBox>();
             LoadFields();
             LoadFieldsValues();
-            TheDataGrid = dataGridPatient;
+            Page = page;
         }
 
         private void LoadFields()
@@ -49,15 +50,20 @@ namespace Presentation
             editTextBoxes.Add(secondLastNameTextBox);
             editTextBoxes.Add(expeditionTextBox);
             editTextBoxes.Add(expeditionPlaceTextBox);
-            editTextBoxes.Add(bornDateTextBox);
+            editTextBoxes.Add(dateTextBox);
             editTextBoxes.Add(addressTextBox);
             editTextBoxes.Add(phoneTextBox);
+            editTextBoxes.Add(idTypeTextBox);
+            editTextBoxes.Add(nationalityTextBox);
         }
 
         private void LoadFieldsValues()
         {
             idTextBox.Text = "" + MyPatient.Id;
             idTextBox.IsEnabled = false;
+
+            idTypeTextBox.Text = "" + MyPatient.IdType;
+            idTypeTextBox.IsEnabled = false;
 
             firstNameTextBox.Text = MyPatient.FirstName;
             firstNameTextBox.IsEnabled = false;
@@ -78,7 +84,7 @@ namespace Presentation
             expeditionPlaceTextBox.Text = MyPatient.ExpeditionPlace;
             expeditionPlaceTextBox.IsEnabled = false;
             
-            bornDateTextBox.Text = "" + MyPatient.BornDate.Day + "/"
+            dateTextBox.Text = "" + MyPatient.BornDate.Day + "/"
                 + MyPatient.BornDate.Month + "/" + MyPatient.BornDate.Year;
 
             addressTextBox.Text = MyPatient.Address;
@@ -86,6 +92,9 @@ namespace Presentation
 
             phoneTextBox.Text = "" + MyPatient.Phone;
             phoneTextBox.IsEnabled = false;
+
+            nationalityTextBox.Text = "" + MyPatient.Nacionality;
+            nationalityTextBox.IsEnabled = false;
 
         }
 
@@ -172,7 +181,7 @@ namespace Presentation
                     patient.Id = int.Parse(idTextBox.Text);
                     var serviceResponse = MyService.DeletePatient(patient);
                     MessageBox.Show(serviceResponse.Message, "CSA LABS", MessageBoxButton.OK);
-                    TheDataGrid.Items.Refresh();
+                    Page.LoadPatientDataGrid();
                     Close();
                 }
             }
@@ -187,28 +196,33 @@ namespace Presentation
             // Create Patient Edition...
             // Send it to the database
 
-            var value = MessageBox.Show("Estás Seguro de querer editar a este paciente?", "CSA LABS",
-                MessageBoxButton.OKCancel);
-
-            if (value == MessageBoxResult.OK)
+            if (ValidateFields())
             {
                 // Create Patient Elimination Petition To the Database
                 // Use the service...
-                if (ValidateFields())
+                if (MessageBox.Show("Estás Seguro de querer editar a este paciente?", "CSA LABS",
+                MessageBoxButton.OKCancel) == MessageBoxResult.OK)
                 {
-                    Patient patient = new Patient(int.Parse(idTextBox.Text), "CC", firstNameTextBox.Text,
-                    secondNameTextBox.Text, firstLastNameTextBox.Text, secondLastNameTextBox.Text,
-                    stringDateFormat(bornDateTextBox.Text), stringDateFormat(expeditionTextBox.Text), expeditionPlaceTextBox.Text, int.Parse(phoneTextBox.Text),
-                    addressTextBox.Text);
-                    var serviceResponse = MyService.UpdatePatient(patient);
-                    MessageBox.Show(serviceResponse.Message, "CSA LABS", MessageBoxButton.OK);
-                    TheDataGrid.Items.Refresh();
-                    Close();
+                    try
+                    {
+                        Patient patient = new Patient(int.Parse(idTextBox.Text), idTypeTextBox.Text, firstNameTextBox.Text,
+                            secondNameTextBox.Text, firstLastNameTextBox.Text, secondLastNameTextBox.Text,
+                            stringDateFormat(dateTextBox.Text), stringDateFormat(expeditionTextBox.Text), expeditionPlaceTextBox.Text, int.Parse(phoneTextBox.Text),
+                            addressTextBox.Text, nationalityTextBox.Text);
+                        var serviceResponse = MyService.UpdatePatient(patient);
+                        MessageBox.Show(serviceResponse.Message, "CSA LABS", MessageBoxButton.OK);
+                        Page.LoadPatientDataGrid();
+                        Close();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show($"Ha ocurrido un error en la edición de la información no se editó el paciente", "CSA LABS", MessageBoxButton.OK);
+                    }
                 }
             }
             else
             {
-                MessageBox.Show("Campos Vacíos Encontrados, Por Favor Completa La Información", "CSA LABS", MessageBoxButton.OK);
+                MessageBox.Show($"Información incompleta, por favor, completa los campos", "CSA LABS", MessageBoxButton.OK);
             }
         }
 

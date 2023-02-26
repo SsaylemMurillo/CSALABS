@@ -112,6 +112,10 @@
                                     Header="Dirección de residencia"
                                     Binding="{Binding Path=Address}"
                                     IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="patientNationality"
+                                    Header="Nacionalidad"
+                                    Binding="{Binding Path=Nacionality}"
+                                    IsReadOnly="True"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Border Grid.Row="2" Background="White" CornerRadius="10">

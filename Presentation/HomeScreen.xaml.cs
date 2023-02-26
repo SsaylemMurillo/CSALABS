@@ -21,13 +21,10 @@ namespace Presentation
     /// </summary>
     public partial class HomeScreen : Window
     {
-        List<Control> modules;
-
         public HomeScreen()
         {
-            modules = new List<Control>();
             InitializeComponent();
-            MainFrame.Content = new MainPage(MainFrame);
+            MainFrame.NavigationService.Navigate(new MainPage(MainFrame));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -95,7 +92,7 @@ namespace Presentation
 
         private void homeButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new MainPage(MainFrame);
+            MainFrame.NavigationService.Navigate(new MainPage(MainFrame));
         }
 
         private void menuButton_Click(object sender, RoutedEventArgs e)
@@ -112,7 +109,7 @@ namespace Presentation
 
         private void settingsButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new ConfigurationPage();
+            MainFrame.NavigationService.Navigate(new ConfigurationPage());
         }
 
         private void searchButton_Click(object sender, RoutedEventArgs e)

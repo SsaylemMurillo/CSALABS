@@ -68,6 +68,7 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Margin="10">
                             <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
@@ -96,8 +97,8 @@
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" Margin="10">
                             <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
-                                Text="Fecha de Nacimiento" Opacity="0.7"/>
-                            <TextBox Name="bornDateTextBox" Style="{StaticResource infoTextbox2}" Width="400" IsEnabled="False"/>
+                                Text="Tipo Id" Opacity="0.7"/>
+                            <TextBox Name="idTypeTextBox" Style="{StaticResource infoTextbox2}" Width="400" IsEnabled="False"/>
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0" Margin="10">
                             <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
@@ -118,6 +119,16 @@
                             <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                 Text="Teléfono" Opacity="0.7"/>
                             <TextBox Name="phoneTextBox" Style="{StaticResource infoTextbox2}" Width="400" IsEnabled="False"/>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Left" Grid.Row="5" Grid.Column="0" Margin="10">
+                            <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                Text="Nacionalidad" Opacity="0.7"/>
+                            <TextBox Name="nationalityTextBox" Style="{StaticResource infoTextbox2}"/>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1" Margin="10">
+                            <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
+                                Text="Fecha de Nacimiento" Opacity="0.7"/>
+                            <TextBox Name="dateTextBox" Style="{StaticResource infoTextbox2}"/>
                         </StackPanel>
                     </Grid>
                 </Grid>

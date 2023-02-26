@@ -81,7 +81,7 @@ namespace Presentation.Pages
             return value;
         }
 
-        private void LoadPatientDataGrid()
+        public void LoadPatientDataGrid()
         {
             patientsDataGrid.Items.Clear();
             var response = MyPatientService.GetAll();
@@ -139,7 +139,7 @@ namespace Presentation.Pages
             var myPatient = (Patient)patientsDataGrid.SelectedItem;     
             if (myPatient != null)
             {
-                new EditPatientWindow(patientsDataGrid, MyPatientService, myPatient, patientsDataGrid.SelectedIndex).Show();
+                new EditPatientWindow(this, MyPatientService, myPatient, patientsDataGrid.SelectedIndex).Show();
             }
             else
             {
@@ -354,7 +354,7 @@ namespace Presentation.Pages
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = PreviousPage;
+            MainFrame.NavigationService.Navigate(new MainPage(MainFrame));
         }
     }
 }
