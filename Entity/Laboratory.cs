@@ -8,38 +8,59 @@ namespace Entity
 {
     public class Laboratory
     {
-        public int OrderId { get; set; }
+        public int Id { get; set; }
         public List<Exam> Exams { get; set; }
         public Patient Patient { get; set; }
-        public String Date { get; set; }
+        public DateTime LabDate { get; set; }
         public String Result { get; set; }
-        public String Campus { get; set; }
+        public String Place { get; set; }
 
-        public Laboratory(List<Exam> exams, Patient patient, string result, string date, string campus)
+        public Laboratory(int id, int patientId, string result, string labDate, string place)
         {
-            this.Exams = exams;
-            this.Patient = patient;
+            Id = id;
+            Exams = new List<Exam>();
+            Patient = new Patient();
+            Patient.Id = patientId;
             Result = result;
-            Date = date;
-            Campus = campus;
+            LabDate = Convert.ToDateTime(labDate);
+            Place = place;
         }
-        public Laboratory(List<Exam> exams, Patient pacient, string result, string date, string campus, int orderId)
+
+        public Laboratory(int id, Patient patient, string result, string labDate, string place)
         {
-            this.Exams = exams;
-            this.Patient = pacient;
+            Id = id;
+            Exams = new List<Exam>();
+            Patient = patient;
             Result = result;
-            Date = date;
-            Campus = campus;
-            this.OrderId = orderId;
+            LabDate = Convert.ToDateTime(labDate);
+            Place = place;
+        }
+
+        public Laboratory(List<Exam> exams, Patient patient, string result, string labDate, string place, int orderId)
+        {
+            Exams = exams;
+            Patient = patient;
+            Result = result;
+            LabDate = Convert.ToDateTime(labDate);
+            Place = place;
+            this.Id = orderId;
+        }
+
+        public Laboratory(List<Exam> exams, Patient patient, string result, string labDate, string place)
+        {
+            Exams = exams;
+            Patient = patient;
+            Result = result;
+            LabDate = Convert.ToDateTime(labDate);
+            Place = place;
         }
         public Laboratory(int orderId)
         {
-            this.OrderId = orderId;
+            Id = orderId;
 
         }
         public Laboratory()
         {
         }
-
     }
 }

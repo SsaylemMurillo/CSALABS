@@ -38,7 +38,7 @@ namespace BusinessLogicLayer
                 connectionManager.CloseDataBase();
             }
             if (patientList == null)
-                return new GenericResponse<Patient>("");
+                return new GenericResponse<Patient>(message);
             else
                 return new GenericResponse<Patient>(patientList);
         }
