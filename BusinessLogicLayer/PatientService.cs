@@ -10,7 +10,6 @@ namespace BusinessLogicLayer
 {
     public class PatientService
     {
-        public GenericResponse<Patient> GenericResponsePatient { get; set; }
         private PatientRepository patientRepository { get; set; }
         ConnectionManager connectionManager;
 
