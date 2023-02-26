@@ -10,6 +10,7 @@ namespace BusinessLogicLayer
     public class ExamService
     {
         private ExamRepository ExamRepository { get; set; }
+        private LabsExamsRepository LabsExamRepository { get; set; }
         ConnectionManager connectionManager;
 
         public ExamService(string connectionString)
@@ -142,6 +143,28 @@ namespace BusinessLogicLayer
                 return new GenericResponse<Exam>(message);
             else
                 return new GenericResponse<Exam>(examListFilter);
+        }
+        public GenericResponse<Exam> GetAllExamLaboratory(int id_laboratory)
+        {
+            List<Exam> examList = null;
+            string message = "";
+            try
+            {
+                connectionManager.OpenDataBase();
+                examList = LabsExamRepository.GetAllExamsFromLab(id_laboratory);
+            }
+            catch (Exception e)
+            {
+                message = "Ocurrio un error: " + e.Message;
+            }
+            finally
+            {
+                connectionManager.CloseDataBase();
+            }
+            if (examList == null)
+                return new GenericResponse<Exam>(message);
+            else
+                return new GenericResponse<Exam>(examList);
         }
     }
 }
