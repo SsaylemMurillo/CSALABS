@@ -42,13 +42,14 @@ namespace BusinessLogicLayer
                 return new GenericResponse<Exam>(examList);
         }
 
-        public GenericResponse<Patient> SavePatient(Exam exam)
+        public GenericResponse<Exam> SaveExam(Exam exam)
         {
             string message = "";
             if (exam != null)
             {
                 try
                 {
+                    
                     connectionManager.OpenDataBase();
                     message = ExamRepository.Save(exam);
                 }
@@ -63,9 +64,9 @@ namespace BusinessLogicLayer
             }
             else
             {
-                message = "El paciente tiene valor NULL";
+                message = "El examen tiene valor NULL";
             }
-            return new GenericResponse<Patient>(message);
+            return new GenericResponse<Exam>(message);
         }
 
         public GenericResponse<Patient> UpdatePatient(Exam exam)
