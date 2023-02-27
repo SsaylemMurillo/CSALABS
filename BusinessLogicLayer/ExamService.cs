@@ -78,7 +78,7 @@ namespace BusinessLogicLayer
 
         public GenericResponse<Patient> UpdatePatient(Exam exam)
         {
-            string message = "Edición Exitosa";
+            string message = "";
             if (exam != null)
             {
                 try
@@ -112,6 +112,9 @@ namespace BusinessLogicLayer
                 {
                     ConnectionManager.OpenDataBase();
                     patientDeleted = ExamRepository.Delete(exam);
+                    if (patientDeleted==null) {
+                        message = "El examen no existe";
+                    } 
                 }
                 catch (Exception e)
                 {
@@ -136,8 +139,8 @@ namespace BusinessLogicLayer
             try
             {
                 ConnectionManager.OpenDataBase();
-                var patients = ExamRepository.GetAll();
-                examListFilter = patients.Where(patient => patient.Id.ToString().Contains(id)).ToList();
+                var exams = ExamRepository.GetAll();
+                examListFilter = exams.Where(exam => exam.Id.ToString().Contains(id)).ToList();
             }
             catch (Exception e)
             {
