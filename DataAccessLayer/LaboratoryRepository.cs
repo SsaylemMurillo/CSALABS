@@ -138,7 +138,7 @@ namespace DataAccessLayer
             }
             else
             {
-                message = "No se ha encontrado el laboratorio a actualizar";
+                message = null;
             }
             return message;
         }

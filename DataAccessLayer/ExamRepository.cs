@@ -90,9 +90,8 @@ namespace DataAccessLayer
             DbCommand command = new SqlCommand();
             command.Connection = _connection;
 
-            command.CommandText = $"update exam set id_exam= @examId,value_measures = @examValueMeasures, " +
-                $"name = @examName, description = @examDescription, results = @examResults";
-            command.Parameters.Add(new SqlParameter("@idExam", exam.Id));
+            command.CommandText = $"update exam set value_measures = @examValueMeasures, " +
+                $"name = @examName, description = @examDescription, results = @examResults where id_exam = @examIdMain;";
             command.Parameters.Add(new SqlParameter("@valueMeasures", exam.ValuesMeasures));
             command.Parameters.Add(new SqlParameter("@name", exam.Name));
             command.Parameters.Add(new SqlParameter("@description", exam.Description));
