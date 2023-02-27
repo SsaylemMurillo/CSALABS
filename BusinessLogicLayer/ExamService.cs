@@ -58,7 +58,7 @@ namespace BusinessLogicLayer
                 {
                     ConnectionManager.OpenDataBase();
                     message = ExamRepository.Save(exam);
-                    
+                    return new GenericResponse<Exam>(exam);
                 }
                 catch (Exception e)
                 {
