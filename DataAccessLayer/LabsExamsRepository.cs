@@ -91,6 +91,28 @@ namespace DataAccessLayer
             return message;
         }
 
+        public bool SearchExamFromLaboratory(int laboratoryId, int examId)
+        {
+            var value = false;
+            DbCommand command = new SqlCommand();
+            command.Connection = _connection;
+            command.CommandText = $"select * from labs_exams where id_lab = @id and id_exam = @examId;";
+            command.Parameters.Add(new SqlParameter("@id", laboratoryId));
+            command.Parameters.Add(new SqlParameter("@examId", examId));
+            var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                int labId = reader.GetInt32(0);
+                int labPatientId = reader.GetInt32(1);
+
+                value = true;
+            }
+
+            reader.Close();
+            return value;
+        }
+
         public string DeleteExamFromLaboratory(int laboratoryId, int examId)
         {
             string message;

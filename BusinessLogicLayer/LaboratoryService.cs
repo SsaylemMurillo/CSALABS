@@ -92,7 +92,7 @@ namespace BusinessLogicLayer
             return new GenericResponse<Laboratory>(message);
         }
 
-        public GenericResponse<Laboratory> UpdatePatient(Laboratory lab)
+        public GenericResponse<Laboratory> UpdateLaboratory(Laboratory lab)
         {
             string message = "Edición Exitosa";
             if (lab != null)
@@ -101,6 +101,23 @@ namespace BusinessLogicLayer
                 {
                     connectionManager.OpenDataBase();
                     message = LabRepository.Update(lab);
+                    if (message != null)
+                    {
+                        ExamService examService = new ExamService(connectionManager);
+                        foreach (var exam in lab.Exams)
+                        {
+                            var examResponse = examService.UpdateExam(exam);
+                            if (examResponse.ObjectResponse != null)
+                            {
+                                LabsExamsRepository.Update(lab.Id, exam.Id);
+                            }
+                        }
+                        message = "laboratorio Registrado correctamente";
+                    }
+                    else
+                    {
+                        message = "No se pudo almacenar el laboratorio";
+                    }
                 }
                 catch (Exception e)
                 {
@@ -118,7 +135,7 @@ namespace BusinessLogicLayer
             return new GenericResponse<Laboratory>(message);
         }
 
-        public GenericResponse<Laboratory> DeletePatient(Laboratory lab)
+        public GenericResponse<Laboratory> DeleteLaboratory(Laboratory lab)
         {
             string message = "Borrado Exitoso";
             Laboratory labDeleted;
