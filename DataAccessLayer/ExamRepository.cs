@@ -99,7 +99,7 @@ namespace DataAccessLayer
             int fila = command.ExecuteNonQuery();
             if (fila == 1)
             {
-                return "Se actualizó la tabla examenes con nuevo exam de id: \" + exam.Id;";
+                return "Actualizacion Exitosa";
             }
             return "Error en tabla examenes al actualizar al examen " + exam.Name + " con id: " + exam.Id;
         }
