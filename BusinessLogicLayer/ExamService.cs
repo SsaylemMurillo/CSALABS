@@ -78,13 +78,14 @@ namespace BusinessLogicLayer
 
         public GenericResponse<Exam> UpdateExam(Exam exam)
         {
-            string message = "";
+            String message="";
             if (exam != null)
             {
                 try
                 {
                     ConnectionManager.OpenDataBase();
                     message=ExamRepository.Update(exam);
+
                 }
                 catch (Exception e)
                 {
@@ -97,12 +98,12 @@ namespace BusinessLogicLayer
             }
             else
             {
-                message = "El paciente tiene valor NULL";
+                message = "El examen tiene valor NULL";
             }
             return new GenericResponse<Exam>(message);
         }
 
-        public GenericResponse<Exam> DeletePatient(Exam exam)
+        public GenericResponse<Exam> DeleteExam(Exam exam)
         {
             string message = "Borrado Exitoso";
             Exam patientDeleted;

@@ -55,9 +55,24 @@ namespace DataAccessLayer
             throw new NotImplementedException();
         }
 
-        public string Update(Laboratory laboratory)
+        public string Update(Exam exam)
         {
-            throw new NotImplementedException();
+            DbCommand command = new SqlCommand();
+            command.Connection = _connection;
+
+            command.CommandText = $"update exam set id_exam= @examId,value_measures = @examValueMeasures, " +
+                $"name = @examName, description = @examDescription, results = @examResults";
+            command.Parameters.Add(new SqlParameter("@idExam", exam.Id));
+            command.Parameters.Add(new SqlParameter("@valueMeasures", exam.ValuesMeasures));
+            command.Parameters.Add(new SqlParameter("@name", exam.Name));
+            command.Parameters.Add(new SqlParameter("@description", exam.Description));
+            command.Parameters.Add(new SqlParameter("@examResults", ""));
+            int fila = command.ExecuteNonQuery();
+            if (fila == 1)
+            {
+                return "Actualizacion Exitosa";
+            }
+            return "Error en tabla examenes al actualizar al examen " + exam.Name + " con id: " + exam.Id;
         }
 
         public string SaveExamFromLaboratory(int laboratoryId, int examId)
@@ -104,7 +119,6 @@ namespace DataAccessLayer
             while (reader.Read())
             {
                 int examId = reader.GetInt32(0);
-
                 exams.Add(new Exam(examId));
             }
 
