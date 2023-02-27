@@ -76,7 +76,7 @@ namespace BusinessLogicLayer
             return new GenericResponse<Exam>(message);
         }
 
-        public GenericResponse<Patient> UpdatePatient(Exam exam)
+        public GenericResponse<Exam> UpdateExam(Exam exam)
         {
             string message = "";
             if (exam != null)
@@ -84,7 +84,7 @@ namespace BusinessLogicLayer
                 try
                 {
                     ConnectionManager.OpenDataBase();
-                    ExamRepository.Update(exam);
+                    message=ExamRepository.Update(exam);
                 }
                 catch (Exception e)
                 {
@@ -99,7 +99,7 @@ namespace BusinessLogicLayer
             {
                 message = "El paciente tiene valor NULL";
             }
-            return new GenericResponse<Patient>(message);
+            return new GenericResponse<Exam>(message);
         }
 
         public GenericResponse<Exam> DeletePatient(Exam exam)
