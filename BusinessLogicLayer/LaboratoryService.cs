@@ -10,15 +10,16 @@ namespace BusinessLogicLayer
 {
     public class LaboratoryService
     {
-        private LaboratoryRepository labRepository { get; set; }
-        private LabsExamsRepository labsExamsRepository { get; set; }
+        private LaboratoryRepository LabRepository { get; set; }
+        private LabsExamsRepository LabsExamsRepository { get; set; }
 
         ConnectionManager connectionManager;
 
         public LaboratoryService(string connectionString)
         {
             connectionManager = new ConnectionManager(connectionString);
-            labRepository = new LaboratoryRepository(connectionManager.Connection);
+            LabRepository = new LaboratoryRepository(connectionManager.Connection);
+            LabsExamsRepository = new LabsExamsRepository(connectionManager.Connection);
         }
 
         public GenericResponse<Laboratory> GetAll()
@@ -28,7 +29,7 @@ namespace BusinessLogicLayer
             try
             {
                 connectionManager.OpenDataBase();
-                labList = labRepository.GetAll();
+                labList = LabRepository.GetAll();
             }
             catch (Exception e)
             {
@@ -53,7 +54,7 @@ namespace BusinessLogicLayer
                 {
                     connectionManager.OpenDataBase();
                     // After saving the labs, needs to save the exams and then everything in labs_exams table
-                    message = labRepository.Save(lab);
+                    message = LabRepository.Save(lab);
                     if (message != null)
                     {
                         // Save exams using for loop
@@ -61,8 +62,17 @@ namespace BusinessLogicLayer
                         ExamService examService = new ExamService(connectionManager);
                         foreach (var exam in lab.Exams)
                         {
-                            examService.SavePatient();
+                            var examResponse = examService.SaveExam(exam);
+                            if (examResponse.ObjectResponse != null)
+                            {
+                                LabsExamsRepository.SaveExamFromLaboratory(lab.Id, exam.Id);
+                            }
                         }
+                        message = "laboratorio Registrado correctamente";
+                    }
+                    else
+                    {
+                        message = "No se pudo almacenar el laboratorio";
                     }
 
                 }
@@ -90,7 +100,7 @@ namespace BusinessLogicLayer
                 try
                 {
                     connectionManager.OpenDataBase();
-                    message = labRepository.Update(lab);
+                    message = LabRepository.Update(lab);
                 }
                 catch (Exception e)
                 {
@@ -118,7 +128,7 @@ namespace BusinessLogicLayer
                 {
                     connectionManager.OpenDataBase();
                     // After deleting the laboratory needs to delete all exams of it, and labs_exams references.
-                    labDeleted = labRepository.Delete(lab);
+                    labDeleted = LabRepository.Delete(lab);
                 }
                 catch (Exception e)
                 {

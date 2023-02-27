@@ -11,6 +11,7 @@ namespace BusinessLogicLayer
     {
         public string Message { get; set; }
         public List<T> DataList { get; set; }
+        public T ObjectResponse { get; set; }
 
 
         public GenericResponse(string message)
@@ -21,6 +22,11 @@ namespace BusinessLogicLayer
         public GenericResponse(List<T> list)
         {
             DataList = list;
+        }
+
+        public GenericResponse(T obj)
+        {
+            ObjectResponse = obj;
         }
     }
 }
