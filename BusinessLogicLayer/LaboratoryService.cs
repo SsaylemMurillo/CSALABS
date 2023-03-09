@@ -109,7 +109,7 @@ namespace BusinessLogicLayer
                             var examResponse = examService.UpdateExam(exam);
                             if (examResponse.ObjectResponse != null)
                             {
-                                LabsExamsRepository.Update(lab.Id, exam.Id);
+                                //LabsExamsRepository.Update(lab.Id, exam.Id);
                             }
                         }
                         message = "laboratorio Registrado correctamente";

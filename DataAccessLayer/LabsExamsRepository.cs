@@ -147,5 +147,10 @@ namespace DataAccessLayer
             reader.Close();
             return exams;
         }
+
+        public string Update(Laboratory obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

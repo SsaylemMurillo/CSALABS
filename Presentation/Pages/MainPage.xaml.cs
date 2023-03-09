@@ -40,7 +40,7 @@ namespace Presentation.Pages
             modules.Add(new ModuleButtonController(mainFrame,
                 new ManagePatientPage(mainFrame, this), "Gestor de Pacientes", "#5aef6a", "#e91d63", "/Images/edit.png"));
             modules.Add(new ModuleButtonController(mainFrame,
-                new RegisterPatientPage(mainFrame, this), "Modulo #1", "#f76f81", "#e91d63", "/Images/add_user.png"));
+                new ManageLabPage(mainFrame, this), "Gestor de Laboratorios", "#f76f81", "#e91d63", "/Images/add_user.png"));
             modules.Add(new ModuleButtonController(mainFrame,
                 new RegisterPatientPage(mainFrame, this), "Modulo #2", "#d2be77", "#e91d63", "/Images/add_user.png"));
             modules.Add(new ModuleButtonController(mainFrame,

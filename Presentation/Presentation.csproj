@@ -70,6 +70,9 @@
     <Compile Include="Pages\MainSettingsPage.xaml.cs">
       <DependentUpon>MainSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ManageLabPage.xaml.cs">
+      <DependentUpon>ManageLabPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ManagePatientPage.xaml.cs">
       <DependentUpon>ManagePatientPage.xaml</DependentUpon>
     </Compile>
@@ -117,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ManageLabPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,6 +240,8 @@
     <Resource Include="Images\analitics.png" />
     <Resource Include="Images\add_user.png" />
     <Resource Include="Images\edit.png" />
+    <Resource Include="Images\eye.png" />
+    <Resource Include="Images\filterw.png" />
     <Content Include="Images\home.svg" />
     <Resource Include="Images\homew.png" />
     <Resource Include="Images\left.png" />
@@ -250,6 +259,9 @@
     <Resource Include="Images\shield.png" />
     <Resource Include="Images\toggle.png" />
     <Resource Include="Images\tool.png" />
+    <Resource Include="Images\openbook.png" />
+    <Resource Include="Images\plus.png" />
+    <Resource Include="Images\trash.png" />
     <Content Include="Images\user_m.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
