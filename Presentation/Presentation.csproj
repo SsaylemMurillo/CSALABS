@@ -85,6 +85,9 @@
     <Compile Include="UserControls\ButtonMenuController.xaml.cs">
       <DependentUpon>ButtonMenuController.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\LoadingControl.xaml.cs">
+      <DependentUpon>LoadingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ModuleButtonController.xaml.cs">
       <DependentUpon>ModuleButtonController.xaml</DependentUpon>
     </Compile>
@@ -140,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ButtonMenuController.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\LoadingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

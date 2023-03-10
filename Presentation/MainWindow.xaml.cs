@@ -98,7 +98,7 @@ namespace Presentation
 
         public void LoginVerification()
         {
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
         }
 
         private void ShowLoading()
