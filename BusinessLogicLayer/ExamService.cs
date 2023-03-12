@@ -18,12 +18,14 @@ namespace BusinessLogicLayer
         {
             ConnectionManager = new ConnectionManager(connectionString);
             ExamRepository = new ExamRepository(ConnectionManager.Connection);
+            LabsExamRepository = new LabsExamsRepository(ConnectionManager.Connection);
         }
 
         public ExamService(ConnectionManager connectionManager)
         {
             ConnectionManager = connectionManager;
             ExamRepository = new ExamRepository(ConnectionManager.Connection);
+            LabsExamRepository = new LabsExamsRepository(connectionManager.Connection);
         }
 
         public GenericResponse<Exam> GetAll()
@@ -47,6 +49,36 @@ namespace BusinessLogicLayer
                 return new GenericResponse<Exam>(message);
             else
                 return new GenericResponse<Exam>(examList);
+        }
+
+        public GenericResponse<Exam> SearchExam(Exam exam)
+        {
+            Exam searchedExam = null;
+            string message = null;
+            if (exam != null)
+            {
+                try
+                {
+                    if (!ConnectionManager.IsOpen)
+                        ConnectionManager.OpenDataBase();
+                    searchedExam = ExamRepository.Search(exam);
+                }
+                catch (Exception e)
+                {
+                    message = "Ocurrio un error: " + e.Message;
+                }
+                finally
+                {
+                    if (ConnectionManager.IsOpen)
+                        ConnectionManager.CloseDataBase();
+                }
+                return new GenericResponse<Exam>(searchedExam);
+            }
+            else
+            {
+                message = "El examen tiene valor NULL";
+            }
+            return new GenericResponse<Exam>(message);
         }
 
         public GenericResponse<Exam> SaveExam(Exam exam)
@@ -158,12 +190,26 @@ namespace BusinessLogicLayer
         }
         public GenericResponse<Exam> GetAllExamLaboratory(int id_laboratory)
         {
-            List<Exam> examList = null;
+            List<Exam> exams = null;
             string message = "";
             try
             {
                 ConnectionManager.OpenDataBase();
-                examList = LabsExamRepository.GetAllExamsFromLab(id_laboratory);
+                var response = LabsExamRepository.GetAllExamsFromLab(id_laboratory);
+                exams = new List<Exam>();
+                if (response != null && response.Count > 0)
+                {
+                    foreach (var exam in response)
+                    {
+                        var examSearched = ExamRepository.Search(exam);
+                        if (examSearched != null)
+                            exams.Add(examSearched);
+                    }
+                }
+                else
+                {
+                    message = "No fue posible encontrar el laboratorio";
+                }
             }
             catch (Exception e)
             {
@@ -173,10 +219,10 @@ namespace BusinessLogicLayer
             {
                 ConnectionManager.CloseDataBase();
             }
-            if (examList == null)
+            if (exams == null)
                 return new GenericResponse<Exam>(message);
             else
-                return new GenericResponse<Exam>(examList);
+                return new GenericResponse<Exam>(exams);
         }
     }
 }

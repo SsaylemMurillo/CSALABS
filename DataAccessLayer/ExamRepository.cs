@@ -36,7 +36,7 @@ namespace DataAccessLayer
                 string examName = reader.GetString(2);
                 string examDescription = reader.GetString(3);
 
-                examnSearched = new Exam(examId, examMeasures, examName, examDescription);
+                examnSearched = new Exam(examId, examName, examDescription, examMeasures);
             }
             reader.Close();
             return examnSearched;
@@ -85,13 +85,14 @@ namespace DataAccessLayer
             return null;
         }
 
-        public String Update(Exam exam)
+        public string Update(Exam exam)
         {
             DbCommand command = new SqlCommand();
             command.Connection = _connection;
 
             command.CommandText = $"update exam set value_measures = @examValueMeasures, " +
-                $"name = @examName, description = @examDescription, results = @examResults where id_exam = @examIdMain;";
+                $"name = @examName, description = @examDescription, results = @examResults where id_exam = @examId;";
+            command.Parameters.Add(new SqlParameter("@examId", exam.Id));
             command.Parameters.Add(new SqlParameter("@valueMeasures", exam.ValuesMeasures));
             command.Parameters.Add(new SqlParameter("@name", exam.Name));
             command.Parameters.Add(new SqlParameter("@description", exam.Description));
@@ -118,7 +119,7 @@ namespace DataAccessLayer
                 string examMeasures = reader.GetString(1);
                 string examName = reader.GetString(2);
                 string examDescription = reader.GetString(3);
-                var exam = new Exam(examId, examMeasures, examName, examDescription);
+                var exam = new Exam(examId, examName, examDescription, examMeasures);
                 exams.Add(exam);
             }
             return exams;

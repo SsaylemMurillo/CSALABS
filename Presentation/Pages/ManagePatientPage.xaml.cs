@@ -136,7 +136,7 @@ namespace Presentation.Pages
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // Edition Window: Pencil On Right Side Bar
-            var myPatient = (Patient)patientsDataGrid.SelectedItem;     
+            var myPatient = (Patient)patientsDataGrid.SelectedItem;    
             if (myPatient != null)
             {
                 new EditPatientWindow(this, MyPatientService, myPatient, patientsDataGrid.SelectedIndex).ShowDialog();

@@ -19,6 +19,32 @@ namespace BusinessLogicLayer
             patientRepository = new PatientRepository(connectionManager.Connection);
         }
 
+        public GenericResponse<Patient> SearchPatient(Patient patient)
+        {
+            Patient patientSearched = null;
+            string message = "";
+            try
+            {
+                connectionManager.OpenDataBase();
+                if (patient != null)
+                    patientSearched = patientRepository.Search(patient);
+                else
+                    message = "Paciente VALOR NULL";
+            }
+            catch (Exception e)
+            {
+                message = "Ocurrio un error: " + e.Message;
+            }
+            finally
+            {
+                connectionManager.CloseDataBase();
+            }
+            if (patientSearched == null)
+                return new GenericResponse<Patient>(message);
+            else
+                return new GenericResponse<Patient>(patientSearched);
+        }
+
         public GenericResponse<Patient> GetAll()
         {
             List<Patient> patientList = null;

@@ -18,6 +18,7 @@ namespace DataAccessLayer
             _connection = connection;
         }
 
+
         public Laboratory Delete(Laboratory laboratory)
         {
             if (Search(laboratory) != null)
@@ -52,7 +53,7 @@ namespace DataAccessLayer
                 int labId = reader.GetInt32(0);
                 int labPatientId = reader.GetInt32(1);
                 string labResult = reader.GetString(2);
-                DateTime labDateTime = Convert.ToDateTime(reader.GetDateTime(3));
+                DateTime labDateTime = reader.GetDateTime(3);
                 var labDate = "" + labDateTime.Month + "/" + labDateTime.Day + "/" + labDateTime.Year;
                 string labPlace = reader.GetString(4);
 
@@ -71,10 +72,10 @@ namespace DataAccessLayer
             {
                 DbCommand command = new SqlCommand();
                 command.Connection = _connection;
-                command.CommandText = $"insert into laboratory (id_patient, result, date_lab, place, " +
+                command.CommandText = $"insert into laboratory (id_patient, result, date_lab, place) " +
                     $"values (@labPatientId, @labResult, @labDate, @labPlace);";
                 command.Parameters.Add(new SqlParameter("@labPatientId", laboratory.Patient.Id));
-                command.Parameters.Add(new SqlParameter("@labResult", laboratory.Result));
+                command.Parameters.Add(new SqlParameter("@labResult", ""));
                 var date = "" + laboratory.LabDate.Month + "/" + laboratory.LabDate.Day + "/" + laboratory.LabDate.Year;
                 command.Parameters.Add(new SqlParameter("@labDate", date));
                 command.Parameters.Add(new SqlParameter("@labPlace", laboratory.Place));
@@ -89,11 +90,31 @@ namespace DataAccessLayer
             return message;
         }
 
+        public Laboratory GetLastLaboratoryCreated()
+        {
+            DbCommand command = new SqlCommand();
+            command.Connection = _connection;
+            command.CommandText = $"SELECT IDENT_CURRENT('laboratory');";
+            var reader = command.ExecuteReader();
+
+            Laboratory lastLab = null;
+
+            while (reader.Read())
+            {
+                Decimal dec1 = reader.GetDecimal(0);
+                int labId = decimal.ToInt32(dec1);
+                lastLab = new Laboratory(labId);
+            }
+
+            reader.Close();
+            return lastLab;
+        }
+
         public Laboratory Search(Laboratory laboratory)
         {
             DbCommand command = new SqlCommand();
             command.Connection = _connection;
-            command.CommandText = $"select * from laboratory where id = @id;";
+            command.CommandText = $"select * from laboratory where id_lab = @id;";
             command.Parameters.Add(new SqlParameter("@id", laboratory.Id));
             var reader = command.ExecuteReader();
 
@@ -104,7 +125,7 @@ namespace DataAccessLayer
                 int labId = reader.GetInt32(0);
                 int labPatientId = reader.GetInt32(1);
                 string labResult = reader.GetString(2);
-                DateTime labDateTime = Convert.ToDateTime(reader.GetDateTime(3));
+                DateTime labDateTime = reader.GetDateTime(3);
                 var labDate = "" + labDateTime.Month + "/" + labDateTime.Day + "/" + labDateTime.Year;
                 string labPlace = reader.GetString(4);
 
@@ -125,10 +146,9 @@ namespace DataAccessLayer
                 DbCommand command = new SqlCommand();
                 command.Connection = _connection;
 
-                command.CommandText = $"update laboratory set id_patient = @labPatientId," +
-                    $" result = @labResult, date_lab = @labDate, place = @labPlace, " +
-                    "WHERE id = @id";
-                command.Parameters.Add(new SqlParameter("@labPatientId", laboratory.Patient.Id));
+                command.CommandText = $"update laboratory set result = @labResult, date_lab = @labDate, place = @labPlace " +
+                    "WHERE id_lab = @labId";
+                command.Parameters.Add(new SqlParameter("@labId", laboratory.Id));
                 command.Parameters.Add(new SqlParameter("@labResult", laboratory.Result));
                 var date = "" + laboratory.LabDate.Month + "/" + laboratory.LabDate.Day + "/" + laboratory.LabDate.Year;
                 command.Parameters.Add(new SqlParameter("@labDate", date));
@@ -141,6 +161,40 @@ namespace DataAccessLayer
                 message = null;
             }
             return message;
+        }
+
+        public List<Laboratory> GetAllLabsFromPatient(int id)
+        {
+            DbCommand command = new SqlCommand();
+            command.Connection = _connection;
+            command.CommandText = $"select id_lab, result, date_lab, place from laboratory where id_patient = @id";
+            command.Parameters.Add(new SqlParameter("@id", id));
+            var reader = command.ExecuteReader();
+
+            var labs = new List<Laboratory>();
+
+            while (reader.Read())
+            {
+                int labId = reader.GetInt32(0);
+                string labResult = reader.GetString(1);
+                DateTime labDateTime = reader.GetDateTime(2);
+                //var laboDate = "" + labDateTime.Month + "/" + labDateTime.Day + "/" + labDateTime.Year;
+                string labPlace = reader.GetString(3);
+
+                var laboratory = new Laboratory()
+                {
+                    Id = labId,
+                    Result = labResult,
+                    LabDate = labDateTime,
+                    Place = labPlace,
+                    Exams = new List<Exam>()
+                };
+
+                labs.Add(laboratory);
+            }
+
+            reader.Close();
+            return labs;
         }
     }
 }

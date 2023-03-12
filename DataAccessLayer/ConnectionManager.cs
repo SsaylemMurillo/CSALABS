@@ -6,6 +6,8 @@ namespace DataAccessLayer
 {
     public class ConnectionManager
     {
+        public bool IsOpen { get; set; }
+
         public DbConnection Connection;
         public ConnectionManager(string connectionString)
         {
@@ -15,11 +17,13 @@ namespace DataAccessLayer
         public void OpenDataBase()
         {
             Connection.Open();
+            IsOpen = true;
         }
 
         public void CloseDataBase()
         {
             Connection.Close();
+            IsOpen = false;
         }
     }
 }

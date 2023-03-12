@@ -36,11 +36,13 @@
                                    VerticalAlignment="Center"/>
                             <TextBox Name="idPatientTextBox" Padding="8" Height="35" Style="{StaticResource infoTextbox2}" Width="300"/>
                             <Button x:Name="chargeIdButton" Content="Cargar" Margin="10 0 10 0" Width="130" Padding="0" Height="45" FontSize="10" Style="{StaticResource actionButton1}" Click="Button_Click"/>
-                            <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
-                                <TextBlock Text="Lugar del Laboratorio " FontSize="15" Margin="10 0 0 0" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
-                                   VerticalAlignment="Center"/>
-                                <TextBox Name="labPlaceTextBox" Padding="8" Height="35" Style="{StaticResource infoTextbox2}" Width="300"/>
-                            </StackPanel>
+                            <!--
+                                <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
+                                    <TextBlock Text="Lugar del Laboratorio " FontSize="15" Margin="10 0 0 0" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
+                                       VerticalAlignment="Center"/>
+                                    <TextBox Name="labPlaceTextBox" Padding="8" Height="35" Style="{StaticResource infoTextbox2}" Width="300"/>
+                                </StackPanel>
+                            -->
                         </StackPanel>
                         <Grid HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1">
                             <Grid.ColumnDefinitions>
@@ -54,15 +56,11 @@
                                 <Image Source="/Images/filterw.png" Stretch="Uniform" Height="20" RenderOptions.BitmapScalingMode="Fant"/>
                             </Button>
 
-                            <Button x:Name="plusButton" Margin="-5 0 10 0" Style="{StaticResource userProfileButton}" Grid.Column="1">
-                                <Image Source="/Images/plus.png" Stretch="Uniform" Height="20" RenderOptions.BitmapScalingMode="Fant"/>
-                            </Button>
-
-                            <Button x:Name="pencilButton" Margin="-5 0 10 0" Style="{StaticResource userProfileButton}" Grid.Column="2">
+                            <Button x:Name="pencilButton" Margin="-5 0 10 0" Style="{StaticResource userProfileButton}" Grid.Column="2" Click="pencilButton_Click">
                                 <Image Source="/Images/edit.png" Stretch="Uniform" Height="20" RenderOptions.BitmapScalingMode="Fant"/>
                             </Button>
 
-                            <Button x:Name="trashButton" Margin="-5 0 10 0" Style="{StaticResource userProfileButton}" Grid.Column="3">
+                            <Button x:Name="trashButton" Margin="-5 0 10 0" Style="{StaticResource userProfileButton}" Grid.Column="3" Click="trashButton_Click">
                                 <Image Source="/Images/trash.png" Stretch="Uniform" Height="20" RenderOptions.BitmapScalingMode="Fant"/>
                             </Button>
 
@@ -73,32 +71,27 @@
                     </Grid>
                 </Border>
                 <DataGrid AutoGenerateColumns="False"
-                          x:Name="examsDataGrid" Grid.Row="1" Margin="10" Background="White"
+                          x:Name="labsDataGrid" Grid.Row="1" Margin="10" Background="White"
                           Height="auto" FontFamily="Lexend" FontSize="15">
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="examId"
-                                    Header="Id Examen"
+                        <DataGridTextColumn x:Name="labIdColumn"
+                                    Header="Id Laboratorio"
                                     Binding="{Binding Path=Id}"
                                     IsReadOnly="True"
                                     Width="*"/>
-                        <DataGridTextColumn x:Name="examName"
-                                    Header="Nombre"
-                                    Binding="{Binding Path=Name}"
+                        <DataGridTextColumn x:Name="resultsColumn"
+                                    Header="Resultados"
+                                    Binding="{Binding Path=Result}"
                                     IsReadOnly="True"
                                     Width="*"/>
-                        <DataGridTextColumn x:Name="examDescription"
-                                    Header="Descripción"
-                                    Binding="{Binding Path=Description}"
+                        <DataGridTextColumn x:Name="labDateColumn"
+                                    Header="Fecha"
+                                    Binding="{Binding Path=LabDate}"
                                     IsReadOnly="True"
                                     Width="*"/>
-                        <DataGridTextColumn x:Name="examMeasures"
-                                    Header="Valores de medidas"
-                                    Binding="{Binding Path=ValuesMeasures}"
-                                    IsReadOnly="True"
-                                    Width="*"/>
-                        <DataGridTextColumn x:Name="examDate"
-                                    Header="Fecha de Examen"
-                                    Binding="{Binding Path=DateExam}"
+                        <DataGridTextColumn x:Name="labPlaceColumn"
+                                    Header="Lugar"
+                                    Binding="{Binding Path=Place}"
                                     IsReadOnly="True"
                                     Width="*"/>
                     </DataGrid.Columns>

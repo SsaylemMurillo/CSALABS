@@ -61,6 +61,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConnectionStringExtractor.cs" />
+    <Compile Include="CreateLabWindow.xaml.cs">
+      <DependentUpon>CreateLabWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditPatientWindow.xaml.cs">
       <DependentUpon>EditPatientWindow.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
     <Compile Include="UserControls\ModuleButtonController.xaml.cs">
       <DependentUpon>ModuleButtonController.xaml</DependentUpon>
     </Compile>
+    <Page Include="CreateLabWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditPatientWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -215,6 +222,10 @@
     <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj">
       <Project>{2875082f-ddf5-44f0-974e-c39e87f98af4}</Project>
       <Name>BusinessLogicLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{EE66711E-2A29-48E3-B2E4-427A1EBF9D93}</Project>
+      <Name>DataAccessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entity\Entity.csproj">
       <Project>{756c0147-9f93-480f-abdb-92019d421600}</Project>

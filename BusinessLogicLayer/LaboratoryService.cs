@@ -12,6 +12,7 @@ namespace BusinessLogicLayer
     {
         private LaboratoryRepository LabRepository { get; set; }
         private LabsExamsRepository LabsExamsRepository { get; set; }
+        private ExamService ExamService { get; set; }
 
         ConnectionManager connectionManager;
 
@@ -20,6 +21,7 @@ namespace BusinessLogicLayer
             connectionManager = new ConnectionManager(connectionString);
             LabRepository = new LaboratoryRepository(connectionManager.Connection);
             LabsExamsRepository = new LabsExamsRepository(connectionManager.Connection);
+            ExamService = new ExamService(connectionManager);
         }
 
         public GenericResponse<Laboratory> GetAll()
@@ -45,6 +47,78 @@ namespace BusinessLogicLayer
                 return new GenericResponse<Laboratory>(labList);
         }
 
+        public GenericResponse<Laboratory> SearchLaboratory(Laboratory laboratory)
+        {
+            string message = "";
+            try
+            {
+                connectionManager.OpenDataBase();
+                // After saving the labs, needs to save the exams and then everything in labs_exams table
+                var lab = LabRepository.Search(laboratory);
+                if (lab != null)
+                {
+                    return new GenericResponse<Laboratory>(lab);
+                }
+                else
+                {
+                    message = "No se encontró el laboratorio";
+                }
+            }
+            catch (Exception e)
+            {
+                message = "Ocurrio un error: " + e.Message;
+            }
+            finally
+            {
+                connectionManager.CloseDataBase();
+            }
+            return new GenericResponse<Laboratory>(message);
+        }
+
+        public GenericResponse<Laboratory> SearchLaboratories(Patient patient)
+        {
+            string message = "";
+            try
+            {
+                connectionManager.OpenDataBase();
+                // After saving the labs, needs to save the exams and then everything in labs_exams table
+                var labs = LabRepository.GetAllLabsFromPatient(patient.Id);
+                if (labs != null && labs.Count > 0)
+                {
+                    foreach (var laboratory in labs)
+                    {
+                        var exams = LabsExamsRepository.GetAllExamsFromLab(laboratory.Id);
+                        if (exams != null)
+                        {
+                            foreach (Exam item in exams)
+                            {
+                                var examDB = ExamService.SearchExam(item);
+
+                                if (examDB.ObjectResponse != null)
+                                {
+                                    laboratory.Exams.Add(examDB.ObjectResponse);
+                                }
+                            }
+                        }
+                    }
+                    return new GenericResponse<Laboratory>(labs);
+                }
+                else
+                {
+                    message = "No se encontraron laboratorios para el paciente"; 
+                }
+            }
+            catch (Exception e)
+            {
+                message = "Ocurrio un error: " + e.Message;
+            }
+            finally
+            {
+                connectionManager.CloseDataBase();
+            }
+            return new GenericResponse<Laboratory>(message);
+        }
+
         public GenericResponse<Laboratory> SaveLaboratory(Laboratory lab)
         {
             string message = "";
@@ -57,12 +131,9 @@ namespace BusinessLogicLayer
                     message = LabRepository.Save(lab);
                     if (message != null)
                     {
-                        // Save exams using for loop
-                        // Save lab_exam row in labs_exams
-                        ExamService examService = new ExamService(connectionManager);
                         foreach (var exam in lab.Exams)
                         {
-                            var examResponse = examService.SaveExam(exam);
+                            var examResponse = ExamService.SaveExam(exam);
                             if (examResponse.ObjectResponse != null)
                             {
                                 LabsExamsRepository.SaveExamFromLaboratory(lab.Id, exam.Id);
@@ -95,42 +166,43 @@ namespace BusinessLogicLayer
         public GenericResponse<Laboratory> UpdateLaboratory(Laboratory lab)
         {
             string message = "Edición Exitosa";
-            if (lab != null)
+            try
             {
-                try
-                {
-                    connectionManager.OpenDataBase();
+                connectionManager.OpenDataBase();
+                if (LabRepository.Search(lab) != null)
                     message = LabRepository.Update(lab);
-                    if (message != null)
-                    {
-                        ExamService examService = new ExamService(connectionManager);
-                        foreach (var exam in lab.Exams)
+                else
+                {
+                    message = LabRepository.Save(lab);
+                    if (message != null) {
+                        var lastAddedLab = LabRepository.GetLastLaboratoryCreated();
+                        if (lastAddedLab != null)
                         {
-                            var examResponse = examService.UpdateExam(exam);
-                            if (examResponse.ObjectResponse != null)
-                            {
-                                //LabsExamsRepository.Update(lab.Id, exam.Id);
-                            }
+                            lab.Id = lastAddedLab.Id;
                         }
-                        message = "laboratorio Registrado correctamente";
                     }
-                    else
+                }
+                if (message != null)
+                {
+                    ExamService examService = new ExamService(connectionManager);
+                    foreach (var exam in lab.Exams)
                     {
-                        message = "No se pudo almacenar el laboratorio";
+                        var examResponse = LabsExamsRepository.SaveExamFromLaboratory(lab.Id, exam.Id);
                     }
+                    message = "Laboratorio Actualizado correctamente";
                 }
-                catch (Exception e)
+                else
                 {
-                    message = "Ocurrio un error: " + e.Message;
-                }
-                finally
-                {
-                    connectionManager.CloseDataBase();
+                    message = "No se pudo actualizar el laboratorio";
                 }
             }
-            else
+            catch (Exception e)
             {
-                message = "El laboratorio tiene valor NULL";
+                message = "Ocurrio un error: " + e.Message;
+            }
+            finally
+            {
+                connectionManager.CloseDataBase();
             }
             return new GenericResponse<Laboratory>(message);
         }

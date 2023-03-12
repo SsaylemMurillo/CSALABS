@@ -77,18 +77,22 @@ namespace DataAccessLayer
 
         public string SaveExamFromLaboratory(int laboratoryId, int examId)
         {
-            string message;
-            DbCommand command = new SqlCommand();
-            command.Connection = _connection;
-            command.CommandText = $"insert into labs_exams (id_lab, id_exam)" +
-                $"values (@labId, @examId);";
-            command.Parameters.Add(new SqlParameter("@labId", laboratoryId));
-            command.Parameters.Add(new SqlParameter("@examId", examId));
+            if (!SearchExamFromLaboratory(laboratoryId, examId))
+            {
+                string message;
+                DbCommand command = new SqlCommand();
+                command.Connection = _connection;
+                command.CommandText = $"insert into labs_exams (id_lab, id_exam)" +
+                    $"values (@labId, @examId);";
+                command.Parameters.Add(new SqlParameter("@labId", laboratoryId));
+                command.Parameters.Add(new SqlParameter("@examId", examId));
 
-            command.ExecuteNonQuery();
-            message = "Examen correctamente añadido";
+                command.ExecuteNonQuery();
+                message = "Examen correctamente añadido";
 
-            return message;
+                return message;
+            }
+            return "Examen ya existente";
         }
 
         public bool SearchExamFromLaboratory(int laboratoryId, int examId)
@@ -132,7 +136,7 @@ namespace DataAccessLayer
         {
             DbCommand command = new SqlCommand();
             command.Connection = _connection;
-            command.CommandText = $"select id_exam from labs_exam where id_lab = @id";
+            command.CommandText = $"select id_exam from labs_exams where id_lab = @id";
             command.Parameters.Add(new SqlParameter("@id", id));
             var reader = command.ExecuteReader();
 
