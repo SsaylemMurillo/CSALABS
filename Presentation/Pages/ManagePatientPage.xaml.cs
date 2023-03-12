@@ -139,7 +139,7 @@ namespace Presentation.Pages
             var myPatient = (Patient)patientsDataGrid.SelectedItem;     
             if (myPatient != null)
             {
-                new EditPatientWindow(this, MyPatientService, myPatient, patientsDataGrid.SelectedIndex).Show();
+                new EditPatientWindow(this, MyPatientService, myPatient, patientsDataGrid.SelectedIndex).ShowDialog();
             }
             else
             {

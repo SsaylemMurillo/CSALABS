@@ -21,37 +21,37 @@
                     <SolidColorBrush Color="White" Opacity="0.95"/>
                 </Border.Background>
 
-                <Grid Margin="10">
+                <Grid Margin="10" Width="auto">
                     <StackPanel VerticalAlignment="Top">
                         <Button x:Name="menuButton" Style="{StaticResource menuButton}" Click="menuButton_Click">
-                            <Image Source="Images/menub.png" Stretch="Uniform" Height="20" Opacity="0.5" />
+                            <Image Source="Images/menub.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" Height="20" Opacity="0.5" />
                         </Button>
                         <Separator Background="gray" Margin="20 0 20 10" Height="0.8"/>
                         <StackPanel x:Name="buttonsPanel">
                             <Button x:Name="searchButton" Style="{StaticResource menuButton}" Click="searchButton_Click">
-                                <Image Source="Images/searchb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                                <Image Source="Images/searchb.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" Height="20" Opacity="0.5"/>
                             </Button>
                             <Button x:Name="homeButton" Style="{StaticResource menuButton}" Click="homeButton_Click">
-                                <Image Source="Images/home.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                                <Image Source="Images/home.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" Height="20" Opacity="0.5"/>
                             </Button>
                             <Button x:Name="settingsButton" Style="{StaticResource menuButton}" Click="settingsButton_Click">
-                                <Image Source="Images/settingsb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                                <Image Source="Images/settingsb.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" Height="20" Opacity="0.5"/>
                             </Button>
                             <Button x:Name="activityButton" Style="{StaticResource menuButton}" Click="activityButton_Click">
-                                <Image Source="Images/activityb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                                <Image Source="Images/activityb.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" Height="20" Opacity="0.5"/>
                             </Button>
                             <Button x:Name="alertButton" Style="{StaticResource menuButton}" Click="alertButton_Click" >
-                                <Image Source="Images/alertb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                                <Image Source="Images/alertb.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" Height="20" Opacity="0.5"/>
                             </Button>
                             <Button x:Name="notificationButton" Style="{StaticResource menuButton}" Click="notificationButton_Click" >
-                                <Image Source="Images/bellb.png" Stretch="Uniform" Height="20" Opacity="0.5"/>
+                                <Image Source="Images/bellb.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" Height="20" Opacity="0.5"/>
                             </Button>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel VerticalAlignment="Bottom" Background="Transparent">
                         <Separator Background="Gray" Height="0.8" Margin="20 0 20 10"/>
                         <Button Style="{StaticResource userProfileButton}">
-                            <Image Source="Images/userw.png" Stretch="Uniform" Height="20"/>
+                            <Image Source="Images/user.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" Height="20"/>
                         </Button>
                     </StackPanel>
                 </Grid>
@@ -150,10 +150,10 @@
                     <TextBlock Width="auto"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1" Width="100">
                         <Button Style="{StaticResource windowButtonMinus}" Width="50" Height="35" Click="Button_Click">
-                            <Image Source="/Images/minusb.png" Margin="10 0 10 0" Style="{StaticResource imgClose}"/>
+                            <Image Source="/Images/minusb.png" Margin="10 0 10 0" RenderOptions.BitmapScalingMode="Fant" Style="{StaticResource imgClose}"/>
                         </Button>
                         <Button Style="{StaticResource windowButtonClose}" Width="50" Height="35" Click="Button_Click_1">
-                            <Image x:Name="xcloseImage" Source="/Images/close_b.png" Margin="10 0 10 0" Style="{StaticResource imgClose}"/>
+                            <Image x:Name="xcloseImage" Source="/Images/close_b.png" RenderOptions.BitmapScalingMode="Fant" Margin="10 0 10 0" Style="{StaticResource imgClose}"/>
                         </Button>
                     </StackPanel>
                 </Grid>
