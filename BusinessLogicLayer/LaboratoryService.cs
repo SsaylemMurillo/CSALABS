@@ -217,7 +217,19 @@ namespace BusinessLogicLayer
                 {
                     connectionManager.OpenDataBase();
                     // After deleting the laboratory needs to delete all exams of it, and labs_exams references.
-                    labDeleted = LabRepository.Delete(lab);
+                    var response = LabsExamsRepository.Delete(lab);
+                    if (response != null)
+                    {
+                        labDeleted = LabRepository.Delete(lab);
+                        if (labDeleted != null)
+                        {
+                            return new GenericResponse<Laboratory>(labDeleted);
+                        }
+                    }
+                    else
+                    {
+                        message = "No se pudo almacenar el laboratorio";
+                    }
                 }
                 catch (Exception e)
                 {

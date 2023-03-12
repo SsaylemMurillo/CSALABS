@@ -22,22 +22,15 @@ namespace DataAccessLayer
 
         public Laboratory Delete(Laboratory laboratory)
         {
-            if (Search(laboratory) != null)
-            {
-                DbCommand command = new SqlCommand();
-                command.Connection = _connection;
-                command.CommandText = $"delete from labs_exams where labs_exams.id_lab = @labId;";
-                command.Parameters.Add(new SqlParameter("@labId", laboratory.Id));
-                var value = command.ExecuteNonQuery();
-                if (value == 1)
-                    return laboratory;
-                else
-                    return null;
-            }
-            else
-            {
+            DbCommand command = new SqlCommand();
+            command.Connection = _connection;
+            command.CommandText = $"delete from labs_exams where labs_exams.id_lab = @labId;";
+            command.Parameters.Add(new SqlParameter("@labId", laboratory.Id));
+            var value = command.ExecuteNonQuery();
+            if (value == 1)
+                return laboratory;
+            else  
                 return null;
-            }
         }
 
         public List<Laboratory> GetAll()

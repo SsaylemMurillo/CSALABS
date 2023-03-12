@@ -173,6 +173,11 @@ namespace Presentation.Pages
                             MessageBox.Show("Laboratorio eliminado correctamente", "CSA LABS",
                             MessageBoxButton.OK, MessageBoxImage.Information);
                         }
+                        else
+                        {
+                            MessageBox.Show("Ocurrió un error inesperado " + response.Message, "CSA LABS",
+                                                           MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
                     }
                 }
                 else

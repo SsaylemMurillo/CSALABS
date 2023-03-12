@@ -135,17 +135,56 @@ namespace BusinessLogicLayer
             return new GenericResponse<Exam>(message);
         }
 
+        public GenericResponse<Exam> DeleteAllExamFromLaboratory(int id_laboratory)
+        {
+            List<Exam> exams = null;
+            string message = "";
+            try
+            {
+                if(!ConnectionManager.IsOpen)
+                    ConnectionManager.OpenDataBase();
+                var response = LabsExamRepository.GetAllExamsFromLab(id_laboratory);
+                exams = new List<Exam>();
+                if (response != null && response.Count > 0)
+                {
+                    foreach (var exam in response)
+                    {
+                        var examSearched = ExamRepository.Search(exam);
+                        if (examSearched != null)
+                            exams.Add(examSearched);
+                    }
+                }
+                else
+                {
+                    message = "No fue posible encontrar el laboratorio";
+                }
+            }
+            catch (Exception e)
+            {
+                message = "Ocurrio un error: " + e.Message;
+            }
+            finally
+            {
+                if(ConnectionManager.IsOpen)
+                    ConnectionManager.CloseDataBase();
+            }
+            if (exams == null)
+                return new GenericResponse<Exam>(message);
+            else
+                return new GenericResponse<Exam>(exams);
+        }
+
         public GenericResponse<Exam> DeleteExam(Exam exam)
         {
             string message = "Borrado Exitoso";
-            Exam patientDeleted;
+            Exam examDeleted;
             if (exam != null)
             {
                 try
                 {
                     ConnectionManager.OpenDataBase();
-                    patientDeleted = ExamRepository.Delete(exam);
-                    if (patientDeleted==null) {
+                    examDeleted = ExamRepository.Delete(exam);
+                    if (examDeleted == null) {
                         message = "El examen no existe";
                     } 
                 }
