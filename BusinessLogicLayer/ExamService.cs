@@ -34,7 +34,8 @@ namespace BusinessLogicLayer
             string message = "";
             try
             {
-                ConnectionManager.OpenDataBase();
+                if (!ConnectionManager.IsOpen)
+                    ConnectionManager.OpenDataBase();
                 examList = ExamRepository.GetAll();
             }
             catch (Exception e)
@@ -43,7 +44,8 @@ namespace BusinessLogicLayer
             }
             finally
             {
-                ConnectionManager.CloseDataBase();
+                if (ConnectionManager.IsOpen)
+                    ConnectionManager.CloseDataBase();
             }
             if (examList == null)
                 return new GenericResponse<Exam>(message);

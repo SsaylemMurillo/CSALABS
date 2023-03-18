@@ -64,6 +64,7 @@
     <Compile Include="CreateLabWindow.xaml.cs">
       <DependentUpon>CreateLabWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataConversor.cs" />
     <Compile Include="EditPatientWindow.xaml.cs">
       <DependentUpon>EditPatientWindow.xaml</DependentUpon>
     </Compile>

@@ -224,7 +224,7 @@
                                  Grid.Column="1"
                                  VerticalAlignment="Center"
                                  TextChanged="txtFilterSearch_TextChanged"
-                                 Style="{StaticResource textBox}"/>
+                                 Style="{StaticResource textBox}" CharacterCasing="Upper"/>
                                 </Grid>
                             </Border>
                             <Grid Margin="15" Grid.Row="1">
@@ -243,31 +243,31 @@
                                     <TextBlock Margin="0 10 0 0" Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                         Text="N° IDENTIFICACIÓN" Opacity="0.7"/>
                                     <TextBox Name="idFilterTextBox" Style="{StaticResource infoTextbox2}" Width="350" TextChanged="idFilterTextBox_TextChanged"
-                                             LostFocus="idFilterTextBox_LostFocus"/>
+                                             LostFocus="idFilterTextBox_LostFocus" CharacterCasing="Upper"/>
                                 </StackPanel>
                                 <StackPanel HorizontalAlignment="Left" Margin="5" Grid.Row="2">
                                     <TextBlock Margin="0 10 0 0" Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                         Text="TIPO ID" Opacity="0.7"/>
                                     <TextBox Name="idTypeFilterTextBox" Style="{StaticResource infoTextbox2}" Width="350" TextChanged="idTypeFilterTextBox_TextChanged"
-                                             LostFocus="idTypeFilterTextBox_LostFocus"/>
+                                             LostFocus="idTypeFilterTextBox_LostFocus" CharacterCasing="Upper"/>
                                 </StackPanel>
                                 <StackPanel HorizontalAlignment="Left" Margin="5" Grid.Row="3">
                                     <TextBlock Margin="0 10 0 0" Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                         Text="PRIMER NOMBRE" Opacity="0.7"/>
                                     <TextBox Name="firstNameFilterTextBox" Style="{StaticResource infoTextbox2}" Width="350" TextChanged="firstNameFilterTextBox_TextChanged"
-                                             LostFocus="firstNameFilterTextBox_LostFocus"/>
+                                             LostFocus="firstNameFilterTextBox_LostFocus" CharacterCasing="Upper"/>
                                 </StackPanel>
                                 <StackPanel HorizontalAlignment="Left" Margin="5" Grid.Row="4">
                                     <TextBlock Margin="0 10 0 0" Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                         Text="DIRECCIÓN DE RESIDENCIA" Opacity="0.7"/>
                                     <TextBox Name="addressFilterTextBox" Style="{StaticResource infoTextbox2}" Width="350" TextChanged="addressFilterTextBox_TextChanged"
-                                             LostFocus="addressFilterTextBox_LostFocus"/>
+                                             LostFocus="addressFilterTextBox_LostFocus" CharacterCasing="Upper"/>
                                 </StackPanel>
                                 <StackPanel HorizontalAlignment="Left" Margin="5" Grid.Row="5">
                                     <TextBlock Margin="0 10 0 0" Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                         Text="FECHA DE NACIMIENTO" Opacity="0.7"/>
                                     <TextBox Name="bornDateFilterTextBox" Style="{StaticResource infoTextbox2}" Width="350" TextChanged="bornDateFilterTextBox_TextChanged"
-                                             LostFocus="bornDateFilterTextBox_LostFocus"/>
+                                             LostFocus="bornDateFilterTextBox_LostFocus" CharacterCasing="Upper"/>
                                 </StackPanel>
                                 <Button Margin="10" Grid.Row="6" Content="Limpiar Filtros" Style="{StaticResource loginButton2}" Click="Button_Click"
                                         Width="240" Height="50"/>

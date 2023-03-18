@@ -98,32 +98,6 @@ namespace Presentation
 
         }
 
-        public string[] DateSeparator(string stringValue)
-        {
-            if (stringValue != null)
-            {
-                var strings = stringValue.Split('/');
-                return strings;
-            }
-            else
-            {
-                return null;
-            }
-
-        }
-        private string stringDateFormat(string stringValue)
-        {
-            string newString = "";
-            var stringArray = DateSeparator(stringValue);
-
-            if (stringArray.Length > 0)
-            {
-                newString = stringArray[1] + "/" + stringArray[0] + "/" + stringArray[2];
-            }
-            return newString;
-        }
-
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
@@ -169,20 +143,31 @@ namespace Presentation
         {
             // Delete Mode
             var value = MessageBox.Show("Estás Seguro de querer eliminar a este paciente?", "CSA LABS",
-                MessageBoxButton.OKCancel);
+                MessageBoxButton.YesNo);
 
-            if (value == MessageBoxResult.OK)
+            if (value == MessageBoxResult.Yes)
             {
-                // Create Patient Elimination Petition To the Database
-                // Use the service...
-                if (idTextBox.Text != null)
+                if (!string.IsNullOrEmpty(idTextBox.Text) && idTextBox.Text.Length > 0)
                 {
-                    Patient patient = new Patient();
-                    patient.Id = int.Parse(idTextBox.Text);
-                    var serviceResponse = MyService.DeletePatient(patient);
-                    MessageBox.Show(serviceResponse.Message, "CSA LABS", MessageBoxButton.OK);
-                    Page.LoadPatientDataGrid();
-                    Close();
+                    var idValue = DataConversor.ConvertStringToInt(idTextBox.Text);
+
+                    if (idValue != -1)
+                    {
+                        Patient patient = new Patient();
+
+                        patient.Id = idValue;
+                        var serviceResponse = MyService.DeletePatient(patient);
+                        MessageBox.Show(serviceResponse.Message, "CSA LABS", MessageBoxButton.OK);
+                        Page.LoadPatientDataGrid();
+                        Close();
+                    }
+                    else
+                    {
+                        if (idValue == -1)
+                        {
+                            MessageBox.Show("El id que intentas ingresar no es válido", "CSA LABS", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
                 }
             }
             else
@@ -193,26 +178,48 @@ namespace Presentation
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            // Create Patient Edition...
-            // Send it to the database
-
             if (ValidateFields())
             {
-                // Create Patient Elimination Petition To the Database
-                // Use the service...
                 if (MessageBox.Show("Estás Seguro de querer editar a este paciente?", "CSA LABS",
                 MessageBoxButton.OKCancel) == MessageBoxResult.OK)
                 {
                     try
                     {
-                        Patient patient = new Patient(int.Parse(idTextBox.Text), idTypeTextBox.Text, firstNameTextBox.Text,
-                            secondNameTextBox.Text, firstLastNameTextBox.Text, secondLastNameTextBox.Text,
-                            stringDateFormat(dateTextBox.Text), stringDateFormat(expeditionTextBox.Text), expeditionPlaceTextBox.Text, int.Parse(phoneTextBox.Text),
-                            addressTextBox.Text, nationalityTextBox.Text);
-                        var serviceResponse = MyService.UpdatePatient(patient);
-                        MessageBox.Show(serviceResponse.Message, "CSA LABS", MessageBoxButton.OK);
-                        Page.LoadPatientDataGrid();
-                        Close();
+                        var idValue = DataConversor.ConvertStringToInt(idTextBox.Text);
+                        var phoneValue = DataConversor.ConvertStringToInt(phoneTextBox.Text);
+                        var dateBornString = DataConversor.ConvertStringToDateFormat(dateTextBox.Text);
+                        var dateExpeditionString = DataConversor.ConvertStringToDateFormat(expeditionTextBox.Text);
+
+                        if (idValue != -1 && phoneValue != -1 && dateBornString != "" && dateExpeditionString != "")
+                        {
+                            Patient patient = new Patient(idValue, idTypeTextBox.Text, firstNameTextBox.Text,
+                                secondNameTextBox.Text, firstLastNameTextBox.Text, secondLastNameTextBox.Text,
+                                dateBornString, dateExpeditionString, expeditionPlaceTextBox.Text, phoneValue,
+                                addressTextBox.Text, nationalityTextBox.Text);
+                            var serviceResponse = MyService.UpdatePatient(patient);
+                            MessageBox.Show(serviceResponse.Message, "CSA LABS", MessageBoxButton.OK);
+                            Page.LoadPatientDataGrid();
+                            Close();
+                        }
+                        else
+                        {
+                            if (idValue == -1)
+                            {
+                                MessageBox.Show("El id que intentas ingresar no es válido", "CSA LABS", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            else if (phoneValue == -1)
+                            {
+                                MessageBox.Show("El telefono que intentas ingresar no es válido", "CSA LABS", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            else if (dateBornString == "")
+                            {
+                                MessageBox.Show("La fecha de nacimiento que intentas ingresar no es válida", "CSA LABS", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            else if (dateExpeditionString == "")
+                            {
+                                MessageBox.Show("La fecha de expedición que intentas ingresar no es válida", "CSA LABS", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        }
                     }
                     catch (Exception)
                     {

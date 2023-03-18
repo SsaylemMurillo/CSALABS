@@ -13,16 +13,24 @@ namespace BusinessLogicLayer
         private LaboratoryRepository LabRepository { get; set; }
         private LabsExamsRepository LabsExamsRepository { get; set; }
         private ExamService ExamService { get; set; }
-
-        ConnectionManager connectionManager;
+        private ConnectionManager ConnectionManager { get; set; }
 
         public LaboratoryService(string connectionString)
         {
-            connectionManager = new ConnectionManager(connectionString);
-            LabRepository = new LaboratoryRepository(connectionManager.Connection);
-            LabsExamsRepository = new LabsExamsRepository(connectionManager.Connection);
-            ExamService = new ExamService(connectionManager);
+            ConnectionManager = new ConnectionManager(connectionString);
+            LabRepository = new LaboratoryRepository(ConnectionManager.Connection);
+            LabsExamsRepository = new LabsExamsRepository(ConnectionManager.Connection);
+            ExamService = new ExamService(ConnectionManager);
         }
+
+        public LaboratoryService(ConnectionManager connectionManager)
+        {
+            ConnectionManager = connectionManager;
+            LabRepository = new LaboratoryRepository(ConnectionManager.Connection);
+            LabsExamsRepository = new LabsExamsRepository(ConnectionManager.Connection);
+            ExamService = new ExamService(ConnectionManager);
+        }
+
 
         public GenericResponse<Laboratory> GetAll()
         {
@@ -30,7 +38,8 @@ namespace BusinessLogicLayer
             string message = "Lista de Laboratorios Vacía";
             try
             {
-                connectionManager.OpenDataBase();
+                if (!ConnectionManager.IsOpen)
+                    ConnectionManager.OpenDataBase();
                 labList = LabRepository.GetAll();
             }
             catch (Exception e)
@@ -39,7 +48,8 @@ namespace BusinessLogicLayer
             }
             finally
             {
-                connectionManager.CloseDataBase();
+                if (ConnectionManager.IsOpen)
+                    ConnectionManager.CloseDataBase();
             }
             if (labList == null)
                 return new GenericResponse<Laboratory>(message);
@@ -52,7 +62,8 @@ namespace BusinessLogicLayer
             string message = "";
             try
             {
-                connectionManager.OpenDataBase();
+                if (!ConnectionManager.IsOpen)
+                    ConnectionManager.OpenDataBase();
                 // After saving the labs, needs to save the exams and then everything in labs_exams table
                 var lab = LabRepository.Search(laboratory);
                 if (lab != null)
@@ -70,7 +81,8 @@ namespace BusinessLogicLayer
             }
             finally
             {
-                connectionManager.CloseDataBase();
+                if (ConnectionManager.IsOpen)
+                    ConnectionManager.CloseDataBase();
             }
             return new GenericResponse<Laboratory>(message);
         }
@@ -80,7 +92,8 @@ namespace BusinessLogicLayer
             string message = "";
             try
             {
-                connectionManager.OpenDataBase();
+                if (!ConnectionManager.IsOpen)
+                    ConnectionManager.OpenDataBase();
                 // After saving the labs, needs to save the exams and then everything in labs_exams table
                 var labs = LabRepository.GetAllLabsFromPatient(patient.Id);
                 if (labs != null && labs.Count > 0)
@@ -113,8 +126,9 @@ namespace BusinessLogicLayer
                 message = "Ocurrio un error: " + e.Message;
             }
             finally
-            {
-                connectionManager.CloseDataBase();
+            {   
+                if (ConnectionManager.IsOpen)
+                    ConnectionManager.CloseDataBase();
             }
             return new GenericResponse<Laboratory>(message);
         }
@@ -126,7 +140,8 @@ namespace BusinessLogicLayer
             {
                 try
                 {
-                    connectionManager.OpenDataBase();
+                    if (!ConnectionManager.IsOpen)
+                        ConnectionManager.OpenDataBase();
                     // After saving the labs, needs to save the exams and then everything in labs_exams table
                     message = LabRepository.Save(lab);
                     if (message != null)
@@ -153,7 +168,8 @@ namespace BusinessLogicLayer
                 }
                 finally
                 {
-                    connectionManager.CloseDataBase();
+                    if (ConnectionManager.IsOpen)
+                        ConnectionManager.CloseDataBase();
                 }
             }
             else
@@ -168,7 +184,8 @@ namespace BusinessLogicLayer
             string message = "Edición Exitosa";
             try
             {
-                connectionManager.OpenDataBase();
+                if (!ConnectionManager.IsOpen)
+                    ConnectionManager.OpenDataBase();
                 if (LabRepository.Search(lab) != null)
                     message = LabRepository.Update(lab);
                 else
@@ -184,7 +201,7 @@ namespace BusinessLogicLayer
                 }
                 if (message != null)
                 {
-                    ExamService examService = new ExamService(connectionManager);
+                    ExamService examService = new ExamService(ConnectionManager);
                     foreach (var exam in lab.Exams)
                     {
                         var examResponse = LabsExamsRepository.SaveExamFromLaboratory(lab.Id, exam.Id);
@@ -202,7 +219,50 @@ namespace BusinessLogicLayer
             }
             finally
             {
-                connectionManager.CloseDataBase();
+                if (ConnectionManager.IsOpen)
+                    ConnectionManager.CloseDataBase();
+            }
+            return new GenericResponse<Laboratory>(message);
+        }
+
+        public GenericResponse<Laboratory> DeleteAllLaboratoryOfPatient(Patient patient)
+        {
+            string message = "Borrado Exitoso";
+            if (patient != null)
+            {
+                try
+                {
+                    if (!ConnectionManager.IsOpen)
+                        ConnectionManager.OpenDataBase();
+                    // After deleting the laboratory needs to delete all exams of it, and labs_exams references.
+                    var labs = LabRepository.GetAllLabsFromPatient(patient.Id);
+                    if (labs != null)
+                    {
+                        foreach (var item in labs)
+                        {
+                            LabsExamsRepository.Delete(item);
+                        }
+                        LabRepository.DeleteAllLabsFromAPatient(patient);
+                        return new GenericResponse<Laboratory>(labs);
+                    }
+                    else
+                    {
+                        message = "No se pudo borrar el laboratorio";
+                    }
+                }
+                catch (Exception e)
+                {
+                    message = "Ocurrio un error: " + e.Message;
+                }
+                finally
+                {
+                    if (ConnectionManager.IsOpen)
+                        ConnectionManager.CloseDataBase();
+                }
+            }
+            else
+            {
+                message = "El laboratorio tiene valor NULL";
             }
             return new GenericResponse<Laboratory>(message);
         }
@@ -215,7 +275,8 @@ namespace BusinessLogicLayer
             {
                 try
                 {
-                    connectionManager.OpenDataBase();
+                    if (!ConnectionManager.IsOpen)
+                        ConnectionManager.OpenDataBase();
                     // After deleting the laboratory needs to delete all exams of it, and labs_exams references.
                     var response = LabsExamsRepository.Delete(lab);
                     if (response != null)
@@ -237,7 +298,45 @@ namespace BusinessLogicLayer
                 }
                 finally
                 {
-                    connectionManager.CloseDataBase();
+                    if (ConnectionManager.IsOpen)
+                        ConnectionManager.CloseDataBase();
+                }
+            }
+            else
+            {
+                message = "El laboratorio tiene valor NULL";
+            }
+            return new GenericResponse<Laboratory>(message);
+        }
+
+        public GenericResponse<Laboratory> DeleteExamsFromLaboratory(Laboratory laboratory, Exam exam)
+        {
+            string message = "Borrado Exitoso";
+            if (laboratory != null && exam != null)
+            {
+                try
+                {
+                    if (!ConnectionManager.IsOpen)
+                        ConnectionManager.OpenDataBase();
+                    // After deleting the laboratory needs to delete all exams of it, and labs_exams references.
+                    var response = LabsExamsRepository.DeleteExamFromLaboratory(laboratory.Id, exam.Id);
+                    if (response != null)
+                    {
+                        return new GenericResponse<Laboratory>(message);
+                    }
+                    else
+                    {
+                        message = "No se pudo almacenar el laboratorio";
+                    }
+                }
+                catch (Exception e)
+                {
+                    message = "Ocurrio un error: " + e.Message;
+                }
+                finally
+                {
+                    if (ConnectionManager.IsOpen)
+                        ConnectionManager.CloseDataBase();
                 }
             }
             else

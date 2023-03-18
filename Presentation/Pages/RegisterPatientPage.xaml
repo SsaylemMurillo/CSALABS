@@ -61,62 +61,62 @@
                     <StackPanel HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0">
                         <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                 Text="Primer Nombre" Opacity="0.7"/>
-                        <TextBox Name="firstNameTextBox" Style="{StaticResource infoTextbox2}"/>
+                        <TextBox Name="firstNameTextBox" Style="{StaticResource infoTextbox2}" CharacterCasing="Upper"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0">
                         <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                 Text="Primer Apellido" Opacity="0.7"/>
-                        <TextBox Name="firstLastNameTextBox" Style="{StaticResource infoTextbox2}"/>
+                        <TextBox Name="firstLastNameTextBox" Style="{StaticResource infoTextbox2}" CharacterCasing="Upper"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1">
                         <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                 Text="Segundo Nombre" Opacity="0.7"/>
-                        <TextBox Name="secondNameTextBox" Style="{StaticResource infoTextbox2}"/>
+                        <TextBox Name="secondNameTextBox" Style="{StaticResource infoTextbox2}" CharacterCasing="Upper"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1">
                         <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                 Text="Segundo Apellido" Opacity="0.7"/>
-                        <TextBox Name="secondLastNameTextBox" Style="{StaticResource infoTextbox2}"/>
+                        <TextBox Name="secondLastNameTextBox" Style="{StaticResource infoTextbox2}" CharacterCasing="Upper"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0">
                         <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                 Text="Documento de Identidad" Opacity="0.7"/>
-                        <TextBox Name="idTextBox" Style="{StaticResource infoTextbox2}"/>
+                        <TextBox Name="idTextBox" Style="{StaticResource infoTextbox2}" CharacterCasing="Upper"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1">
                         <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                 Text="Tipo Id" Opacity="0.7"/>
-                        <TextBox Name="idTypeTextBox" Style="{StaticResource infoTextbox2}"/>
+                        <TextBox Name="idTypeTextBox" Style="{StaticResource infoTextbox2}" CharacterCasing="Upper"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0">
                         <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                 Text="Fecha de Expedición" Opacity="0.7"/>
-                        <TextBox Name="expeditionTextBox" Style="{StaticResource infoTextbox2}"/>
+                        <TextBox Name="expeditionTextBox" Style="{StaticResource infoTextbox2}" CharacterCasing="Upper"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1">
                         <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                 Text="Lugar de Expedición" Opacity="0.7"/>
-                        <TextBox Name="placeExpeditionTextBox" Style="{StaticResource infoTextbox2}"/>
+                        <TextBox Name="placeExpeditionTextBox" Style="{StaticResource infoTextbox2}" CharacterCasing="Upper"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Left" Grid.Row="4" Grid.Column="0">
                         <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                 Text="Dirección de Residencia" Opacity="0.7"/>
-                        <TextBox Name="addressTextBox" Style="{StaticResource infoTextbox2}"/>
+                        <TextBox Name="addressTextBox" Style="{StaticResource infoTextbox2}" CharacterCasing="Upper"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1">
                         <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                 Text="Teléfono" Opacity="0.7"/>
-                        <TextBox Name="phoneTextBox" Style="{StaticResource infoTextbox2}"/>
+                        <TextBox Name="phoneTextBox" Style="{StaticResource infoTextbox2}" CharacterCasing="Upper"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Left" Grid.Row="5" Grid.Column="0">
                         <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                 Text="Nacionalidad" Opacity="0.7"/>
-                        <TextBox Name="nationalityTextBox" Style="{StaticResource infoTextbox2}"/>
+                        <TextBox Name="nationalityTextBox" Style="{StaticResource infoTextbox2}" CharacterCasing="Upper"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1">
                         <TextBlock  Foreground="Black" FontFamily="Lexend" FontWeight="Bold" IsHitTestVisible="False"
                                 Text="Fecha de Nacimiento" Opacity="0.7"/>
-                        <TextBox Name="dateTextBox" Style="{StaticResource infoTextbox2}"/>
+                        <TextBox Name="dateTextBox" Style="{StaticResource infoTextbox2}" CharacterCasing="Upper"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>

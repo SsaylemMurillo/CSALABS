@@ -114,19 +114,29 @@ namespace Presentation
                 if (!string.IsNullOrEmpty(addExamTextBox.Text) && addExamTextBox.Text.Length > 0)
                 {
                     // Search exam in database
-                    var response = MyExamService.SearchExam(new Exam(int.Parse(addExamTextBox.Text)));
-                    if (response.ObjectResponse != null)
+                    var idValue = DataConversor.ConvertStringToInt(addExamTextBox.Text);
+                    if (idValue != -1)
                     {
-                        // Add exam to a lab
-                        MyLaboratory.Exams.Add(response.ObjectResponse);
-                        UnSavedLoadExamsTable();
+                        var response = MyExamService.SearchExam(new Exam(idValue));
+                        if (response.ObjectResponse != null)
+                        {
+                            // Add exam to a lab
+                            MyLaboratory.Exams.Add(response.ObjectResponse);
+
+                            UnSavedLoadExamsTable();
+                        }
+                        else
+                        {
+                            MessageBox.Show("El ID de examen ingresado no es reconocible", "CSA LABS",
+                            MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                        addExamTextBox.Text = "";
                     }
                     else
                     {
-                        MessageBox.Show("El ID de examen ingresado no es reconocible", "CSA LABS",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("El ID de examen ingresado no está en formato correcto", "CSA LABS",
+                            MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    addExamTextBox.Text = "";
                 }
                 else
                 {
@@ -155,6 +165,34 @@ namespace Presentation
                     MessageBox.Show("El Campo de lugar laboratorio no puede estar vacío", "CSA LABS",
                         MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
+            }
+        }
+
+        private void trashButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            // Edition Window: Pencil On Right Side Bar
+            var myExam = (Exam)examsDataGrid.SelectedItem;
+            if (myExam != null)
+            {
+                var message = MessageBox.Show("¿Estás seguro de querer eliminar este examen?", "CSA LABS",
+                        MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (message == MessageBoxResult.Yes)
+                {
+                    var response = MyLabService.DeleteExamsFromLaboratory(MyLaboratory, myExam);
+                    MessageBox.Show(response.Message, "CSA LABS",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("El Campo de lugar laboratorio no puede estar vacío", "CSA LABS",
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debes seleccionar un paciente del registro para poder editar", "CSA LABS",
+                    MessageBoxButton.OK);
             }
         }
     }

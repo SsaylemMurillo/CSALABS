@@ -81,38 +81,51 @@ namespace Presentation.Pages
             {
                 // Call to the lab - Patient services...
                 Patient patient = new Patient();
-                patient.Id = int.Parse(idPatientTextBox.Text);
-                var response = MyPatientService.SearchPatient(patient);
-                if (response.ObjectResponse != null)
+                var idValue = DataConversor.ConvertStringToInt(idPatientTextBox.Text);
+                
+                if(idValue != -1)
                 {
-                    var response2 = MyLabService.SearchLaboratories(patient);
-                    if (response2.DataList !=null) {
-                        LoadLaboratoryDataGrid(response2.DataList);
-                        ModifyInterface();
+                    patient.Id = idValue;
+                    var response = MyPatientService.SearchPatient(patient);
+                    if (response.ObjectResponse != null)
+                    {
+                        var response2 = MyLabService.SearchLaboratories(patient);
+                        if (response2.DataList != null)
+                        {
+                            LoadLaboratoryDataGrid(response2.DataList);
+                            ModifyInterface();
+                        }
+                        else
+                        {
+                            var message = MessageBox.Show("El paciente no tiene laboratorios, ¿ Desea crear nuevo laboratorio?",
+                            "CSA LABS",
+                            MessageBoxButton.YesNo, MessageBoxImage.Information);
+                            if (message == MessageBoxResult.Yes)
+                            {
+                                new CreateLabWindow(this, MyLabService, new Laboratory()
+                                {
+                                    Patient = patient,
+                                },
+                                labsDataGrid.SelectedIndex).ShowDialog();
+                            }
+                        }
                     }
                     else
                     {
-                        var message = MessageBox.Show("El paciente no tiene laboratorios, ¿ Desea crear nuevo laboratorio?",
+                        var message = MessageBox.Show("El id paciente NO existe, ¿ Desea crear un nuevo paciente ?",
                         "CSA LABS",
                         MessageBoxButton.YesNo, MessageBoxImage.Information);
                         if (message == MessageBoxResult.Yes)
                         {
-                            new CreateLabWindow(this, MyLabService, new Laboratory()
-                            {
-                                Patient = patient,
-                            }, 
-                            labsDataGrid.SelectedIndex).ShowDialog();
+                            MainFrame.NavigationService.Navigate(new RegisterPatientPage(MainFrame, this));
                         }
                     }
                 }
                 else
                 {
-                    var message = MessageBox.Show("El id paciente NO existe, ¿ Desea crear un nuevo paciente ?",
-                    "CSA LABS",
-                    MessageBoxButton.YesNo, MessageBoxImage.Information);
-                    if (message == MessageBoxResult.Yes)
+                    if (idValue == -1)
                     {
-                        MainFrame.NavigationService.Navigate(new RegisterPatientPage(MainFrame, this));
+                        MessageBox.Show("El id que intentas ingresar no es válido", "CSA LABS", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
@@ -127,9 +140,9 @@ namespace Presentation.Pages
         private void ModifyInterface()
         {
             // If the above action was ok... succesfull... unlock buttons
-            descriptionLABPAGETextBlock.Visibility = Visibility.Collapsed;
-            //saveLabButton.Visibility = Visibility.Visible;
-            //cancelLabButton.Visibility = Visibility.Visible;
+            // descriptionLABPAGETextBlock.Visibility = Visibility.Collapsed;
+            // saveLabButton.Visibility = Visibility.Visible;
+            // cancelLabButton.Visibility = Visibility.Visible;
         }
 
         private void pencilButton_Click(object sender, RoutedEventArgs e)

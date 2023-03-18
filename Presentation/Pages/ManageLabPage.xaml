@@ -34,7 +34,7 @@
                             </Button>
                             <TextBlock Text="N° de Identificación " FontSize="15" Margin="10 0 0 0" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
                                    VerticalAlignment="Center"/>
-                            <TextBox Name="idPatientTextBox" Padding="8" Height="35" Style="{StaticResource infoTextbox2}" Width="300"/>
+                            <TextBox Name="idPatientTextBox" Padding="8" Height="35" Style="{StaticResource infoTextbox2}" Width="300" CharacterCasing="Upper"/>
                             <Button x:Name="chargeIdButton" Content="Cargar" Margin="10 0 10 0" Width="130" Padding="0" Height="45" FontSize="10" Style="{StaticResource actionButton1}" Click="Button_Click"/>
                             <!--
                                 <StackPanel Orientation="Horizontal" Margin="20 0 0 0">

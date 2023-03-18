@@ -39,6 +39,59 @@ namespace DataAccessLayer
             }
         }
 
+        public List<Laboratory> SearchAllLabsFromAPatient(Patient patient)
+        {
+            if (patient != null)
+            {
+                DbCommand command = new SqlCommand();
+                command.Connection = _connection;
+                command.CommandText = $"select * from laboratory where laboratory.id_patient = @patientId;";
+                command.Parameters.Add(new SqlParameter("@patientId", patient.Id));
+                var reader = command.ExecuteReader();
+
+                List<Laboratory> labs = new List<Laboratory>();
+
+                while (reader.Read())
+                {
+                    int labId = reader.GetInt32(0);
+                    int labPatientId = reader.GetInt32(1);
+                    string labResult = reader.GetString(2);
+                    DateTime labDateTime = reader.GetDateTime(3);
+                    var labDate = "" + labDateTime.Month + "/" + labDateTime.Day + "/" + labDateTime.Year;
+                    string labPlace = reader.GetString(4);
+
+                    labs.Add(new Laboratory(labId, labPatientId, labResult, labDate, labPlace));
+                }
+
+                reader.Close();
+                return labs;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public Patient DeleteAllLabsFromAPatient(Patient patient)
+        {
+            if (patient != null)
+            {
+                DbCommand command = new SqlCommand();
+                command.Connection = _connection;
+                command.CommandText = $"delete from laboratory where laboratory.id_patient = @patientId;";
+                command.Parameters.Add(new SqlParameter("@patientId", patient.Id));
+                var value = command.ExecuteNonQuery();
+                if (value == 1)
+                    return patient;
+                else
+                    return null;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public List<Laboratory> GetAll()
         {
             DbCommand command = new SqlCommand();

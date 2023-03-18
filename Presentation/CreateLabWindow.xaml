@@ -75,10 +75,10 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="Lugar del Laboratorio" FontSize="15" Margin="0 0 0 0" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
                                    VerticalAlignment="Center"/>
-                        <TextBox Grid.Column="1" Name="labPlaceTextBox" Margin="20 0 0 0" Padding="8" Height="35" Style="{StaticResource infoTextbox2}" Width="300"/>
+                        <TextBox Grid.Column="1" Name="labPlaceTextBox" Margin="20 0 0 0" Padding="8" Height="35" Style="{StaticResource infoTextbox2}" Width="300" CharacterCasing="Upper"/>
                         <TextBlock Grid.Column="2" Text="Agregar codigo examen " FontSize="15" Margin="20 0 0 0" FontWeight="Bold" FontFamily="Lexend" Opacity="0.8"
                                    VerticalAlignment="Center"/>
-                        <TextBox Grid.Column="3" Name="addExamTextBox" Margin="20 0 0 0" Padding="8" Height="35" Style="{StaticResource infoTextbox2}" Width="300" KeyDown="addExamTextBox_KeyDown"/>
+                        <TextBox Grid.Column="3" Name="addExamTextBox" Margin="20 0 0 0" Padding="8" Height="35" Style="{StaticResource infoTextbox2}" Width="300" KeyDown="addExamTextBox_KeyDown" CharacterCasing="Upper"/>
 
                         <Grid Grid.Column="4" Margin="10 0 0 0" HorizontalAlignment="Right">
                             <Grid.ColumnDefinitions>
@@ -86,10 +86,10 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Button x:Name="filterButton" Margin="0 0 10 0" Style="{StaticResource userProfileButton}" HorizontalAlignment="Left">
+                            <Button x:Name="trashButton" Margin="0 0 10 0" Style="{StaticResource userProfileButton}" HorizontalAlignment="Left" Click="trashButton_Click">
                                 <Image Source="/Images/trash.png" Stretch="Uniform" Height="20" RenderOptions.BitmapScalingMode="Fant"/>
                             </Button>
-                            <Button Grid.Column="1" x:Name="deleteButton" Margin="10 0 10 0" Style="{StaticResource userProfileButton}" HorizontalAlignment="Left">
+                            <Button x:Name="viewElementButton" Grid.Column="1" Margin="10 0 10 0" Style="{StaticResource userProfileButton}" HorizontalAlignment="Left">
                                 <Image Source="/Images/eye.png" Stretch="Uniform" Height="20" RenderOptions.BitmapScalingMode="Fant"/>
                             </Button>
                         </Grid>

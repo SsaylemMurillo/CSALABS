@@ -10,13 +10,15 @@ namespace BusinessLogicLayer
 {
     public class PatientService
     {
-        private PatientRepository patientRepository { get; set; }
+        private PatientRepository PatientRepository { get; set; }
+        private LaboratoryService LabService { get; set; }
         ConnectionManager connectionManager;
 
         public PatientService(string connectionString)
         {
             connectionManager = new ConnectionManager(connectionString);
-            patientRepository = new PatientRepository(connectionManager.Connection);
+            LabService = new LaboratoryService(connectionString);
+            PatientRepository = new PatientRepository(connectionManager.Connection);
         }
 
         public GenericResponse<Patient> SearchPatient(Patient patient)
@@ -27,7 +29,7 @@ namespace BusinessLogicLayer
             {
                 connectionManager.OpenDataBase();
                 if (patient != null)
-                    patientSearched = patientRepository.Search(patient);
+                    patientSearched = PatientRepository.Search(patient);
                 else
                     message = "Paciente VALOR NULL";
             }
@@ -52,7 +54,7 @@ namespace BusinessLogicLayer
             try
             {
                 connectionManager.OpenDataBase();
-                patientList = patientRepository.GetAll();
+                patientList = PatientRepository.GetAll();
             }
             catch (Exception e)
             {
@@ -76,7 +78,7 @@ namespace BusinessLogicLayer
                 try
                 {
                     connectionManager.OpenDataBase();
-                    message = patientRepository.Save(patient);
+                    message = PatientRepository.Save(patient);
                 }
                 catch (Exception e)
                 {
@@ -102,7 +104,7 @@ namespace BusinessLogicLayer
                 try
                 {
                     connectionManager.OpenDataBase();
-                    patientRepository.Update(patient);
+                    PatientRepository.Update(patient);
                 }
                 catch (Exception e)
                 {
@@ -122,14 +124,32 @@ namespace BusinessLogicLayer
 
         public GenericResponse<Patient> DeletePatient(Patient patient)
         {
-            string message = "Borrado Exitoso";
+            var message = "";
             Patient patientDeleted;
             if (patient != null)
             {
                 try
                 {
                     connectionManager.OpenDataBase();
-                    patientDeleted = patientRepository.Delete(patient);
+                    var response = LabService.DeleteAllLaboratoryOfPatient(patient);
+                    if (response != null)
+                    {
+                        var response2 = PatientRepository.Delete(patient);
+                        if (response2 != null)
+                        {
+                            message = "Se borro el paciente y sus laboratorios";
+                        }
+                        else
+                        {
+                            message = "No se pudo borrar el paciente";
+                        }
+                    }
+                    else
+                    {
+                        message = "No se pudo almacenar el laboratorio";
+                    }
+
+                    patientDeleted = PatientRepository.Delete(patient);
                 }
                 catch (Exception e)
                 {
@@ -154,7 +174,7 @@ namespace BusinessLogicLayer
             try
             {
                 connectionManager.OpenDataBase();
-                var patients = patientRepository.GetAll();
+                var patients = PatientRepository.GetAll();
                 patientsListFilter = patients.Where(patient => patient.Id.ToString().Contains(id)).ToList();
             }
             catch (Exception e)
@@ -178,7 +198,7 @@ namespace BusinessLogicLayer
             try
             {
                 connectionManager.OpenDataBase();
-                var patients = patientRepository.GetAll();
+                var patients = PatientRepository.GetAll();
                 patientsListFilter = patients.Where(patient => patient.IdType.ToString().Contains(idType)).ToList();
             }
             catch (Exception e)
@@ -202,7 +222,7 @@ namespace BusinessLogicLayer
             try
             {
                 connectionManager.OpenDataBase();
-                var patients = patientRepository.GetAll();
+                var patients = PatientRepository.GetAll();
                 patientsListFilter = patients.Where(patient => patient.FirstName.ToString().Contains(firstName)).ToList();
             }
             catch (Exception e)
@@ -226,7 +246,7 @@ namespace BusinessLogicLayer
             try
             {
                 connectionManager.OpenDataBase();
-                var patients = patientRepository.GetAll();
+                var patients = PatientRepository.GetAll();
                 patientsListFilter = patients.Where(patient => patient.Address.ToString().Contains(address)).ToList();
             }
             catch (Exception e)
@@ -250,7 +270,7 @@ namespace BusinessLogicLayer
             try
             {
                 connectionManager.OpenDataBase();
-                var patients = patientRepository.GetAll();
+                var patients = PatientRepository.GetAll();
                 patientsListFilter = patients.Where(patient => patient.BornDate.ToString().Contains(bornDate)).ToList();
             }
             catch (Exception e)

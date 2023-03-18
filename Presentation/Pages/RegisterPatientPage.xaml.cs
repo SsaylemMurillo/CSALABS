@@ -47,20 +47,6 @@ namespace Presentation.Pages
                 " it to make a type specimen book.\r\n";
         }
 
-        public string[] DateSeparator(string stringValue)
-        {
-            if (stringValue != null)
-            {
-                var strings = stringValue.Split('/');
-                return strings;
-            }
-            else
-            {
-                return null;
-            }
-
-        }
-
         private void FillTextBoxesList()
         {
             registerTextBoxes.Add(firstNameTextBox);
@@ -90,33 +76,47 @@ namespace Presentation.Pages
             CleanFields();
         }
 
-        private string stringDateFormat(string stringValue)
-        {
-            string newString = "";
-            var stringArray = DateSeparator(stringValue);
-
-            if (stringArray.Length > 0)
-            {
-                newString = stringArray[1] + "/" + stringArray[0] + "/" + stringArray[2];
-            }return newString;
-        }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            // Create Patient
             if (ValidateFields())
             {
-                // Patient Object Creation...
                 try
                 {
-                    Patient patient = new Patient(int.Parse(idTextBox.Text), idTypeTextBox.Text, firstNameTextBox.Text,
-                    secondNameTextBox.Text, firstLastNameTextBox.Text, secondLastNameTextBox.Text,
-                    stringDateFormat(dateTextBox.Text), stringDateFormat(expeditionTextBox.Text), placeExpeditionTextBox.Text, int.Parse(phoneTextBox.Text),
-                    addressTextBox.Text, nationalityTextBox.Text);
+                    var idValue = DataConversor.ConvertStringToInt(idTextBox.Text);
+                    var phoneValue = DataConversor.ConvertStringToInt(phoneTextBox.Text);
+                    var dateBornString = DataConversor.ConvertStringToDateFormat(dateTextBox.Text);
+                    var dateExpeditionString = DataConversor.ConvertStringToDateFormat(expeditionTextBox.Text);
 
-                    string message = MyPatientService.SavePatient(patient).Message;
-                    MessageBox.Show(message, "CSA LABS");
-                    CleanFields();
+                    if (idValue != -1 && phoneValue != -1 && dateBornString != "" && dateExpeditionString != "")
+                    {
+                        Patient patient = new Patient(idValue, idTypeTextBox.Text, firstNameTextBox.Text,
+                        secondNameTextBox.Text, firstLastNameTextBox.Text, secondLastNameTextBox.Text,
+                        dateBornString, dateExpeditionString, placeExpeditionTextBox.Text, phoneValue,
+                        addressTextBox.Text, nationalityTextBox.Text);
+
+                        string message = MyPatientService.SavePatient(patient).Message;
+                        MessageBox.Show(message, "CSA LABS");
+                        CleanFields();
+                    }
+                    else
+                    {
+                        if (idValue == -1)
+                        {
+                            MessageBox.Show("El id que intentas ingresar no es válido", "CSA LABS", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else if (phoneValue == -1)
+                        {
+                            MessageBox.Show("El telefono que intentas ingresar no es válido", "CSA LABS", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else if (dateBornString == "")
+                        {
+                            MessageBox.Show("La fecha de nacimiento que intentas ingresar no es válida", "CSA LABS", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else if (dateExpeditionString == "")
+                        {
+                            MessageBox.Show("La fecha de expedición que intentas ingresar no es válida", "CSA LABS", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
                 }
                 catch (Exception exception)
                 {
