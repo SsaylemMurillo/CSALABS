@@ -25,8 +25,7 @@ namespace Presentation.UserControls
         public string moduleName { get; set; }
         public Page moduleDirection { get; set; }
         public string buttonColor { get; set; }
-        public string buttonColorVariation { get; set; }
-        public string buttonImageContent { get; set; }
+        public string buttonColorVariation { get; set; }        public string buttonImageContent { get; set; }
 
         public ModuleButtonController(Frame mainFrame, Page pageDirection, string moduleName, string buttonColor, string buttonColorVariation, string buttonImageContent)
         {

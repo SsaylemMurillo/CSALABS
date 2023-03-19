@@ -100,6 +100,8 @@ namespace BusinessLogicLayer
                 {
                     foreach (var laboratory in labs)
                     {
+                        if (!ConnectionManager.IsOpen)
+                            ConnectionManager.OpenDataBase();
                         var exams = LabsExamsRepository.GetAllExamsFromLab(laboratory.Id);
                         if (exams != null)
                         {

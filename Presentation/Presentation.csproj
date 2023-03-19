@@ -61,6 +61,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConnectionStringExtractor.cs" />
+    <Compile Include="CreateExamWindow.xaml.cs">
+      <DependentUpon>CreateExamWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateLabWindow.xaml.cs">
       <DependentUpon>CreateLabWindow.xaml</DependentUpon>
     </Compile>
@@ -73,6 +76,9 @@
     </Compile>
     <Compile Include="Pages\MainSettingsPage.xaml.cs">
       <DependentUpon>MainSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ManageExamsPage.xaml.cs">
+      <DependentUpon>ManageExamsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ManageLabPage.xaml.cs">
       <DependentUpon>ManageLabPage.xaml</DependentUpon>
@@ -95,6 +101,10 @@
     <Compile Include="UserControls\ModuleButtonController.xaml.cs">
       <DependentUpon>ModuleButtonController.xaml</DependentUpon>
     </Compile>
+    <Page Include="CreateExamWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateLabWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ManageExamsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

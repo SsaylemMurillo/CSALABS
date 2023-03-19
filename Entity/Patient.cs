@@ -22,6 +22,11 @@ namespace Entity
 
         }
 
+        public Patient(int id)
+        {
+            Id = Id;
+        }
+
         public Patient(int id, string idType, string firstName, 
             string secondName, string lastName, string secondLastName,
             string bornDate, string expeditionDate, string expeditionPlace, 

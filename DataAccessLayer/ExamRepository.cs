@@ -51,11 +51,11 @@ namespace DataAccessLayer
                 command.Connection = _connection;
                 command.CommandText = $"insert into exam (id_exam, value_measures, name, description, results) " +
                     "values (@examId, @examMeasures, @examName, @examDescription, @examResults)";
-                command.Parameters.Add(new SqlParameter("@id_exam", exam.Id));
+                command.Parameters.Add(new SqlParameter("@examId", exam.Id));
                 command.Parameters.Add(new SqlParameter("@examMeasures", exam.ValuesMeasures));
                 command.Parameters.Add(new SqlParameter("@examName", exam.Name));
                 command.Parameters.Add(new SqlParameter("@examDescription", exam.Description));
-                command.Parameters.Add(new SqlParameter("@examResults", ""));
+                command.Parameters.Add(new SqlParameter("@examResults", "aroaroaro"));
 
                 int fila = command.ExecuteNonQuery();
 

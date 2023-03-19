@@ -33,6 +33,19 @@ namespace DataAccessLayer
                 return null;
         }
 
+        public string DeleteAllExamsWhereIDEXAM(Exam exam)
+        {
+            DbCommand command = new SqlCommand();
+            command.Connection = _connection;
+            command.CommandText = $"delete from labs_exams where labs_exams.id_exam = @examId;";
+            command.Parameters.Add(new SqlParameter("@examId", exam.Id));
+            var value = command.ExecuteNonQuery();
+            if (value > 0)
+                return "Borrado Exitoso";
+            else
+                return null;
+        }
+
         public List<Laboratory> GetAll()
         {
             throw new NotImplementedException();

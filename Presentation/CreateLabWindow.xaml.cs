@@ -62,14 +62,17 @@ namespace Presentation
         private void LoadExamsTable()
         {
             examsDataGrid.Items.Clear();
-            var response = MyExamService.GetAllExamLaboratory(MyLaboratory.Id);
-
-            if (response.DataList != null)
+            if (MyLaboratory.Id != -1)
             {
-                MyLaboratory.Exams = response.DataList;
-                foreach (var item in response.DataList)
+                var response = MyExamService.GetAllExamLaboratory(MyLaboratory.Id);
+
+                if (response.DataList != null)
                 {
-                    examsDataGrid.Items.Add(item);
+                    MyLaboratory.Exams = response.DataList;
+                    foreach (var item in response.DataList)
+                    {
+                        examsDataGrid.Items.Add(item);
+                    }
                 }
             }
         }
@@ -122,7 +125,6 @@ namespace Presentation
                         {
                             // Add exam to a lab
                             MyLaboratory.Exams.Add(response.ObjectResponse);
-
                             UnSavedLoadExamsTable();
                         }
                         else

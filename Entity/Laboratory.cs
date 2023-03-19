@@ -57,10 +57,13 @@ namespace Entity
         public Laboratory(int orderId)
         {
             Id = orderId;
-
+            Exams = new List<Exam>();
         }
+
         public Laboratory()
         {
+            Id = -1;
+            Exams = new List<Exam>();
         }
     }
 }

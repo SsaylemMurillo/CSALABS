@@ -32,8 +32,11 @@ namespace Presentation.Pages
 
         public LaboratoryService MyLabService { get; set; }
 
+        public Patient MyPatient { get; set; }
+
         public ManageLabPage(Frame mainFrame, Page previousPage)
         {
+            MyPatient = new Patient();
             InitializeComponent();
             MainFrame = mainFrame;
             PreviousPage = previousPage;
@@ -46,7 +49,6 @@ namespace Presentation.Pages
         private void FillTextBoxesList()
         {
             registerTextBoxes.Add(idPatientTextBox);
-            //registerTextBoxes.Add(labPlaceTextBox);
         }
         
         private void backButton_Click(object sender, RoutedEventArgs e)
@@ -80,16 +82,15 @@ namespace Presentation.Pages
             if (!string.IsNullOrEmpty(idPatientTextBox.Text) && idPatientTextBox.Text.Length > 0)
             {
                 // Call to the lab - Patient services...
-                Patient patient = new Patient();
                 var idValue = DataConversor.ConvertStringToInt(idPatientTextBox.Text);
                 
                 if(idValue != -1)
                 {
-                    patient.Id = idValue;
-                    var response = MyPatientService.SearchPatient(patient);
+                    MyPatient.Id = idValue;
+                    var response = MyPatientService.SearchPatient(MyPatient);
                     if (response.ObjectResponse != null)
                     {
-                        var response2 = MyLabService.SearchLaboratories(patient);
+                        var response2 = MyLabService.SearchLaboratories(MyPatient);
                         if (response2.DataList != null)
                         {
                             LoadLaboratoryDataGrid(response2.DataList);
@@ -104,7 +105,7 @@ namespace Presentation.Pages
                             {
                                 new CreateLabWindow(this, MyLabService, new Laboratory()
                                 {
-                                    Patient = patient,
+                                    Patient = MyPatient,
                                 },
                                 labsDataGrid.SelectedIndex).ShowDialog();
                             }
@@ -140,9 +141,11 @@ namespace Presentation.Pages
         private void ModifyInterface()
         {
             // If the above action was ok... succesfull... unlock buttons
-            // descriptionLABPAGETextBlock.Visibility = Visibility.Collapsed;
-            // saveLabButton.Visibility = Visibility.Visible;
-            // cancelLabButton.Visibility = Visibility.Visible;
+            filterButton.Visibility = Visibility.Visible;
+            addButton.Visibility = Visibility.Visible;
+            pencilButton.Visibility = Visibility.Visible;
+            trashButton.Visibility = Visibility.Visible;
+            eyeButton.Visibility = Visibility.Visible;
         }
 
         private void pencilButton_Click(object sender, RoutedEventArgs e)
@@ -198,6 +201,17 @@ namespace Presentation.Pages
                     MessageBox.Show("Debes seleccionar un laboratorio del registro para poder eliminar", "CSA LABS",
                         MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
+            }
+        }
+
+        private void addButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MyPatient != null)
+            {
+                new CreateLabWindow(this, MyLabService, new Laboratory()
+                {
+                    Patient = MyPatient
+                }, 0).ShowDialog();
             }
         }
     }

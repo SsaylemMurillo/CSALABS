@@ -90,9 +90,9 @@ namespace BusinessLogicLayer
             {
                 try
                 {
-                    ConnectionManager.OpenDataBase();
+                    if (!ConnectionManager.IsOpen)
+                        ConnectionManager.OpenDataBase();
                     message = ExamRepository.Save(exam);
-                    return new GenericResponse<Exam>(exam);
                 }
                 catch (Exception e)
                 {
@@ -100,7 +100,8 @@ namespace BusinessLogicLayer
                 }
                 finally
                 {
-                    ConnectionManager.CloseDataBase();
+                    if (ConnectionManager.IsOpen)
+                        ConnectionManager.CloseDataBase();
                 }
             }
             else
@@ -184,11 +185,21 @@ namespace BusinessLogicLayer
             {
                 try
                 {
-                    ConnectionManager.OpenDataBase();
-                    examDeleted = ExamRepository.Delete(exam);
-                    if (examDeleted == null) {
+                    if (!ConnectionManager.IsOpen)
+                        ConnectionManager.OpenDataBase();
+                    if (ExamRepository.Search(exam) != null)
+                    {
+                        LabsExamRepository.DeleteAllExamsWhereIDEXAM(exam);
+                        examDeleted = ExamRepository.Delete(exam);
+                        if (examDeleted == null)
+                        {
+                            message = "El examen no existe";
+                        }
+                    }
+                    else
+                    {
                         message = "El examen no existe";
-                    } 
+                    }
                 }
                 catch (Exception e)
                 {
@@ -196,7 +207,8 @@ namespace BusinessLogicLayer
                 }
                 finally
                 {
-                    ConnectionManager.CloseDataBase();
+                    if (ConnectionManager.IsOpen)
+                        ConnectionManager.CloseDataBase();
                 }
             }
             else
