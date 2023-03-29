@@ -86,7 +86,6 @@ namespace DataAccessLayer
                 searchedPatient = new Patient(patientId, patientIdType, patientFirstName, patientSecondName, patientLastName, patientSecondLastName,
                     patientBornDateTime, patientExpeditionDateTime, patientExpeditionPlace, patientPhone, patientAddress, nacionality);
             }
-
             reader.Close();
             return searchedPatient;
         }
@@ -110,7 +109,6 @@ namespace DataAccessLayer
                 return null;
             }
         }
-
         public string Update(Patient patient)
         {
             DbCommand command = new SqlCommand();

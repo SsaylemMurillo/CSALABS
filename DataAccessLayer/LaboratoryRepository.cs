@@ -132,7 +132,6 @@ namespace DataAccessLayer
                 var date = "" + laboratory.LabDate.Month + "/" + laboratory.LabDate.Day + "/" + laboratory.LabDate.Year;
                 command.Parameters.Add(new SqlParameter("@labDate", date));
                 command.Parameters.Add(new SqlParameter("@labPlace", laboratory.Place));
-
                 command.ExecuteNonQuery();
                 message = "Laboratorio Correctamente Añadido";
             }

@@ -20,8 +20,6 @@ namespace TestApp
             patient = new Patient();
             patientService = new PatientService("Data Source=.;Initial Catalog=CSALABS;Integrated Security=True");
         }
-
-
         [Test]
         public void TestSavePatient()
         {
