@@ -18,8 +18,6 @@ namespace TestApp
             patient = new Patient();
             patientService = new PatientService(ConnectionStringExtractor.connectionString);
         }
-
-
         [Test]
         public void TestSavePatient()
         {
@@ -43,7 +41,7 @@ namespace TestApp
 
             var possibleResponses = new List<string> { expected, expected2 };
 
-            Assert.Contains(expected, possibleResponses);
+            Assert.Contains(response, possibleResponses);
             Assert.Pass();
         }
     }

@@ -20,7 +20,6 @@ namespace Entity
             Description = description;
             this.ValuesMeasures = valuesMeasures;
         }
-
         public Exam(int id)
         {
             Id = id;
@@ -28,7 +27,6 @@ namespace Entity
             Description = "";
             ValuesMeasures = "";
         }
-
         public Exam()
         {
         }

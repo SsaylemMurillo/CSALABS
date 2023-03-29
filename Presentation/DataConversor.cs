@@ -29,7 +29,6 @@ namespace Presentation
             {
                 string newString = "";
                 var stringArray = DateSeparator(stringValue);
-
                 if (stringArray.Length > 0 && stringArray.Length<=3)
                 {
                     newString = stringArray[1] + "/" + stringArray[0] + "/" + stringArray[2];
