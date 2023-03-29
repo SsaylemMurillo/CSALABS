@@ -1,30 +1,26 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using DataAccessLayer;
 using Entity;
-using Presentation;
-using FluentAssertions;
 using BusinessLogicLayer;
+using DataAccessLayer;
+using Presentation;
 
-namespace TestApp
+namespace TestAppFramework
 {
-    public class Tests
+    [TestClass]
+    public class UnitTest1
     {
         Patient patient;
         PatientService patientService;
 
-        [SetUp]
-        public void Setup()
+
+        [TestMethod]
+        public void RegisterPatient()
         {
             patient = new Patient();
             patientService = new PatientService("Data Source=.;Initial Catalog=CSALABS;Integrated Security=True");
-        }
 
-
-        [Test]
-        public void TestSavePatient()
-        {
             patient.Id = 123456789;
             patient.IdType = "CC";
             patient.FirstName = "pepi";
@@ -40,13 +36,14 @@ namespace TestApp
 
 
             var response = patientService.SavePatient(patient);
-            var expected = "Paciente Correctamente A�adido";
+            var expected = "Paciente Correctamente Añadido";
             var expected2 = "Ha ocurrido un error inesperado";
 
-            var possibleResponses = new List<string> { expected, expected2 };
+            //var possibleResponses = new List<string> { expected, expected2 };
 
-            Assert.Contains(response, possibleResponses);
-            Assert.Pass();
+            //Assert.AreEqual(expected, response.Message);
+            Assert.AreEqual(expected2, response.Message);
         }
+
     }
 }
