@@ -5,6 +5,8 @@ using Entity;
 using BusinessLogicLayer;
 using DataAccessLayer;
 using Presentation;
+using FluentAssertions;
+
 
 namespace TestAppFramework
 {
@@ -21,7 +23,7 @@ namespace TestAppFramework
             patient = new Patient();
             patientService = new PatientService("Data Source=.;Initial Catalog=CSALABS;Integrated Security=True");
 
-            patient.Id = 123456789;
+            patient.Id = 189;
             patient.IdType = "CC";
             patient.FirstName = "pepi";
             patient.SecondName = "pepito";
@@ -36,13 +38,25 @@ namespace TestAppFramework
 
 
             var response = patientService.SavePatient(patient);
-            var expected = "Paciente Correctamente Añadido";
+            //var expected1 = "Paciente Correctamente Añadido";
             var expected2 = "Ha ocurrido un error inesperado";
 
-            //var possibleResponses = new List<string> { expected, expected2 };
-
-            //Assert.AreEqual(expected, response.Message);
             Assert.AreEqual(expected2, response.Message);
+        }
+
+        [TestMethod]
+        public void QueryPatient()
+        {
+            patient = new Patient();
+            patientService = new PatientService("Data Source=.;Initial Catalog=CSALABS;Integrated Security=True");
+
+            patient.Id = 189;
+
+            var response = patientService.SearchPatient(patient);
+            //var expected1 = "Paciente Correctamente Añadido";
+            var expected1 = new Patient() { Id = 189 };
+
+            Assert.AreEqual(expected1.Id, response.ObjectResponse.Id);
         }
 
     }
