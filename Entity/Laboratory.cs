@@ -54,12 +54,20 @@ namespace Entity
             LabDate = Convert.ToDateTime(labDate);
             Place = place;
         }
-        public Laboratory(int orderId)
+        public Laboratory( int patientId, string place)
         {
-            Id = orderId;
+            Place = place;
+            Patient = new Patient() { Id = patientId };
+            LabDate = DateTime.Today;
             Exams = new List<Exam>();
         }
 
+        public Laboratory(int id)
+        {
+            Id = id;
+            Exams = new List<Exam>();
+        }
+    
         public Laboratory()
         {
             Id = -1;

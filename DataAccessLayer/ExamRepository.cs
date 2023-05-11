@@ -61,12 +61,12 @@ namespace DataAccessLayer
 
                 if (fila == 1)
                 {
-                    message="Guardado exitosamente " + exam.Name;
+                    message="Guardado exitosamente";
                 }
             }
             else
             {
-                message="Error en tabla examenes al registrar al examen " + exam.Name;
+                message="Error en tabla examenes al registrar al examen";
             }
             return message;
         }
@@ -93,16 +93,16 @@ namespace DataAccessLayer
             command.CommandText = $"update exam set value_measures = @examValueMeasures, " +
                 $"name = @examName, description = @examDescription, results = @examResults where id_exam = @examId;";
             command.Parameters.Add(new SqlParameter("@examId", exam.Id));
-            command.Parameters.Add(new SqlParameter("@valueMeasures", exam.ValuesMeasures));
-            command.Parameters.Add(new SqlParameter("@name", exam.Name));
-            command.Parameters.Add(new SqlParameter("@description", exam.Description));
+            command.Parameters.Add(new SqlParameter("@examValueMeasures", exam.ValuesMeasures));
+            command.Parameters.Add(new SqlParameter("@examName", exam.Name));
+            command.Parameters.Add(new SqlParameter("@examDescription", exam.Description));
             command.Parameters.Add(new SqlParameter("@examResults", ""));
             int fila = command.ExecuteNonQuery();
             if (fila == 1)
             {
                 return "Actualizacion Exitosa";
             }
-            return "Error en tabla examenes al actualizar al examen " + exam.Name + " con id: " + exam.Id;
+            return "Error en tabla examenes al actualizar al examen";
         }
 
         public List<Exam> GetAll()

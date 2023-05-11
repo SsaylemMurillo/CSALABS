@@ -111,30 +111,40 @@ namespace DataAccessLayer
         }
         public string Update(Patient patient)
         {
-            DbCommand command = new SqlCommand();
-            command.Connection = _connection;
+            string message;
 
-            command.CommandText = $"update patient set id_type = @patientIdType, first_name = @patientFirstName," +
-                $" second_name = @patientSecondName, last_name = @patientLastName, second_lastname = @patientSecondLastName, " +
-                $"born_date = @patientBornDate, expedition_date = @patientExpeditionDate, expedition_place = @patientExpeditionPlace, phone = @patientPhone, " +
-                $"address = @patientAddress, nacionality = @patientNationality WHERE id = @id";
-            command.Parameters.Add(new SqlParameter("@id", patient.Id));
-            command.Parameters.Add(new SqlParameter("@patientIdType", patient.IdType));
-            command.Parameters.Add(new SqlParameter("@patientFirstName", patient.FirstName));
-            command.Parameters.Add(new SqlParameter("@patientSecondName", patient.SecondName));
-            command.Parameters.Add(new SqlParameter("@patientLastName", patient.LastName));
-            command.Parameters.Add(new SqlParameter("@patientSecondLastName", patient.SecondLastName));
-            var date = "" + patient.BornDate.Month + "/" + patient.BornDate.Day + "/" + patient.BornDate.Year;
-            command.Parameters.Add(new SqlParameter("@patientBornDate", date));
-            var date2 = "" + patient.ExpeditionDate.Month + "/" + patient.ExpeditionDate.Day + "/" + patient.ExpeditionDate.Year;
-            command.Parameters.Add(new SqlParameter("@patientExpeditionDate", date2));
-            command.Parameters.Add(new SqlParameter("@patientExpeditionPlace", patient.ExpeditionPlace));
-            command.Parameters.Add(new SqlParameter("@patientPhone", patient.Phone));
-            command.Parameters.Add(new SqlParameter("@patientAddress", patient.Address));
-            command.Parameters.Add(new SqlParameter("@patientNationality", patient.Nacionality));
-            command.ExecuteNonQuery();
+            if (Search(patient) != null)
+            {
 
-            return "";
+                DbCommand command = new SqlCommand();
+                command.Connection = _connection;
+
+                command.CommandText = $"update patient set id_type = @patientIdType, first_name = @patientFirstName," +
+                    $" second_name = @patientSecondName, last_name = @patientLastName, second_lastname = @patientSecondLastName, " +
+                    $"born_date = @patientBornDate, expedition_date = @patientExpeditionDate, expedition_place = @patientExpeditionPlace, phone = @patientPhone, " +
+                    $"address = @patientAddress, nacionality = @patientNationality WHERE id = @id";
+                command.Parameters.Add(new SqlParameter("@id", patient.Id));
+                command.Parameters.Add(new SqlParameter("@patientIdType", patient.IdType));
+                command.Parameters.Add(new SqlParameter("@patientFirstName", patient.FirstName));
+                command.Parameters.Add(new SqlParameter("@patientSecondName", patient.SecondName));
+                command.Parameters.Add(new SqlParameter("@patientLastName", patient.LastName));
+                command.Parameters.Add(new SqlParameter("@patientSecondLastName", patient.SecondLastName));
+                var date = "" + patient.BornDate.Month + "/" + patient.BornDate.Day + "/" + patient.BornDate.Year;
+                command.Parameters.Add(new SqlParameter("@patientBornDate", date));
+                var date2 = "" + patient.ExpeditionDate.Month + "/" + patient.ExpeditionDate.Day + "/" + patient.ExpeditionDate.Year;
+                command.Parameters.Add(new SqlParameter("@patientExpeditionDate", date2));
+                command.Parameters.Add(new SqlParameter("@patientExpeditionPlace", patient.ExpeditionPlace));
+                command.Parameters.Add(new SqlParameter("@patientPhone", patient.Phone));
+                command.Parameters.Add(new SqlParameter("@patientAddress", patient.Address));
+                command.Parameters.Add(new SqlParameter("@patientNationality", patient.Nacionality));
+                command.ExecuteNonQuery();
+                message = "Paciente Actualizado";
+            }
+            else
+            {
+                message = "No fue posible actualizar al paciente";
+            }
+            return message;
         }
 
         public List<Patient> GetAll()

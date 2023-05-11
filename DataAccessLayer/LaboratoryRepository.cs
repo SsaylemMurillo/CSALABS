@@ -137,7 +137,7 @@ namespace DataAccessLayer
             }
             else
             {
-                message = null;
+                message = "El laboratorio no se pudo crear";
             }
             return message;
         }
@@ -210,7 +210,7 @@ namespace DataAccessLayer
             }
             else
             {
-                message = null;
+                message = "No se pudo actualizar el laboratorio";
             }
             return message;
         }

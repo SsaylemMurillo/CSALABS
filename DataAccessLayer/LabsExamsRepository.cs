@@ -85,7 +85,6 @@ namespace DataAccessLayer
         {
             if (!SearchExamFromLaboratory(laboratoryId, examId))
             {
-                string message;
                 DbCommand command = new SqlCommand();
                 command.Connection = _connection;
                 command.CommandText = $"insert into labs_exams (id_lab, id_exam)" +
@@ -94,11 +93,10 @@ namespace DataAccessLayer
                 command.Parameters.Add(new SqlParameter("@examId", examId));
 
                 command.ExecuteNonQuery();
-                message = "Examen correctamente añadido";
 
-                return message;
+                return "Lab/Examen correctamente añadido";
             }
-            return "Examen ya existente";
+            return "Lab/Examen ya existente";
         }
 
         public bool SearchExamFromLaboratory(int laboratoryId, int examId)
@@ -125,17 +123,18 @@ namespace DataAccessLayer
 
         public string DeleteExamFromLaboratory(int laboratoryId, int examId)
         {
-            string message;
-            DbCommand command = new SqlCommand();
-            command.Connection = _connection;
-            command.CommandText = $"delete from labs_exams where labs_exams.id_lab = @labId and labs_exams.id_exam = @examId;";
-            command.Parameters.Add(new SqlParameter("@labId", laboratoryId));
-            command.Parameters.Add(new SqlParameter("@examId", examId));
+            if (SearchExamFromLaboratory(laboratoryId, examId))
+            {
+                DbCommand command = new SqlCommand();
+                command.Connection = _connection;
+                command.CommandText = $"delete from labs_exams where labs_exams.id_lab = @labId and labs_exams.id_exam = @examId;";
+                command.Parameters.Add(new SqlParameter("@labId", laboratoryId));
+                command.Parameters.Add(new SqlParameter("@examId", examId));
 
-            command.ExecuteNonQuery();
-            message = "Se ha borrado el examen perteneciente al laboratorio";
-
-            return message;
+                command.ExecuteNonQuery();
+                return "Se ha borrado el examen perteneciente al laboratorio";
+            }
+            return "No se pudo borrar el laboratorio/examen";
         }
 
         public List<Exam> GetAllExamsFromLab(int id)
