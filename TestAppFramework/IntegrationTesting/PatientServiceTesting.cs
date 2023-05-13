@@ -9,7 +9,7 @@ using System.Data.Common;
 namespace TestAppFramework.IntegrationTesting
 {
     [TestClass]
-    public class UnitTest1
+    public class PatientServiceTesting
     {
         private ConnectionManager connectionManager = new ConnectionManager("Data Source=.;Initial Catalog=CSALABS;Integrated Security=True");
 
