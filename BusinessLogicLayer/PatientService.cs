@@ -82,7 +82,7 @@ namespace BusinessLogicLayer
                 }
                 catch (Exception e)
                 {
-                    message = "Ocurrio un error: " + e.Message;
+                    message = "Ocurrio un error";
                 }
                 finally
                 {

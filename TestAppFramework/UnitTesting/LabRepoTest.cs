@@ -110,7 +110,7 @@ namespace TestAppFramework
             Assert.AreEqual("No se pudo actualizar el laboratorio", response);
             ConnectionManager.CloseDataBase();
         }
-
+        
         [TestMethod]
         public void UpdateExistentLab()
         {
