@@ -9,6 +9,7 @@ namespace TestAppFramework.IntegrationTesting
         [TestMethod]
         public void TestMethod1()
         {
+
         }
     }
 }
