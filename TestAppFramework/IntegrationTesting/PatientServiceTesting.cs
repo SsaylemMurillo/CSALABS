@@ -4,7 +4,7 @@ using System;
 namespace TestAppFramework.IntegrationTesting
 {
     [TestClass]
-    public class UnitTest1
+    public class PatientServiceTesting
     {
         [TestMethod]
         public void TestMethod1()
