@@ -14,8 +14,8 @@ namespace TestAppFramework.IntegrationTesting
         private ConnectionManager connectionManager = new ConnectionManager("Data Source=.;Initial Catalog=CSALABS;Integrated Security=True");
 
         [TestMethod]
-            public void S001_AddPatient()
-            {
+        public void S001_AddPatient()
+        {
             // Arrange
             var service = new PatientService("Data Source =.; Initial Catalog = CSALABS; Integrated Security = True");
             var patient = new Patient
@@ -51,15 +51,17 @@ namespace TestAppFramework.IntegrationTesting
             // Assert
             Assert.AreEqual("Paciente Correctamente Añadido", response.Message);
         }
-        public void S003_SearchPatient()
+
+        [TestMethod]
+        public void S002_ModifyPatient()
         {
             // Arrange
             var service = new PatientService("Data Source =.; Initial Catalog = CSALABS; Integrated Security = True");
             var patient = new Patient
             {
                 Id = 1003315190,
-                FirstName = "Miguel",
-                SecondName = "David",
+                FirstName = "Miguelito",
+                SecondName = "Davidito",
                 LastName = "Miguel",
                 SecondLastName = "Davi",
                 IdType = "CC",
@@ -71,22 +73,9 @@ namespace TestAppFramework.IntegrationTesting
                 Phone = 300835389
             };
 
-            var response = service.SearchPatient(patient);
-            connectionManager.OpenDataBase();
+            var response = service.UpdatePatient(patient);
             // Assert
-            using (var command = new SqlCommand())
-            {
-                DbConnection connection = connectionManager.Connection;
-                command.Connection = (SqlConnection)connection;
-                command.CommandText = "SELECT COUNT(*) FROM patient WHERE id = @PacienteId";
-                command.Parameters.AddWithValue("@PacienteId", patient.Id);
-
-                var count = (int)command.ExecuteScalar();
-                Assert.AreEqual(1, count);
-            }
-            connectionManager.CloseDataBase();
-            // Assert
-            Assert.AreEqual(patient.Id, response.ObjectResponse.Id);
+            Assert.AreEqual("Edición Exitosa", response.Message);
         }
     }
 }
