@@ -44,3 +44,6 @@ CREATE TABLE labs_exams(
 	FOREIGN KEY (id_lab) REFERENCES laboratory (id_lab),
 	FOREIGN KEY (id_exam) REFERENCES exam (id_exam),
 );
+
+select * from patient
+delete from patient
