@@ -14,7 +14,7 @@ namespace TestAppFramework.IntegrationTesting
         private ConnectionManager connectionManager = new ConnectionManager("Data Source=.;Initial Catalog=CSALABS;Integrated Security=True");
 
         [TestMethod]
-            public void AgregarPaciente_DebeAgregarPacienteALaBaseDeDatos()
+            public void S001_AddPatient()
             {
             // Arrange
             var service = new PatientService("Data Source =.; Initial Catalog = CSALABS; Integrated Security = True");
