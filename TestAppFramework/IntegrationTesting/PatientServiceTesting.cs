@@ -14,8 +14,8 @@ namespace TestAppFramework.IntegrationTesting
         private ConnectionManager connectionManager = new ConnectionManager("Data Source=.;Initial Catalog=CSALABS;Integrated Security=True");
 
         [TestMethod]
-            public void S001_AddPatient()
-            {
+        public void S001_AddPatient()
+        {
             // Arrange
             var service = new PatientService("Data Source =.; Initial Catalog = CSALABS; Integrated Security = True");
             var patient = new Patient
@@ -50,6 +50,32 @@ namespace TestAppFramework.IntegrationTesting
             connectionManager.CloseDataBase();
             // Assert
             Assert.AreEqual("Paciente Correctamente Añadido", response.Message);
+        }
+
+        [TestMethod]
+        public void S002_ModifyPatient()
+        {
+            // Arrange
+            var service = new PatientService("Data Source =.; Initial Catalog = CSALABS; Integrated Security = True");
+            var patient = new Patient
+            {
+                Id = 1003315190,
+                FirstName = "Miguelito",
+                SecondName = "Davidito",
+                LastName = "Miguel",
+                SecondLastName = "Davi",
+                IdType = "CC",
+                Address = "CRA 19B3 #6A-52",
+                BornDate = Convert.ToDateTime("06/06/1999"),
+                Nacionality = "CC",
+                ExpeditionDate = Convert.ToDateTime("09/12/2003"),
+                ExpeditionPlace = "VALLEDUPAR, CESAR",
+                Phone = 300835389
+            };
+
+            var response = service.UpdatePatient(patient);
+            // Assert
+            Assert.AreEqual("Edición Exitosa", response.Message);
         }
     }
 }
