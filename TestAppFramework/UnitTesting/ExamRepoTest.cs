@@ -11,7 +11,7 @@ namespace TestAppFramework
         private ConnectionManager ConnectionManager = new ConnectionManager("Data Source=.;Initial Catalog=CSALABS;Integrated Security=True");
         private ExamRepository examRepository;
 
-        /*
+        
         [TestMethod]
         public void SaveUnExistentExam()
         {
@@ -49,9 +49,9 @@ namespace TestAppFramework
             Assert.AreEqual("Error en tabla examenes al registrar al examen", response);
             ConnectionManager.CloseDataBase();
         }
-        */
+        
 
-        /*
+        
         [TestMethod]
         public void SearchExistentExam()
         {
@@ -82,9 +82,9 @@ namespace TestAppFramework
             Assert.IsNull(response);
             ConnectionManager.CloseDataBase();
         }
-        */
+        
 
-        /*
+        
         [TestMethod]
         public void DeleteExistentExam()
         {
@@ -154,6 +154,6 @@ namespace TestAppFramework
             Assert.AreEqual("Actualizacion Exitosa", response);
             ConnectionManager.CloseDataBase();
         }
-        */
+        
     }
 }

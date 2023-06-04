@@ -1,0 +1,7 @@
+﻿D:\Programacion\Source\.NET\CSALABS\CSALABS\DataAccessLayer\ConnectionManager.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\DataAccessLayer\ExamRepository.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\DataAccessLayer\ICRUD.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\DataAccessLayer\LaboratoryRepository.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\DataAccessLayer\LabsExamsRepository.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\DataAccessLayer\PatientRepository.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\DataAccessLayer\Properties\AssemblyInfo.cs

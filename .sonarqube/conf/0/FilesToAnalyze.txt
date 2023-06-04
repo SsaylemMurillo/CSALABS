@@ -1,0 +1,4 @@
+﻿D:\Programacion\Source\.NET\CSALABS\CSALABS\Entity\Exam.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\Entity\Laboratory.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\Entity\Patient.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\Entity\Properties\AssemblyInfo.cs

@@ -10,7 +10,7 @@ namespace TestAppFramework
     {
         private ConnectionManager ConnectionManager = new ConnectionManager("Data Source=.;Initial Catalog=CSALABS;Integrated Security=True");
         private PatientRepository patientRepository;
-        /*
+        
         
         [TestMethod]
         public void SaveExistentPatient()
@@ -184,6 +184,6 @@ namespace TestAppFramework
             Assert.IsNull(response);
             ConnectionManager.CloseDataBase();
         }
-        */
+        
     }
 }

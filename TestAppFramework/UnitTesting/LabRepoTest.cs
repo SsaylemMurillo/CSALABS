@@ -12,7 +12,7 @@ namespace TestAppFramework
         private ConnectionManager ConnectionManager = new ConnectionManager("Data Source=.;Initial Catalog=CSALABS;Integrated Security=True");
         private LaboratoryRepository laboratoryRepository;
 
-        /*
+        
         [TestMethod]
         public void SaveUnExistentLab()
         {
@@ -124,6 +124,6 @@ namespace TestAppFramework
             Assert.AreEqual("Laboratorio Actualizado Correctamente", response);
             ConnectionManager.CloseDataBase();
         }
-        */
+        
     }
 }

@@ -1,0 +1,17 @@
+﻿D:\Programacion\Source\.NET\CSALABS\CSALABS\TestAppFramework\IntegrationTesting\PatientServiceTesting.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\TestAppFramework\Properties\AssemblyInfo.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\TestAppFramework\UnitTesting\PatientRepoTest.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\TestAppFramework\UnitTesting\ExamRepoTest.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\TestAppFramework\UnitTesting\LabRepoTest.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\TestAppFramework\UnitTesting\LabsExamRepoTest.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\packages\MSTest.TestAdapter.3.0.2\build\net462\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+D:\Programacion\Source\.NET\CSALABS\CSALABS\packages\MSTest.TestAdapter.3.0.2\build\net462\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+D:\Programacion\Source\.NET\CSALABS\CSALABS\packages\MSTest.TestAdapter.3.0.2\build\net462\Microsoft.TestPlatform.AdapterUtilities.dll
+D:\Programacion\Source\.NET\CSALABS\CSALABS\packages\NUnit3TestAdapter.4.4.2\build\net462\NUnit3.TestAdapter.dll
+D:\Programacion\Source\.NET\CSALABS\CSALABS\packages\NUnit3TestAdapter.4.4.2\build\net462\NUnit3.TestAdapter.pdb
+D:\Programacion\Source\.NET\CSALABS\CSALABS\packages\NUnit3TestAdapter.4.4.2\build\net462\nunit.engine.dll
+D:\Programacion\Source\.NET\CSALABS\CSALABS\packages\NUnit3TestAdapter.4.4.2\build\net462\nunit.engine.api.dll
+D:\Programacion\Source\.NET\CSALABS\CSALABS\packages\NUnit3TestAdapter.4.4.2\build\net462\nunit.engine.core.dll
+D:\Programacion\Source\.NET\CSALABS\CSALABS\packages\NUnit3TestAdapter.4.4.2\build\net462\testcentric.engine.metadata.dll
+D:\Programacion\Source\.NET\CSALABS\CSALABS\TestAppFramework\app.config
+D:\Programacion\Source\.NET\CSALABS\CSALABS\TestAppFramework\packages.config

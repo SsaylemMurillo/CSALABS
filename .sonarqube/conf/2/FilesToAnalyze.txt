@@ -1,0 +1,5 @@
+﻿D:\Programacion\Source\.NET\CSALABS\CSALABS\BusinessLogicLayer\ExamService.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\BusinessLogicLayer\GenericResponse.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\BusinessLogicLayer\LaboratoryService.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\BusinessLogicLayer\PatientService.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\BusinessLogicLayer\Properties\AssemblyInfo.cs

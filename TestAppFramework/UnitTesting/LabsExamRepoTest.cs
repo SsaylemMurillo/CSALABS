@@ -12,7 +12,7 @@ namespace TestAppFramework
         private LabsExamsRepository labsExamRepository;
 
 
-        /*
+        
         [TestMethod]
         public void SaveUnExistentLab()
         {
@@ -94,6 +94,6 @@ namespace TestAppFramework
             Assert.AreEqual("No se pudo borrar el laboratorio/examen", response);
             ConnectionManager.CloseDataBase();
         }
-        */
+        
     }
 }
