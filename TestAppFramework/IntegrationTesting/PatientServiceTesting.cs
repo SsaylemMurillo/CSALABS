@@ -104,9 +104,9 @@ namespace TestAppFramework.IntegrationTesting
             // Assert
             Assert.AreEqual(patient.Id, response.ObjectResponse.Id);
         }
-        */
+        
 
-        /*
+        
         [TestMethod]
         public void S004_DeletePatient()
         {

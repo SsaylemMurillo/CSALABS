@@ -1,4 +1,6 @@
 ﻿D:\Programacion\Source\.NET\CSALABS\CSALABS\TestAppFramework\IntegrationTesting\PatientServiceTesting.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\TestAppFramework\IntegrationTesting\LaboratoryServiceTesting.cs
+D:\Programacion\Source\.NET\CSALABS\CSALABS\TestAppFramework\IntegrationTesting\ExamenServiceTesting.cs
 D:\Programacion\Source\.NET\CSALABS\CSALABS\TestAppFramework\Properties\AssemblyInfo.cs
 D:\Programacion\Source\.NET\CSALABS\CSALABS\TestAppFramework\UnitTesting\PatientRepoTest.cs
 D:\Programacion\Source\.NET\CSALABS\CSALABS\TestAppFramework\UnitTesting\ExamRepoTest.cs
