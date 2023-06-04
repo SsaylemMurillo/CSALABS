@@ -249,7 +249,7 @@ namespace BusinessLogicLayer
                     }
                     else
                     {
-                        message = "No se pudo borrar el laboratorio";
+                        message = "No se borro ningun laboratorio";
                     }
                 }
                 catch (Exception e)

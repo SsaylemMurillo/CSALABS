@@ -74,6 +74,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IntegrationTesting\PatientServiceTesting.cs" />
+    <Compile Include="IntegrationTesting\LaboratoryServiceTesting.cs" />
+    <Compile Include="IntegrationTesting\ExamenServiceTesting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTesting\PatientRepoTest.cs" />
     <Compile Include="UnitTesting\ExamRepoTest.cs" />

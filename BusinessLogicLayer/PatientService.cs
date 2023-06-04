@@ -125,7 +125,6 @@ namespace BusinessLogicLayer
         public GenericResponse<Patient> DeletePatient(Patient patient)
         {
             var message = "";
-            Patient patientDeleted;
             if (patient != null)
             {
                 try
@@ -146,10 +145,10 @@ namespace BusinessLogicLayer
                     }
                     else
                     {
-                        message = "No se pudo almacenar el laboratorio";
+                        message = "No se pudieron borrar los laboratorios del paciente";
                     }
 
-                    patientDeleted = PatientRepository.Delete(patient);
+                    PatientRepository.Delete(patient);
                 }
                 catch (Exception e)
                 {
