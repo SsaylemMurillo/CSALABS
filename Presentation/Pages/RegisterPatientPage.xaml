@@ -6,12 +6,13 @@
       xmlns:local="clr-namespace:Presentation.Pages"
       mc:Ignorable="d"
       Background="White"
-      Height="865"
-      Width="1640"
+      Height="700"
+      Width="1200"
       Title="Registro Paciente">
 
     <Border BorderBrush="#efefefff" BorderThickness="10" CornerRadius="5">
-        <Grid>
+        <ScrollViewer>
+            <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="3*"/>
@@ -125,5 +126,6 @@
                 <Button Content="Limpiar" Style="{StaticResource actionButton2}" Click="Button_Click"/>
             </StackPanel>
         </Grid>
+        </ScrollViewer>
     </Border>
 </Page>

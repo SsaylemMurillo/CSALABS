@@ -6,11 +6,12 @@
       xmlns:local="clr-namespace:Presentation.Pages"
       mc:Ignorable="d" 
       Background="White"
-      Height="865"
-      Width="1640"
+      Height="700"
+      Width="1200"
       Title="Gestión Paciente">
     <Border Background="#efefefff" BorderBrush="#efefefff" BorderThickness="10" CornerRadius="5" Margin="10">
-        <Grid>
+        <ScrollViewer>
+            <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -115,5 +116,6 @@
                 </Border>
             </Grid>
         </Grid>
+        </ScrollViewer>
     </Border>
 </Page>
