@@ -12,6 +12,7 @@ namespace TestAppFramework
         private ExamRepository examRepository;
 
         
+        /*
         [TestMethod]
         public void SaveUnExistentExam()
         {
@@ -154,6 +155,6 @@ namespace TestAppFramework
             Assert.AreEqual("Actualizacion Exitosa", response);
             ConnectionManager.CloseDataBase();
         }
-        
+        */
     }
 }

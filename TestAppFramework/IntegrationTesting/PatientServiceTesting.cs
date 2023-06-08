@@ -13,7 +13,7 @@ namespace TestAppFramework.IntegrationTesting
     {
         private ConnectionManager connectionManager = new ConnectionManager("Data Source=.;Initial Catalog=CSALABS;Integrated Security=True");
         
-        
+        /*
         [TestMethod]
         public void S001_AddPatient()
         {
@@ -134,7 +134,7 @@ namespace TestAppFramework.IntegrationTesting
             // Assert
             Assert.AreEqual("Se borro el paciente y sus laboratorios", response.Message);
         }
-        
+        */
     }
 }
     

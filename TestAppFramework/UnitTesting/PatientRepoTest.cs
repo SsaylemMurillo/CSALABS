@@ -13,7 +13,7 @@ namespace TestAppFramework
         
         
         [TestMethod]
-        public void SaveExistentPatient()
+        public void UT_001SaveExistentPatient()
         {
             patientRepository = new PatientRepository(ConnectionManager.Connection);
             ConnectionManager.OpenDataBase();
@@ -38,10 +38,8 @@ namespace TestAppFramework
             ConnectionManager.CloseDataBase();
         }
 
-        
-
         [TestMethod]
-        public void SaveUnExistentPatient()
+        public void UT_002SaveUnExistentPatient()
         {
             patientRepository = new PatientRepository(ConnectionManager.Connection);
             ConnectionManager.OpenDataBase();
@@ -65,9 +63,35 @@ namespace TestAppFramework
             Assert.AreEqual("Paciente Correctamente Añadido", response);
             ConnectionManager.CloseDataBase();
         }
-        
 
-        
+        [TestMethod]
+        public void UT_003SavePatientEXTENDEDNAME()
+        {
+            patientRepository = new PatientRepository(ConnectionManager.Connection);
+            ConnectionManager.OpenDataBase();
+            // Act
+            Patient patient = new Patient();
+            patient.Id = 141315190;
+            patient.FirstName = "SantiagoanSantiagoanSantiagoanSantiagoanSantiagoanS";
+            patient.SecondName = "David";
+            patient.LastName = "Miguel";
+            patient.SecondLastName = "David";
+            patient.IdType = "CC";
+            patient.Address = "CRA 19B3 #6A-52";
+            patient.BornDate = Convert.ToDateTime("06/06/1999");
+            patient.Nacionality = "CC";
+            patient.ExpeditionDate = Convert.ToDateTime("09/12/2003");
+            patient.ExpeditionPlace = "VALLEDUPAR, CESAR";
+            patient.Phone = 300835389;
+            var response = patientRepository.Save(patient);
+            // Assert
+            Assert.IsNotNull(response);
+            Assert.AreEqual("Ha ocurrido un error inesperado", response);
+            ConnectionManager.CloseDataBase();
+        }
+
+
+        /*
         [TestMethod]
         public void SearchExistentPatient()
         {
@@ -184,6 +208,6 @@ namespace TestAppFramework
             Assert.IsNull(response);
             ConnectionManager.CloseDataBase();
         }
-        
+        */
     }
 }

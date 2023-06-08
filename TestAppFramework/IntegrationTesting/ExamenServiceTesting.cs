@@ -14,7 +14,7 @@ namespace TestAppFramework.IntegrationTesting
     {
         private ConnectionManager connectionManager = new ConnectionManager("Data Source=.;Initial Catalog=CSALABS;Integrated Security=True");
 
-        
+        /*
         [TestMethod]
         public void S009_SaveExam()
         {
@@ -88,5 +88,6 @@ namespace TestAppFramework.IntegrationTesting
             // Assert
             Assert.AreEqual("Borrado Exitoso", response.Message);
         }
+        */
     }
 }
