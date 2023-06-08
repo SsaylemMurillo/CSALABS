@@ -33,7 +33,7 @@ namespace BusinessLogicLayer
                 else
                     message = "Paciente VALOR NULL";
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 message = "Ocurrio un error";
             }
@@ -80,7 +80,7 @@ namespace BusinessLogicLayer
                     connectionManager.OpenDataBase();
                     message = PatientRepository.Save(patient);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     message = "Ocurrio un error";
                 }
@@ -106,7 +106,7 @@ namespace BusinessLogicLayer
                     connectionManager.OpenDataBase();
                     PatientRepository.Update(patient);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     message = "Ocurrio un error";
                 }
